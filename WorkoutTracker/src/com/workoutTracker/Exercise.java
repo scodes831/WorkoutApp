@@ -8,11 +8,14 @@ public abstract class Exercise {
 	int heartRate;
 	int calories;
 	
-	
-	
 	public double convertMilesToKilometers(double miles) {
 		BigDecimal km = new BigDecimal(miles * 1.609344).setScale(2, RoundingMode.HALF_UP);
 		return km.doubleValue();
+	}
+	
+	public double convertPoundsToKilograms(double pounds) {
+		BigDecimal kg = new BigDecimal(pounds * 0.453592).setScale(2, RoundingMode.HALF_UP);
+		return kg.doubleValue();
 	}
 	
 	public int getHeartRate() {
