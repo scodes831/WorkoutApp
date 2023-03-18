@@ -1,5 +1,5 @@
 package com.workoutTracker;
 
-public class Exercise {
+public abstract class Exercise {
 
 }
