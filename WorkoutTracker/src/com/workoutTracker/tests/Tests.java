@@ -24,6 +24,15 @@ public class Tests {
 		int id2 = user2.getUserId();
 		Assert.assertTrue(id1 != id2);
 	}
+	
+	@Test
+	void testForUserConstructor() {
+		User user1 = new User("Jim", "Jacks", 24, 162);
+		Assert.assertTrue(user1.getFirstName().equals("Jim"));
+		Assert.assertTrue(user1.getLastName().equals("Jacks"));
+		Assert.assertTrue(user1.getAge() == 24);
+		Assert.assertTrue(user1.getWeightLbs() == 162);
+	}
 
 	@Test
 	 void convert1MileToKm() {
