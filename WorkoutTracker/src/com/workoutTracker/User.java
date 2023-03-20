@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class User {
 	
+	private static int ID = 1000;
+	
 	int userId;
 	String firstName;
 	String lastName;
@@ -12,6 +14,22 @@ public class User {
 	double weightKg;
 	
 	ArrayList<Workout> workouts = new ArrayList<Workout>();
+	
+	public User(String firstName, String lastName, int age, double weightLbs) {
+		this.userId = generateUserId();
+		System.out.println("userId is " + getUserId());
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+		this.weightLbs = weightLbs;
+	}
+
+	public int generateUserId() { 
+		int id = User.getID();
+		id++;
+		User.setID((id));  
+		return id;
+	}
 
 	public int getUserId() {
 		return userId;
@@ -67,6 +85,14 @@ public class User {
 
 	public void setWorkouts(ArrayList<Workout> workouts) {
 		this.workouts = workouts;
+	}
+
+	public static int getID() {
+		return ID;
+	}
+
+	public static void setID(int iD) {
+		ID = iD;
 	}
 	
 
