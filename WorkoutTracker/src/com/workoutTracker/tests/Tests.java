@@ -5,8 +5,25 @@ import org.junit.jupiter.api.Test;
 
 import com.workoutTracker.Run;
 import com.workoutTracker.StrengthTraining;
+import com.workoutTracker.User;
 
 public class Tests {
+	
+	@Test
+	void doesUserIdGenerate() {
+		User user = new User("Jane", "Doe", 34, 125);
+		int id = user.getUserId();
+		Assert.assertTrue(id != 0);
+	}
+	
+	@Test
+	void doesUniqueUserIdGenerate() {
+		User user1 = new User("Jane", "Doe", 34, 125);
+		int id1 = user1.getUserId();
+		User user2 = new User("Jack", "Smith", 29, 174);
+		int id2 = user2.getUserId();
+		Assert.assertTrue(id1 != id2);
+	}
 
 	@Test
 	 void convert1MileToKm() {
@@ -39,4 +56,6 @@ public class Tests {
 		double expected = 2.27;
 		Assert.assertEquals("Incorrect conversion to kg", expected, converted, 0.001);
 	}
+	
+	
 }
