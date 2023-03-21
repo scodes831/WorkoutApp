@@ -1,6 +1,7 @@
 package com.workoutTracker;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class User {
 	
@@ -17,7 +18,6 @@ public class User {
 	
 	public User(String firstName, String lastName, int age, double weightLbs) {
 		this.userId = generateUserId();
-		System.out.println("userId is " + getUserId());
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
