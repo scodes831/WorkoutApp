@@ -13,6 +13,11 @@ public class StrengthTraining extends Exercise {
 		this.exerciseName = exerciseName;
 		this.muscleGroup = muscleGroup;
 	}
+	
+	public void addNewSet(int sets, double weightLbs, int reps) {
+		Set set = new Set(sets, weightLbs, reps);
+		getSets().add(set);
+	}
 		
 	public String getExerciseName() {
 		return exerciseName;
