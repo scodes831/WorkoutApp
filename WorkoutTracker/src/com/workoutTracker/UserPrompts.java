@@ -32,18 +32,33 @@ public class UserPrompts {
 		return 0;
 	}
 	
-	private static double askWeight(Scanner in) {
+	private static double askWeight(Scanner in, boolean isUserWeight) {
 		System.out.println("Enter weight in pounds:");
 		boolean inputError = false;
 		do {
 			double weight = in.nextDouble();
-			if (validateWeightInput(weight)) {
+			if (validateWeightInput(weight) || !isUserWeight) {
 				return weight;
 			} else {
 				inputError = true;
-				System.out.println("Please enter a valid weight greater than 0");
+				System.out.println("Weight must be greater than 0");
 			}
 
+		} while (inputError);
+		return 0;
+	}
+	
+	private static int askSetsReps(Scanner in, String sr) {
+		System.out.println("How many " + sr + "?");
+		boolean inputError = false;
+		do {
+			int sets = in.nextInt();
+			if (validateSetRepInput(sets)) {
+				return sets;
+			} else {
+				inputError = true;
+				System.out.println("Sets/reps must be greater than 0");
+			}
 		} while (inputError);
 		return 0;
 	}
@@ -58,5 +73,10 @@ public class UserPrompts {
 		return isValidWeight;
 	}
 	
+	private static boolean validateSetRepInput(int sr) {
+		boolean isValidNum = (sr > 0) ? true : false;
+		return isValidNum;
+	}
+
 
 }
