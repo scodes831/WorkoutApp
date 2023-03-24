@@ -1,14 +1,19 @@
 package com.workoutTracker;
 
+import java.util.ArrayList;
+
 public class StrengthTraining extends Exercise {
 	
 	String exerciseName;
 	String muscleGroup;
-	double weightLb;
-	double weightKg;
-	int sets;
-	int reps;
 	
+	ArrayList<Set> sets = new ArrayList<Set>();
+	
+	public StrengthTraining(String exerciseName, String muscleGroup) {
+		this.exerciseName = exerciseName;
+		this.muscleGroup = muscleGroup;
+	}
+		
 	public String getExerciseName() {
 		return exerciseName;
 	}
@@ -21,29 +26,11 @@ public class StrengthTraining extends Exercise {
 	public void setMuscleGroup(String muscleGroup) {
 		this.muscleGroup = muscleGroup;
 	}
-	public double getWeightLb() {
-		return weightLb;
-	}
-	public void setWeightLb(double weightLb) {
-		this.weightLb = weightLb;
-	}
-	public double getWeightKg() {
-		return weightKg;
-	}
-	public void setWeightKg(double weightKg) {
-		this.weightKg = weightKg;
-	}
-	public int getSets() {
+	public ArrayList<Set> getSets() {
 		return sets;
 	}
-	public void setSets(int sets) {
+	public void setSets(ArrayList<Set> sets) {
 		this.sets = sets;
-	}
-	public int getReps() {
-		return reps;
-	}
-	public void setReps(int reps) {
-		this.reps = reps;
 	}
 
 }
