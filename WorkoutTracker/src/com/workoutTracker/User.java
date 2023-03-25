@@ -24,6 +24,14 @@ public class User {
 		this.weightLbs = weightLbs;
 	}
 
+	public User(Object firstName, Object lastName, Object age, Object weightLbs) {
+		this.userId = generateUserId();
+		this.firstName = (String) firstName;
+		this.lastName = (String) lastName;
+		this.age = (int) age;
+		this.weightLbs = (double) weightLbs;
+	}
+
 	public int generateUserId() { 
 		int id = User.getID();
 		id++;
