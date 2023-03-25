@@ -4,19 +4,19 @@ import java.util.Scanner;
 
 public class UserPrompts {
 	
-	private static String askFirstName(Scanner in) {
+	public static String askFirstName(Scanner in) {
 		System.out.println("Enter first name:");
 		String firstName = in.next();
 		return firstName;
 	}
 	
-	private static String askLastName(Scanner in) {
+	public static String askLastName(Scanner in) {
 		System.out.println("Enter last name:");
 		String lastName = in.next();
 		return lastName;
 	}
 	
-	private static int askAge(Scanner in) {
+	public static int askAge(Scanner in) {
 		System.out.println("Enter age:");
 		boolean inputError = false;
 		do {
@@ -32,7 +32,7 @@ public class UserPrompts {
 		return 0;
 	}
 	
-	private static double askWeight(Scanner in, boolean isUserWeight) {
+	public static double askWeight(Scanner in, boolean isUserWeight) {
 		System.out.println("Enter weight in pounds:");
 		boolean inputError = false;
 		do {
@@ -48,7 +48,7 @@ public class UserPrompts {
 		return 0;
 	}
 	
-	private static int askSetsReps(Scanner in, String sr) {
+	public static int askSetsReps(Scanner in, String sr) {
 		System.out.println("How many " + sr + "?");
 		boolean inputError = false;
 		do {
