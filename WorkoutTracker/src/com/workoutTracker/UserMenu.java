@@ -27,10 +27,12 @@ public class UserMenu extends Menu {
 			System.out.println("You have added a new user: " + user.getFirstName() + " " + user.getLastName() + " is "
 					+ user.getAge() + " years old and weighs " + user.getWeightLbs() + "pounds.");
 		case 2:
-			// display users
+			System.out.println("Displaying all users:\n");
+			userManager.displayUsers(userManager.getUsers());
 		case 3:
-			// display, then edit users;
-
+			userManager.displayUsers(userManager.getUsers());
+			int selectedId = UserPrompts.askUserId(userManager);
+			userManager.editUser(selectedId);
 		}
 
 	}
