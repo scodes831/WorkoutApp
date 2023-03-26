@@ -69,13 +69,32 @@ public class UserPrompts {
 		Scanner in = new Scanner(System.in);
 		do {
 			int id = in.nextInt();
-			if (validateIdInput(id)) {
+			if (validateIdInput(userManager, id)) {
 				return id;
 			} else {
 				inputError = true;
 				System.out.println("Please enter a valid userId");
 			}
 		} while (inputError);
+		return 0;
+	}
+	
+	public static int askUserEditField(int id) {
+		System.out.println("Please select the field to edit for UserId" + id + ":\n");
+		System.out.print("1 - First Name\n2 - Last Name\n3 - Age\n4 - Weight (lbs)\n5 - Weight (kg)");
+		boolean inputError;
+		Scanner in = new Scanner(System.in);
+		do {
+			int selection = in.nextInt();
+			if (selection > 0 && selection < 6) {
+				return selection;
+			} else {
+				inputError = true;
+				System.out.println("Please enter a valid selection");
+			}
+			
+		} while (inputError);
+		return 0;
 	}
 	
 	private static boolean validateAgeInput(int age) {
@@ -91,6 +110,15 @@ public class UserPrompts {
 	private static boolean validateSetRepInput(int sr) {
 		boolean isValidNum = (sr > 0) ? true : false;
 		return isValidNum;
+	}
+	
+	private static boolean validateIdInput(UserManager userManager, int id) {
+		for (User user : userManager.getUsers()) {
+			if (user.getUserId() == id) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 
