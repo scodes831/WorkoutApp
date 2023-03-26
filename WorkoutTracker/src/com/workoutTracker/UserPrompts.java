@@ -63,6 +63,21 @@ public class UserPrompts {
 		return 0;
 	}
 	
+	public static int askUserId(UserManager userManager) {
+		System.out.println("Please enter the UserId of the user you want to edit:\n");
+		boolean inputError;
+		Scanner in = new Scanner(System.in);
+		do {
+			int id = in.nextInt();
+			if (validateIdInput(id)) {
+				return id;
+			} else {
+				inputError = true;
+				System.out.println("Please enter a valid userId");
+			}
+		} while (inputError);
+	}
+	
 	private static boolean validateAgeInput(int age) {
 		boolean isValidAge = (age < 100 && age > 1) ? true : false;
 		return isValidAge;
