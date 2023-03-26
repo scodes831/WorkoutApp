@@ -1,5 +1,7 @@
 package com.workoutTracker;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,6 +24,7 @@ public class User {
 		this.lastName = lastName;
 		this.age = age;
 		this.weightLbs = weightLbs;
+		this.weightKg = convertPoundsToKilograms(weightLbs);
 	}
 
 	public User(Object firstName, Object lastName, Object age, Object weightLbs) {
@@ -30,6 +33,7 @@ public class User {
 		this.lastName = (String) lastName;
 		this.age = (int) age;
 		this.weightLbs = (double) weightLbs;
+		this.weightKg = convertPoundsToKilograms((double) weightLbs);
 	}
 
 	public int generateUserId() { 
@@ -37,6 +41,11 @@ public class User {
 		id++;
 		User.setID((id));  
 		return id;
+	}
+	
+	private double convertPoundsToKilograms(double pounds) {
+		BigDecimal kg = new BigDecimal(pounds * 0.453592).setScale(2, RoundingMode.HALF_UP);
+		return kg.doubleValue();
 	}
 
 	public int getUserId() {
