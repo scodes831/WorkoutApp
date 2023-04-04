@@ -43,9 +43,14 @@ public class User {
 		return id;
 	}
 	
-	private double convertPoundsToKilograms(double pounds) {
+	public double convertPoundsToKilograms(double pounds) {
 		BigDecimal kg = new BigDecimal(pounds * 0.453592).setScale(2, RoundingMode.HALF_UP);
 		return kg.doubleValue();
+	}
+	
+	public double convertKilogramsToPounds(double kilograms) {
+		BigDecimal lbs = new BigDecimal(kilograms * 2.20462).setScale(2, RoundingMode.HALF_UP);
+		return lbs.doubleValue();
 	}
 
 	public int getUserId() {
