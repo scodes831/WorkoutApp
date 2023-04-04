@@ -32,12 +32,23 @@ public class UserTests {
 
 	@Test
 	void testForUserConstructor() {
-		Assert.assertTrue(user1.getFirstName().equals("Jim"));
-		Assert.assertTrue(user1.getLastName().equals("Jacks"));
-		Assert.assertTrue(user1.getAge() == 24);
-		Assert.assertTrue(user1.getWeightLbs() == 162);
+		Assert.assertTrue(user2.getFirstName().equals("Jim"));
+		Assert.assertTrue(user2.getLastName().equals("Jacks"));
+		Assert.assertTrue(user2.getAge() == 24);
+		Assert.assertTrue(user2.getWeightLbs() == 162);
 	}
-
+	
+	@Test
+	void doKilogramsConvertToPounds() {
+		Assert.assertTrue("incorrect kg to lb conversion", user1.convertKilogramsToPounds(12) == 26.46);
+		Assert.assertTrue("incorrect decimal kg to lb conversion", user1.convertKilogramsToPounds(34.6) == 76.28);
+	}
+	
+	@Test
+	void doPoundsConverToKilograms(){
+		Assert.assertTrue("incorrect lb to kg conversion", user1.convertPoundsToKilograms(96) == 43.54);
+		Assert.assertTrue("incorrect decimal lb to kg conversion", user1.convertPoundsToKilograms(168.47) == 76.42);
+	}
 	
 
 	
