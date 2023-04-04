@@ -32,7 +32,8 @@ public class UserMenu extends Menu {
 		case 3:
 			userManager.displayUsers(userManager.getUsers());
 			int selectedId = UserPrompts.askUserId(userManager);
-			userManager.editUser(selectedId);
+			User selectedUser = userManager.getUserById(userManager, selectedId);
+			userManager.editUser(selectedUser);
 		}
 
 	}
