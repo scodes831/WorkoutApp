@@ -5,10 +5,26 @@ import java.util.ArrayList;
 
 public class Workout {
 	
+	private static int ID = 49820;
+	
 	int workoutId;
 	LocalDate date;
 	int time;
 	ArrayList<Exercise> exercises = new ArrayList<Exercise>();
+	
+	public Workout (LocalDate date, int time, ArrayList<Exercise> exercises) {
+		this.workoutId = generateWorkoutId();
+		this.date = date;
+		this.time = time;
+		this.exercises = exercises;
+	}
+	
+	public int generateWorkoutId() {
+		int id = Workout.getID();
+		id++;
+		Workout.setID(id);
+		return id;
+	}
 	
 	public int getWorkoutId() {
 		return workoutId;
@@ -33,6 +49,14 @@ public class Workout {
 	}
 	public void setExercises(ArrayList<Exercise> exercises) {
 		this.exercises = exercises;
+	}
+
+	public static int getID() {
+		return ID;
+	}
+
+	public static void setID(int iD) {
+		ID = iD;
 	}
 
 }
