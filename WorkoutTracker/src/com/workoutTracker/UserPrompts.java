@@ -80,8 +80,8 @@ public class UserPrompts {
 	}
 
 	public static int askUserEditField(User user) {
-		System.out.println("Please select the field to edit for User" + user.getFirstName() + " " + user.getLastName()
-				+ "(enter 0 when finished editing):\n");
+		System.out.println("Please select the field to edit for : " + user.getFirstName() + " " + user.getLastName()
+				+ " (enter 0 when finished editing):\n");
 		System.out.print("1 - First Name\n2 - Last Name\n3 - Age\n4 - Weight (lbs)\n5 - Weight (kg)");
 		boolean inputError;
 		Scanner in = new Scanner(System.in);
