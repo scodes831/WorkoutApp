@@ -25,16 +25,20 @@ public class UserMenu extends Menu {
 			ArrayList<Object> values = userManager.getNewUserDetails();
 			User user = userManager.addNewUser(values);
 			System.out.println("You have added a new user: " + user.getFirstName() + " " + user.getLastName() + " is "
-					+ user.getAge() + " years old and weighs " + user.getWeightLbs() + "pounds.");
+					+ user.getAge() + " years old and weighs " + user.getWeightLbs() + " pounds.");
+			break;
 		case 2:
 			System.out.println("Displaying all users:\n");
 			userManager.displayUsers(userManager.getUsers());
+			break;
 		case 3:
 			userManager.displayUsers(userManager.getUsers());
 			int selectedId = UserPrompts.askUserId(userManager);
 			User selectedUser = userManager.getUserById(userManager, selectedId);
 			userManager.editUser(selectedUser);
+			break;
 		}
+		displayMenu(userManager, mainMenu);
 
 	}
 
