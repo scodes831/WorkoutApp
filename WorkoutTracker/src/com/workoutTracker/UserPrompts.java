@@ -1,5 +1,6 @@
 package com.workoutTracker;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class UserPrompts {
@@ -89,7 +90,7 @@ public class UserPrompts {
 			int selection = in.nextInt();
 			if (selection > 0 && selection < 6) {
 				return selection;
-			} else if (selection == 0){
+			} else if (selection == 0) {
 				return 0;
 			} else {
 				inputError = true;
@@ -97,6 +98,30 @@ public class UserPrompts {
 			}
 		} while (inputError);
 		return -1;
+	}
+
+	public static LocalDate askWorkoutDate() {
+		System.out.println("Enter date of workout (MM/DD/YYYY):");
+		boolean inputError;
+		Scanner in = new Scanner(System.in);
+		do {
+			String dateInput = in.next();
+			if (validateDateInput(dateInput)) {
+				String[] dateArr = dateInput.split("/");
+				LocalDate workoutDate = LocalDate.of(Integer.valueOf(dateArr[3]), Integer.valueOf(dateArr[0]),
+						Integer.valueOf(dateArr[0]));
+				return workoutDate;
+			} else {
+				inputError = true;
+				System.out.println("Please enter a valid date");
+			}
+		} while (inputError);
+		return LocalDate.now();
+	}
+	
+	private static boolean validateDateInput(String input) {
+		String regex = "[0-9]+/[0-9]+/[0-9]{4}";
+		return input.matches(regex);
 	}
 
 	private static boolean validateAgeInput(int age) {
