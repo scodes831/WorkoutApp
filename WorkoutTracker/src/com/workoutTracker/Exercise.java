@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 
 public abstract class Exercise {
 	
+	private static int ID = 378832;
+	
 	int heartRate;
 	int calories;
 	
@@ -29,6 +31,14 @@ public abstract class Exercise {
 	}
 	public void setCalories(int calories) {
 		this.calories = calories;
+	}
+
+	public static int getID() {
+		return ID;
+	}
+
+	public static void setID(int iD) {
+		ID = iD;
 	}
 
 }
