@@ -2,8 +2,8 @@ package com.workoutTracker;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class User {
 	
@@ -41,6 +41,14 @@ public class User {
 		id++;
 		User.setID((id));  
 		return id;
+	}
+	
+	public Workout addWorkout(User user) {
+		LocalDate workoutDate = UserPrompts.askWorkoutDate();
+		int workoutTime = UserPrompts.askWorkoutTime();
+		Workout workout = new Workout(workoutDate, workoutTime);
+		user.getWorkouts().add(workout);
+		return workout;
 	}
 	
 	public double convertPoundsToKilograms(double pounds) {
