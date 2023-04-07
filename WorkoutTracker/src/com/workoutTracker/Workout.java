@@ -31,6 +31,24 @@ public class Workout {
 		Workout.setID(id);
 		return id;
 	}
+	
+	public Exercise addNewExercise(String exerciseType) {
+		switch (exerciseType) {
+		case "Run":
+			Run run = new Run();
+			return run;
+		case "HIIT":
+			HIIT hiit = new HIIT();
+			return hiit;
+		case "Bike":
+			Bike bike = new Bike();
+			return bike;
+		case "Strength Training":
+			StrengthTraining strengthTraining = new StrengthTraining();
+			return strengthTraining;
+		}
+		return null;
+	}
 
 	public int getWorkoutId() {
 		return workoutId;
