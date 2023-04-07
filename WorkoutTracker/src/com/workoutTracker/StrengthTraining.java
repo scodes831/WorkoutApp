@@ -14,6 +14,8 @@ public class StrengthTraining extends Exercise {
 		this.muscleGroup = muscleGroup;
 	}
 	
+	StrengthTraining() {}
+	
 	public void addNewSet(int sets, double weightLbs, int reps) {
 		Set set = new Set(sets, weightLbs, reps);
 		getSets().add(set);
