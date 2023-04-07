@@ -119,6 +119,38 @@ public class UserPrompts {
 		return LocalDate.now();
 	}
 	
+	public static int askWorkoutTime() {
+		System.out.println("How long was the workout (in minutes)?");
+		Scanner in = new Scanner(System.in);
+		int workoutTime = in.nextInt();
+		return workoutTime;
+	}
+	
+	public static String askExerciseType() {
+		System.out.println("Please enter the type of exercise:\n1 - Run\n2 - High Intensity Interval Training\n3 - Bike\n4 - Strength Training");
+		Scanner in = new Scanner(System.in);
+		boolean inputError = false;
+		do {
+			int selection = in.nextInt();
+			if (validateExerciseTypeInput(selection)) {
+				switch (selection) {
+				case 1: 
+					return "Run";
+				case 2: 
+					return "HIIT";
+				case 3: 
+					return "Bike";
+				case 4:
+					return "Strength Training";
+				}
+			} else {
+				inputError = true;
+				System.out.println("Please enter a valid selection.");
+			}
+		} while (inputError);
+		return null;
+	}
+	
 	private static boolean validateDateInput(String input) {
 		String regex = "[0-9]+/[0-9]+/[0-9]{4}";
 		return input.matches(regex);
@@ -146,6 +178,11 @@ public class UserPrompts {
 			}
 		}
 		return false;
+	}
+	
+	private static boolean validateExerciseTypeInput(int input) {
+		boolean isValidInput = (input > 0 && input < 5) ? true : false;
+		return isValidInput;
 	}
 
 }
