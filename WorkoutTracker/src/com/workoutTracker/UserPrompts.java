@@ -118,27 +118,28 @@ public class UserPrompts {
 		} while (inputError);
 		return LocalDate.now();
 	}
-	
+
 	public static int askWorkoutTime() {
 		System.out.println("How long was the workout (in minutes)?");
 		Scanner in = new Scanner(System.in);
 		int workoutTime = in.nextInt();
 		return workoutTime;
 	}
-	
+
 	public static String askExerciseType() {
-		System.out.println("Please enter the type of exercise:\n1 - Run\n2 - High Intensity Interval Training\n3 - Bike\n4 - Strength Training");
+		System.out.println(
+				"Please enter the type of exercise:\n1 - Run\n2 - High Intensity Interval Training\n3 - Bike\n4 - Strength Training");
 		Scanner in = new Scanner(System.in);
 		boolean inputError = false;
 		do {
 			int selection = in.nextInt();
 			if (validateExerciseTypeInput(selection)) {
 				switch (selection) {
-				case 1: 
+				case 1:
 					return "Run";
-				case 2: 
+				case 2:
 					return "HIIT";
-				case 3: 
+				case 3:
 					return "Bike";
 				case 4:
 					return "Strength Training";
@@ -150,7 +151,52 @@ public class UserPrompts {
 		} while (inputError);
 		return null;
 	}
-	
+
+	public static String askStrengthTrainingExerciseName() {
+		System.out.println("Enter exercise name:");
+		Scanner in = new Scanner(System.in);
+		String input = in.next();
+		return input;
+	}
+
+	public static String askMuscleGroupName() {
+		System.out.println(
+				"Select the muscle group for this exercise:\n1 - Shoulders\n2 - Triceps\nB3 - Biceps\n4 - Upper Back\n5 - Lower Back\n6 - Abs\n7 - Hamstrings\n8 - Quads\n9 - Glutes\n10 - Calves");
+		Scanner in = new Scanner(System.in);
+		boolean inputError = false;
+		do {
+			int selection = in.nextInt();
+			if (validateMuscleGroupNameInput(selection)) {
+				switch (selection) {
+				case 1:
+					return "Shoulders";
+				case 2: 
+					return "Triceps";
+				case 3: 
+					return "Biceps";
+				case 4:
+					return "Upper Back";
+				case 5: 
+					return "Lower Back";
+				case 6: 
+					return "Abs";
+				case 7: 
+					return "Hamstrings";
+				case 8: 
+					return "Quads";
+				case 9:
+					return "Glutes";
+				case 10:
+					return "Calves";
+				}
+			} else {
+				inputError = true;
+				System.out.println("Please enter a valid selection.");
+			}
+		} while (inputError);
+		return null;
+	}
+
 	private static boolean validateDateInput(String input) {
 		String regex = "[0-9]+/[0-9]+/[0-9]{4}";
 		return input.matches(regex);
@@ -179,9 +225,14 @@ public class UserPrompts {
 		}
 		return false;
 	}
-	
+
 	private static boolean validateExerciseTypeInput(int input) {
 		boolean isValidInput = (input > 0 && input < 5) ? true : false;
+		return isValidInput;
+	}
+	
+	private static boolean validateMuscleGroupNameInput(int input) {
+		boolean isValidInput = (input > 0 && input < 11) ? true : false; 
 		return isValidInput;
 	}
 
