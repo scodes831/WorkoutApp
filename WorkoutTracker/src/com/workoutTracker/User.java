@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Formatter;
 
 public class User {
 	
@@ -49,6 +50,15 @@ public class User {
 		Workout workout = new Workout(workoutDate, workoutTime);
 		user.getWorkouts().add(workout);
 		return workout;
+	}
+	
+	public void displayAllWorkouts() {
+		Formatter table = new Formatter();
+		table.format("%15s %15s %15s\n", "WorkoutId", "Date", "Time");
+		for (Workout workout : getWorkouts()) {
+			table.format("%15s %15s %15s\n", workout.getWorkoutId(), workout.getDate(), workout.getTime());
+		}
+		System.out.println(table);
 	}
 	
 	public double convertPoundsToKilograms(double pounds) {
