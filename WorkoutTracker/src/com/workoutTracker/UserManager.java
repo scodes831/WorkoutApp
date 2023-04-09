@@ -34,7 +34,14 @@ public class UserManager {
 		}
 		System.out.println(userTable);
 	}
-
+	
+	public User selectAUser(UserManager userManager) {
+		userManager.displayUsers(userManager.getUsers());
+		int selectedId = UserPrompts.askUserId(userManager);
+		User selectedUser = userManager.getUserById(userManager, selectedId);
+		return selectedUser;
+	}
+	
 	public void editUser(User user) {
 		Scanner in = new Scanner(System.in);
 		boolean stillEditing = true;
