@@ -196,7 +196,28 @@ public class UserPrompts {
 		} while (inputError);
 		return null;
 	}
-
+	
+	public static int askNumSets() {
+		System.out.println("How many sets?");
+		Scanner in = new Scanner(System.in);
+		int input = in.nextInt();
+		return input;
+	}
+	
+	public static double askSetWeight() {
+		System.out.println("Enter weight for set (in pounds):");
+		Scanner in = new Scanner(System.in);
+		double input = in.nextDouble();
+		return input;
+	}
+	
+	public static int askSetReps() {
+		System.out.println("Number of reps?");
+		Scanner in = new Scanner(System.in);
+		int input = in.nextInt();
+		return input;
+	}
+	
 	private static boolean validateDateInput(String input) {
 		String regex = "[0-9]+/[0-9]+/[0-9]{4}";
 		return input.matches(regex);
