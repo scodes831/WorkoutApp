@@ -35,18 +35,19 @@ public class UserMenu extends Menu {
 			User selectedUser = userManager.selectAUser(userManager);
 			userManager.editUser(selectedUser);
 			break;
+		case 4:
+			mainMenu.displayMenu(userManager, mainMenu);
+			break;
 		}
 		displayMenu(userManager, mainMenu);
 
 	}
 
 	public int makeSelection() {
-		System.out.println("User Menu Options:\n1 - Add User\n2 - Display Users\n3 - Edit Users");
+		System.out.println("User Menu Options:\n1 - Add User\n2 - Display Users\n3 - Edit Users\n4 - Back to Main Menu");
 		Scanner in = new Scanner(System.in);
 		int selection = in.nextInt();
 		return selection;
 	}
 	
-	public
-
 }
