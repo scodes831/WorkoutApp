@@ -16,7 +16,7 @@ public class StrengthTraining extends Exercise {
 	
 	StrengthTraining() {}
 	
-	public void addExerciseDetails(Workout workout) {
+	public void addStrengthTrainingDetails() {
 		String exerciseName = UserPrompts.askStrengthTrainingExerciseName();
 		String muscleGroup = UserPrompts.askMuscleGroupName();
 		this.setExerciseName(exerciseName);
