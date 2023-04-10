@@ -8,6 +8,7 @@ public abstract class Exercise {
 	private static int ID = 378832;
 	
 	int exerciseId;
+	int exerciseTime;
 	int heartRate;
 	int calories;
 	
@@ -20,6 +21,25 @@ public abstract class Exercise {
 		id++;
 		Exercise.setID(id);
 		return id;
+	}
+	
+	public void addExerciseDetails() {
+		int exerciseTime = UserPrompts.askTime("exercise");
+		this.setExerciseTime(exerciseTime);
+		if (this instanceof StrengthTraining) {
+			((StrengthTraining)this).addStrengthTrainingDetails();
+		} else if (this instanceof Bike) {
+			
+		} else if (this instanceof HIIT) {
+			
+		} else if (this instanceof Run) {
+			
+		}
+	}
+	
+	public double calculateMPH(double miles, int time) {
+		BigDecimal mph = new BigDecimal((miles*60)/time).setScale(1, RoundingMode.HALF_UP);
+		return mph.doubleValue();
 	}
 	
 	public double convertMilesToKilometers(double miles) {
@@ -59,6 +79,14 @@ public abstract class Exercise {
 
 	public static void setID(int iD) {
 		ID = iD;
+	}
+
+	public int getExerciseTime() {
+		return exerciseTime;
+	}
+
+	public void setExerciseTime(int exerciseTime) {
+		this.exerciseTime = exerciseTime;
 	}
 
 }
