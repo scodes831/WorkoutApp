@@ -16,7 +16,7 @@ public class ExerciseTests {
 	@BeforeEach
 	public void setup() {
 		run = new Run();
-		st = new StrengthTraining();
+		st = new StrengthTraining("squats", "legs");
 	}
 	
 	@Test
@@ -45,6 +45,12 @@ public class ExerciseTests {
 		double converted = st.convertPoundsToKilograms(5);
 		double expected = 2.27;
 		Assert.assertEquals("Incorrect conversion to kg", expected, converted, 0.001);
+	}
+	
+	@Test
+	void calculateMPH() {
+		Assert.assertEquals("Incorrect calculation 1mph", 1.0, run.calculateMPH(1, 60), 0.001);
+		Assert.assertEquals("Incorrect calculation 2.3mph", 2.3, run.calculateMPH(5, 130), 0.001);
 	}
 
 }
