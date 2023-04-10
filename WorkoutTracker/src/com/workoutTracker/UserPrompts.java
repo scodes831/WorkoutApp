@@ -119,11 +119,11 @@ public class UserPrompts {
 		return LocalDate.now();
 	}
 
-	public static int askWorkoutTime() {
-		System.out.println("How long was the workout (in minutes)?");
+	public static int askTime(String text) {
+		System.out.println("How long was the" + text + "(in minutes)?");
 		Scanner in = new Scanner(System.in);
-		int workoutTime = in.nextInt();
-		return workoutTime;
+		int time = in.nextInt();
+		return time;
 	}
 
 	public static String askExerciseType() {
