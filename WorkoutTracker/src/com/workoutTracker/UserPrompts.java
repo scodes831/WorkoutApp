@@ -218,6 +218,26 @@ public class UserPrompts {
 		return input;
 	}
 	
+	public static boolean askIfStationaryBike() {
+		System.out.println("Was workout on a stationary bike?\n1 - Yes\n2 - No");
+		Scanner in = new Scanner(System.in);
+		boolean inputError = false;
+		do {
+			int selection = in.nextInt();
+			if (validateBikeTypeInput(selection)) {
+				if (selection == 1) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				inputError = true;
+				System.out.println("Please enter a valid selection.");
+			}
+		} while (inputError);
+		return false;	
+	}
+	
 	private static boolean validateDateInput(String input) {
 		String regex = "[0-9]+/[0-9]+/[0-9]{4}";
 		return input.matches(regex);
@@ -254,6 +274,11 @@ public class UserPrompts {
 	
 	private static boolean validateMuscleGroupNameInput(int input) {
 		boolean isValidInput = (input > 0 && input < 11) ? true : false; 
+		return isValidInput;
+	}
+	
+	private static boolean validateBikeTypeInput(int input) {
+		boolean isValidInput = (input == 1 || input == 2) ? true : false;
 		return isValidInput;
 	}
 
