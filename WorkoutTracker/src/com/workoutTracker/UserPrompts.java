@@ -238,6 +238,29 @@ public class UserPrompts {
 		return false;	
 	}
 	
+	public static int askResistance() {
+		System.out.println("Add resistance:");
+		Scanner in = new Scanner(System.in);
+		boolean inputError = false;
+		do {
+			int input = in.nextInt();
+			if (input < 0) {
+				inputError = true;
+				System.out.println("Resistance cannot be less than 0");
+			} else {
+				return input;
+			}
+		} while (inputError);
+		return 0;
+	}
+	
+	public static double askDistanceMiles() {
+		System.out.println("Please enter the distance in miles:");
+		Scanner in = new Scanner(System.in);
+		double input = in.nextDouble();
+		return input;
+	}
+	
 	private static boolean validateDateInput(String input) {
 		String regex = "[0-9]+/[0-9]+/[0-9]{4}";
 		return input.matches(regex);
