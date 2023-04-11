@@ -1,13 +1,27 @@
 package com.workoutTracker;
 
+import java.time.LocalTime;
+
 public class Bike extends Exercise implements Distance, Speed {
 	
 	double mph;
-	double pace;
+	LocalTime pace;
 	double distanceMi;
-	double distanceKg;
+	double distanceKm;
 	int resistance;
 	boolean isStationaryBike;
+	
+	public void addBikeDetails() {
+		boolean isStationaryBike = UserPrompts.askIfStationaryBike();
+		this.setStationaryBike(isStationaryBike);
+		double distanceMi = UserPrompts.askDistanceMiles();
+		this.setDistanceMi(distanceMi);
+		this.setDistanceKm(this.convertMilesToKilometers(distanceMi));
+		int resistance = UserPrompts.askResistance();
+		this.setResistance(resistance);
+		this.setMph(this.calculateMPH(distanceMi, this.getExerciseTime()));
+		this.setPace(this.calculatePace(this.getMph()));
+	}
 	
 	public double getMph() {
 		return mph;
@@ -15,10 +29,10 @@ public class Bike extends Exercise implements Distance, Speed {
 	public void setMph(double mph) {
 		this.mph = mph;
 	}
-	public double getPace() {
+	public LocalTime getPace() {
 		return pace;
 	}
-	public void setPace(double pace) {
+	public void setPace(LocalTime pace) {
 		this.pace = pace;
 	}
 	public double getDistanceMi() {
@@ -27,11 +41,11 @@ public class Bike extends Exercise implements Distance, Speed {
 	public void setDistanceMi(double distanceMi) {
 		this.distanceMi = distanceMi;
 	}
-	public double getDistanceKg() {
-		return distanceKg;
+	public double getDistanceKm() {
+		return distanceKm;
 	}
-	public void setDistanceKg(double distanceKg) {
-		this.distanceKg = distanceKg;
+	public void setDistanceKm(double distanceKm) {
+		this.distanceKm = distanceKm;
 	}
 	public int getResistance() {
 		return resistance;
