@@ -2,6 +2,7 @@ package com.workoutTracker;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalTime;
 
 public abstract class Exercise {
 	
@@ -40,6 +41,17 @@ public abstract class Exercise {
 	public double calculateMPH(double miles, int time) {
 		BigDecimal mph = new BigDecimal((miles*60)/time).setScale(1, RoundingMode.HALF_UP);
 		return mph.doubleValue();
+	}
+	
+	public LocalTime calculatePace(double mph) {
+		int hour = 0;
+		int minutes = (int) (60.0 / mph);
+		if (minutes > 59) {
+			hour++;
+		}
+		int seconds = (int) (((60.0/mph) - minutes) * 60);
+		LocalTime pace = LocalTime.of(hour, minutes, seconds);
+		return pace;
 	}
 	
 	public double convertMilesToKilometers(double miles) {
