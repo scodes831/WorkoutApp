@@ -261,6 +261,20 @@ public class UserPrompts {
 		return input;
 	}
 	
+	public static int askIntervalSeconds(String type) {
+		System.out.println("Enter" + type + " interval time (seconds)");
+		Scanner in = new Scanner(System.in);
+		int input = in.nextInt();
+		return input;
+	}
+	
+	public static int askNumIntervals() {
+		System.out.println("How many intervals?");
+		Scanner in = new Scanner(System.in);
+		int input = in.nextInt();
+		return input;
+	}
+	
 	private static boolean validateDateInput(String input) {
 		String regex = "[0-9]+/[0-9]+/[0-9]{4}";
 		return input.matches(regex);
@@ -304,5 +318,7 @@ public class UserPrompts {
 		boolean isValidInput = (input == 1 || input == 2) ? true : false;
 		return isValidInput;
 	}
+
+	
 
 }
