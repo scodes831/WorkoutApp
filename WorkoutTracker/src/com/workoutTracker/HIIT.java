@@ -2,20 +2,20 @@ package com.workoutTracker;
 
 public class HIIT extends Exercise {
 	
-	double activeIntervalSec;
-	double restInvertalSec;
+	int activeIntervalSec;
+	int restInvertalSec;
 	int numOfIntervals;
 	
-	public double getActiveIntervalSec() {
+	public int getActiveIntervalSec() {
 		return activeIntervalSec;
 	}
-	public void setActiveIntervalSec(double activeIntervalSec) {
+	public void setActiveIntervalSec(int activeIntervalSec) {
 		this.activeIntervalSec = activeIntervalSec;
 	}
-	public double getRestInvertalSec() {
+	public int getRestInvertalSec() {
 		return restInvertalSec;
 	}
-	public void setRestInvertalSec(double restInvertalSec) {
+	public void setRestInvertalSec(int restInvertalSec) {
 		this.restInvertalSec = restInvertalSec;
 	}
 	public int getNumOfIntervals() {
