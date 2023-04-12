@@ -3,8 +3,17 @@ package com.workoutTracker;
 public class HIIT extends Exercise {
 	
 	int activeIntervalSec;
-	int restInvertalSec;
+	int restIntervalSec;
 	int numOfIntervals;
+	
+	public void addHIITDetails() {
+		int activeIntervalSec = UserPrompts.askIntervalSeconds("active");
+		this.setActiveIntervalSec(activeIntervalSec);
+		int restIntervalSec = UserPrompts.askIntervalSeconds("rest");
+		this.setRestIntervalSec(restIntervalSec);
+		int numOfIntervals = UserPrompts.askNumIntervals();
+		this.setNumOfIntervals(numOfIntervals);
+	}
 	
 	public int getActiveIntervalSec() {
 		return activeIntervalSec;
@@ -12,11 +21,11 @@ public class HIIT extends Exercise {
 	public void setActiveIntervalSec(int activeIntervalSec) {
 		this.activeIntervalSec = activeIntervalSec;
 	}
-	public int getRestInvertalSec() {
-		return restInvertalSec;
+	public int getRestIntervalSec() {
+		return restIntervalSec;
 	}
-	public void setRestInvertalSec(int restInvertalSec) {
-		this.restInvertalSec = restInvertalSec;
+	public void setRestIntervalSec(int restIntervalSec) {
+		this.restIntervalSec = restIntervalSec;
 	}
 	public int getNumOfIntervals() {
 		return numOfIntervals;
