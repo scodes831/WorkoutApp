@@ -30,11 +30,11 @@ public abstract class Exercise {
 		if (this instanceof StrengthTraining) {
 			((StrengthTraining)this).addStrengthTrainingDetails();
 		} else if (this instanceof Bike) {
-			
+			((Bike)this).addBikeDetails();
 		} else if (this instanceof HIIT) {
-			
+			((HIIT)this).addHIITDetails();
 		} else if (this instanceof Run) {
-			
+			((Run)this).addRunDetails();
 		}
 	}
 	
