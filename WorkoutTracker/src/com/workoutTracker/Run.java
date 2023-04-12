@@ -1,11 +1,21 @@
 package com.workoutTracker;
 
+import java.time.LocalTime;
+
 public class Run extends Exercise implements Distance, Speed {
 	
 	double mph;
-	double pace;
+	LocalTime pace;
 	double distanceMi;
 	double distanceKm;
+	
+	public void addRunDetails() {
+		double distanceMi = UserPrompts.askDistanceMiles();
+		this.setDistanceMi(distanceMi);
+		this.setDistanceKm(this.convertMilesToKilometers(distanceMi));
+		this.setMph(this.calculateMPH(distanceMi, this.getExerciseTime()));
+		this.setPace(this.calculatePace(this.getMph()));
+	}
 	
 	public double getMph() {
 		return mph;
@@ -13,10 +23,10 @@ public class Run extends Exercise implements Distance, Speed {
 	public void setMph(double mph) {
 		this.mph = mph;
 	}
-	public double getPace() {
+	public LocalTime getPace() {
 		return pace;
 	}
-	public void setPace(double pace) {
+	public void setPace(LocalTime pace) {
 		this.pace = pace;
 	}
 	public double getDistanceMi() {
@@ -31,5 +41,6 @@ public class Run extends Exercise implements Distance, Speed {
 	public void setDistanceKm(double distanceKm) {
 		this.distanceKm = distanceKm;
 	}
+	
 
 }
