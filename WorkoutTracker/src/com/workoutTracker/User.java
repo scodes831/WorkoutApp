@@ -46,7 +46,7 @@ public class User {
 	
 	public Workout addWorkout(User user) {
 		LocalDate workoutDate = UserPrompts.askWorkoutDate();
-		int workoutTime = UserPrompts.askWorkoutTime();
+		int workoutTime = UserPrompts.askTime("workout");
 		Workout workout = new Workout(workoutDate, workoutTime);
 		user.getWorkouts().add(workout);
 		return workout;
