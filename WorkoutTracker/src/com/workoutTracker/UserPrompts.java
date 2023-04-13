@@ -65,7 +65,7 @@ public class UserPrompts {
 	}
 
 	public static int askUserId(UserManager userManager) {
-		System.out.println("Please enter the UserId of the user you want to edit:\n");
+		System.out.println("Select a user: please enter the UserId to continue:\n");
 		boolean inputError;
 		Scanner in = new Scanner(System.in);
 		do {
