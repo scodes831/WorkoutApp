@@ -30,8 +30,13 @@ public class MainMenu extends Menu {
 		case 1: 
 			UserMenu userMenu = new UserMenu();
 			userMenu.displayMenu(userManager, mainMenu);
+			break;
+		case 2: 
+			WorkoutMenu workoutMenu = new WorkoutMenu();
+			workoutMenu.displayMenu(userManager, mainMenu);
+			break;
 		}
-		
+		displayMenu(userManager, mainMenu);
 	}
 	
 	
