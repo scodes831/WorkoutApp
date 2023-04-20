@@ -2,6 +2,7 @@ package com.workoutTracker;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Workout {
 
@@ -32,6 +33,21 @@ public class Workout {
 		return id;
 	}
 	
+	public void addWorkoutDetails(Workout workout) {
+		System.out.println("Let's add exercises to your workout!\n");
+		boolean keepAddingExercises = true;
+		do {
+			String exerciseType = UserPrompts.askExerciseType();
+			if (!exerciseType.equals("Exit")) {
+				Exercise exercise = addNewExercise(exerciseType);
+				workout.getExercises().add(exercise);
+				exercise.addExerciseDetails();
+			} else {
+				keepAddingExercises = false;
+			}
+		} while (keepAddingExercises);		
+	}
+	
 	public Exercise addNewExercise(String exerciseType) {
 		switch (exerciseType) {
 		case "Run":
@@ -46,8 +62,38 @@ public class Workout {
 		case "Strength Training":
 			StrengthTraining strengthTraining = new StrengthTraining();
 			return strengthTraining;
+		case "Exit":
+			break;
 		}
 		return null;
+	}
+	
+	public void editWorkout() {
+		boolean stillEditing = true;
+		do {
+			int selection = UserPrompts.askWorkoutFieldToEdit();
+			if (selection == 0) {
+				stillEditing = false;
+			} else {
+				switch (selection) {
+				case 1:
+					LocalDate newDate = UserPrompts.askWorkoutDate();
+					this.setDate(newDate);
+					break;
+				case 2:
+					int newTime = UserPrompts.askTime("workout");
+					this.setTime(newTime);
+					break;
+				case 3:
+					this.editExercises();
+					break;
+				}
+			}
+		} while (stillEditing);
+	}
+	
+	public void editExercises() {
+		System.out.println("Editing the exercises...");
 	}
 
 	public int getWorkoutId() {
