@@ -108,8 +108,8 @@ public class UserPrompts {
 			String dateInput = in.next();
 			if (validateDateInput(dateInput)) {
 				String[] dateArr = dateInput.split("/");
-				LocalDate workoutDate = LocalDate.of(Integer.valueOf(dateArr[3]), Integer.valueOf(dateArr[0]),
-						Integer.valueOf(dateArr[0]));
+				LocalDate workoutDate = LocalDate.of(Integer.valueOf(dateArr[2]), Integer.valueOf(dateArr[0]),
+						Integer.valueOf(dateArr[1]));
 				return workoutDate;
 			} else {
 				inputError = true;
@@ -120,7 +120,7 @@ public class UserPrompts {
 	}
 
 	public static int askTime(String text) {
-		System.out.println("How long was the" + text + "(in minutes)?");
+		System.out.println("How long was the " + text + " (in minutes)?");
 		Scanner in = new Scanner(System.in);
 		int time = in.nextInt();
 		return time;
@@ -128,7 +128,7 @@ public class UserPrompts {
 
 	public static String askExerciseType() {
 		System.out.println(
-				"Please enter the type of exercise:\n1 - Run\n2 - High Intensity Interval Training\n3 - Bike\n4 - Strength Training");
+				"Please enter the type of exercise (0 to exit):\n1 - Run\n2 - High Intensity Interval Training\n3 - Bike\n4 - Strength Training");
 		Scanner in = new Scanner(System.in);
 		boolean inputError = false;
 		do {
@@ -143,6 +143,8 @@ public class UserPrompts {
 					return "Bike";
 				case 4:
 					return "Strength Training";
+				case 0:
+					return "Exit";
 				}
 			} else {
 				inputError = true;
@@ -161,7 +163,7 @@ public class UserPrompts {
 
 	public static String askMuscleGroupName() {
 		System.out.println(
-				"Select the muscle group for this exercise:\n1 - Shoulders\n2 - Triceps\nB3 - Biceps\n4 - Upper Back\n5 - Lower Back\n6 - Abs\n7 - Hamstrings\n8 - Quads\n9 - Glutes\n10 - Calves");
+				"Select the muscle group for this exercise:\n1 - Shoulders\n2 - Triceps\n3 - Biceps\n4 - Upper Back\n5 - Lower Back\n6 - Abs\n7 - Hamstrings\n8 - Quads\n9 - Glutes\n10 - Calves");
 		Scanner in = new Scanner(System.in);
 		boolean inputError = false;
 		do {
@@ -262,7 +264,7 @@ public class UserPrompts {
 	}
 	
 	public static int askIntervalSeconds(String type) {
-		System.out.println("Enter" + type + " interval time (seconds)");
+		System.out.println("Enter " + type + " interval time (seconds)");
 		Scanner in = new Scanner(System.in);
 		int input = in.nextInt();
 		return input;
@@ -275,8 +277,51 @@ public class UserPrompts {
 		return input;
 	}
 	
+	public static int askWorkoutSelection(User user) {
+		System.out.println("Enter the workoutId you want to edit:");
+		Scanner in = new Scanner(System.in);
+		boolean inputError = false;
+		int input = in.nextInt();
+		do {
+			if (validateWorkoutSelectionInput(input, user)) {
+				return input;
+			} else {
+				inputError = true;
+				System.out.println("Please enter a valid workoutId");
+			}
+		} while (inputError);
+		return 0;
+	}
+	
+	public static int askWorkoutFieldToEdit() {
+		System.out.println("Which field do you want to edit? (0 to exit)\n1 - Workout Date\n2 - Workout Time\n3 - Exercises");
+		Scanner in = new Scanner(System.in);
+		boolean inputError = false;
+		do {
+			int input = in.nextInt();
+			if (input == 0) {
+				return 0;
+			} else if (input < 1 || input > 3) {
+				inputError = true;
+				System.out.println("Please enter a valid selection.");
+			} else {
+				return input;
+			}
+		} while (inputError);
+		return -1;
+	}
+	
+	private static boolean validateWorkoutSelectionInput(int input, User user) {
+		for (Workout workout : user.getWorkouts()) {
+			if (workout.getWorkoutId() == input) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private static boolean validateDateInput(String input) {
-		String regex = "[0-9]+/[0-9]+/[0-9]{4}";
+		String regex = "[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}";
 		return input.matches(regex);
 	}
 
@@ -305,7 +350,7 @@ public class UserPrompts {
 	}
 
 	private static boolean validateExerciseTypeInput(int input) {
-		boolean isValidInput = (input > 0 && input < 5) ? true : false;
+		boolean isValidInput = (input > -1 && input < 5) ? true : false;
 		return isValidInput;
 	}
 	
@@ -318,7 +363,4 @@ public class UserPrompts {
 		boolean isValidInput = (input == 1 || input == 2) ? true : false;
 		return isValidInput;
 	}
-
-	
-
 }
