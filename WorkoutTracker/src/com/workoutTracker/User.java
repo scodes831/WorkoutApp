@@ -61,6 +61,16 @@ public class User {
 		System.out.println(table);
 	}
 	
+	public Workout selectWorkout() {
+		int selectedWorkoutId = UserPrompts.askWorkoutSelection(this);
+		for (Workout workout : getWorkouts()) {
+			if (workout.getWorkoutId() == selectedWorkoutId) {
+				return workout;
+			}
+		}
+		return null;
+	}
+	
 	public double convertPoundsToKilograms(double pounds) {
 		BigDecimal kg = new BigDecimal(pounds * 0.453592).setScale(2, RoundingMode.HALF_UP);
 		return kg.doubleValue();
