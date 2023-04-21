@@ -311,6 +311,42 @@ public class UserPrompts {
 		return -1;
 	}
 	
+	public static Exercise askExerciseSelection(Workout workout) {
+		System.out.println("Enter the exerciseId of the exercise you want to edit:");
+		Scanner in = new Scanner(System.in);
+		boolean inputError = false;
+		do {
+			int input = in.nextInt();
+			Exercise selectedExercise = validateExerciseSelectionInput(input, workout);
+			if (selectedExercise != null) {
+				return selectedExercise;
+			} else {
+				inputError = true;
+				System.out.println("Please enter a valid exerciseId");
+			}
+		} while (inputError);
+		return null;
+	}
+	
+	public static int askStrengthTrainingEditFields() {
+		System.out.println("Please enter the field to edit (0 to exit)");
+		System.out.println("1 - Exercise Time\n2 - Heart Rate\n3 - Calories\n4 - Exercise Name\n5 - Muscle Group\n6 - Sets");
+		Scanner in = new Scanner(System.in);
+		boolean inputError = false;
+		do {
+			int input = in.nextInt();
+			if (input > 0 && input < 7) {
+				return input;
+			} else if (input == 0) {
+				return 0;
+			} else {
+				inputError = true;
+				System.out.println("Please enter a valid selection.");
+			}
+		} while (inputError);
+		return -1;
+	}
+	
 	private static boolean validateWorkoutSelectionInput(int input, User user) {
 		for (Workout workout : user.getWorkouts()) {
 			if (workout.getWorkoutId() == input) {
@@ -318,6 +354,15 @@ public class UserPrompts {
 			}
 		}
 		return false;
+	}
+	
+	private static Exercise validateExerciseSelectionInput(int input, Workout workout) {
+		for (Exercise exercise : workout.getExercises()) {
+			if (exercise.getExerciseId() == input) {
+				return exercise;
+			}
+		}
+		return null;
 	}
 
 	private static boolean validateDateInput(String input) {
