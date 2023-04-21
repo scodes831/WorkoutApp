@@ -361,6 +361,25 @@ public class UserPrompts {
 		return -1;
 	}
 	
+	public static int askBikeEditFields() {
+		System.out.println("Please enter the field to edit (0 to exit)");
+		System.out.println("1 - Exercise Time\n2 - Heart Rate\n3 - Calories\n4 - Stationary Bike\n5 - Distance\n6 - Resistance");
+		Scanner in = new Scanner(System.in);
+		boolean inputError = false;
+		do {
+			int input = in.nextInt();
+			if (input > 0 && input < 7) {
+				return input;
+			} else if (input == 0) {
+				return 0;
+			} else {
+				inputError = true;
+				System.out.println("Please enter a valid selection.");
+			}
+		} while (inputError);
+		return -1;
+	}
+	
 	private static boolean validateWorkoutSelectionInput(int input, User user) {
 		for (Workout workout : user.getWorkouts()) {
 			if (workout.getWorkoutId() == input) {
