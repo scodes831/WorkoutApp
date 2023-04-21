@@ -1,6 +1,7 @@
 package com.workoutTracker;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class StrengthTraining extends Exercise {
 	
@@ -22,6 +23,43 @@ public class StrengthTraining extends Exercise {
 		this.setExerciseName(exerciseName);
 		this.setMuscleGroup(muscleGroup);
 		addSetDetails();
+	}
+	
+	public void editStrengthTrainingDetails() {
+		boolean stillEditing = true;
+		do {
+			int selection = UserPrompts.askStrengthTrainingEditFields();
+			if (selection > 0) {
+				switch (selection) {
+				case 1:
+					int newExerciseTime = UserPrompts.askTime("exercise");
+					this.setExerciseTime(newExerciseTime);
+					break;
+				case 2: 
+					int newHeartRate = UserPrompts.askHeartRate();
+					this.setHeartRate(newHeartRate);
+					break;
+				case 3: 
+					int calories = UserPrompts.askCalories();
+					this.setCalories(calories);
+					break;
+				case 4: 
+					String exerciseName = UserPrompts.askStrengthTrainingExerciseName();
+					this.setExerciseName(exerciseName);
+					break;
+				case 5:
+					String newMuscleGroup = UserPrompts.askMuscleGroupName();
+					this.setMuscleGroup(newMuscleGroup);
+					break;
+				case 6:
+					System.out.println("editing sets");
+					break;
+				}
+			} else {
+				stillEditing = false;
+			}
+			
+		} while (stillEditing);
 	}
 	
 	public void addSetDetails() {
@@ -52,5 +90,7 @@ public class StrengthTraining extends Exercise {
 	public void setSets(ArrayList<Set> sets) {
 		this.sets = sets;
 	}
+
+	
 
 }
