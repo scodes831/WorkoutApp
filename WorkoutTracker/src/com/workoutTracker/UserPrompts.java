@@ -125,6 +125,20 @@ public class UserPrompts {
 		int time = in.nextInt();
 		return time;
 	}
+	
+	public static int askHeartRate() {
+		System.out.println("Enter heart rate:");
+		Scanner in = new Scanner(System.in);
+		int hr = in.nextInt();
+		return hr;
+	}
+	
+	public static int askCalories() {
+		System.out.println("Enter calories:");
+		Scanner in = new Scanner(System.in);
+		int calories = in.nextInt();
+		return calories;
+	}
 
 	public static String askExerciseType() {
 		System.out.println(
