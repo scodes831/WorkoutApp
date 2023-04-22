@@ -53,12 +53,16 @@ public class User {
 	}
 	
 	public void displayAllWorkouts() {
-		Formatter table = new Formatter();
-		table.format("%15s %15s %15s\n", "WorkoutId", "Date", "Time");
-		for (Workout workout : getWorkouts()) {
-			table.format("%15s %15s %15s\n", workout.getWorkoutId(), workout.getDate(), workout.getTime());
+		if (getWorkouts().size() == 0) {
+			System.out.println("No workouts to display for this user\n");
+		} else {
+			Formatter table = new Formatter();
+			table.format("%15s %15s %15s\n", "WorkoutId", "Date", "Time");
+			for (Workout workout : getWorkouts()) {
+				table.format("%15s %15s %15s\n", workout.getWorkoutId(), workout.getDate(), workout.getTime());
+			}
+			System.out.println(table);
 		}
-		System.out.println(table);
 	}
 	
 	public Workout selectWorkout() {
