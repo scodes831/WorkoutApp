@@ -38,6 +38,22 @@ public abstract class Exercise {
 		}
 	}
 	
+	public void editExerciseDetails() {
+		if (this instanceof StrengthTraining) {
+			System.out.println("this is an instance of st");
+			((StrengthTraining)this).editStrengthTrainingDetails();
+		} else if (this instanceof Bike) {
+			System.out.println("this is an instance of bike");
+			((Bike)this).editBikeDetails();
+		} else if (this instanceof HIIT) {
+			System.out.println("this is an instance of hiit");
+			((HIIT)this).editHIITDetails();
+		} else if (this instanceof Run) {
+			System.out.println("this is an instance of run");
+			((Run)this).editRunDetails();
+		}
+	}
+	
 	public double calculateMPH(double miles, int time) {
 		BigDecimal mph = new BigDecimal((miles*60)/time).setScale(1, RoundingMode.HALF_UP);
 		return mph.doubleValue();
