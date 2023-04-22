@@ -3,7 +3,7 @@ package com.workoutTracker;
 import java.util.Scanner;
 
 public class MainMenu extends Menu {
-	
+
 	public void displayMenu(UserManager userManager, MainMenu mainMenu) {
 		boolean inputError = false;
 		do {
@@ -15,9 +15,8 @@ public class MainMenu extends Menu {
 				System.out.println("Please enter a valid selection.");
 			}
 		} while (inputError);
-		
 	}
-	
+
 	public int makeSelection() {
 		System.out.println("Menu options:\n1 - Users\n2 - Workouts");
 		Scanner in = new Scanner(System.in);
@@ -27,18 +26,15 @@ public class MainMenu extends Menu {
 
 	public void processSelection(UserManager userManager, MainMenu mainMenu, int selection) {
 		switch (selection) {
-		case 1: 
+		case 1:
 			UserMenu userMenu = new UserMenu();
 			userMenu.displayMenu(userManager, mainMenu);
 			break;
-		case 2: 
+		case 2:
 			WorkoutMenu workoutMenu = new WorkoutMenu();
 			workoutMenu.displayMenu(userManager, mainMenu);
 			break;
 		}
 		displayMenu(userManager, mainMenu);
 	}
-	
-	
-
 }
