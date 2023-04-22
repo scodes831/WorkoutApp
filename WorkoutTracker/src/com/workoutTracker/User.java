@@ -57,9 +57,9 @@ public class User {
 			System.out.println("No workouts to display for this user\n");
 		} else {
 			Formatter table = new Formatter();
-			table.format("%15s %15s %15s\n", "WorkoutId", "Date", "Time");
+			table.format("%15s %15s %15s %15s\n", "WorkoutId", "Date", "Time", "# of Exercises");
 			for (Workout workout : getWorkouts()) {
-				table.format("%15s %15s %15s\n", workout.getWorkoutId(), workout.getDate(), workout.getTime());
+				table.format("%15s %15s %15s %15s\n", workout.getWorkoutId(), workout.getDate(), workout.getTime(), workout.getExercises().size());
 			}
 			System.out.println(table);
 		}
