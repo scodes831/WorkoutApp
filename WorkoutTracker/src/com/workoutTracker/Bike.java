@@ -2,7 +2,7 @@ package com.workoutTracker;
 
 import java.time.LocalTime;
 
-public class Bike extends Exercise implements Distance, Speed {
+public class Bike extends Exercise {
 
 	double mph;
 	LocalTime pace;
