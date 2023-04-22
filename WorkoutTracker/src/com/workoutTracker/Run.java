@@ -17,6 +17,38 @@ public class Run extends Exercise implements Distance, Speed {
 		this.setPace(this.calculatePace(this.getMph()));
 	}
 	
+	public void editRunDetails() {
+		boolean stillEditing = true;
+		do {
+			int selection = UserPrompts.askRunEditFields();
+			if (selection > 0) {
+				switch (selection) {
+				case 1:
+					int newExerciseTime = UserPrompts.askTime("exercise");
+					this.setExerciseTime(newExerciseTime);
+					break;
+				case 2:
+					int newHeartRate = UserPrompts.askHeartRate();
+					this.setHeartRate(newHeartRate);
+					break;
+				case 3:
+					int calories = UserPrompts.askCalories();
+					this.setCalories(calories);
+					break;
+				case 4:
+					double newDistanceMi = UserPrompts.askDistanceMiles();
+					this.setDistanceMi(newDistanceMi);
+					this.setDistanceKm(this.convertMilesToKilometers(newDistanceMi));
+					this.setMph(this.calculateMPH(newDistanceMi, this.getExerciseTime()));
+					this.setPace(this.calculatePace(this.getMph()));
+					break;
+				}
+			} else {
+				stillEditing = false;
+			}
+		} while (stillEditing);
+	}
+	
 	public double getMph() {
 		return mph;
 	}
@@ -41,6 +73,7 @@ public class Run extends Exercise implements Distance, Speed {
 	public void setDistanceKm(double distanceKm) {
 		this.distanceKm = distanceKm;
 	}
+
 	
 
 }
