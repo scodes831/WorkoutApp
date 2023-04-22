@@ -2,7 +2,7 @@ package com.workoutTracker;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Formatter;
 
 public class Workout {
 
@@ -93,7 +93,19 @@ public class Workout {
 	}
 	
 	public void editExercises() {
-		System.out.println("Editing the exercises...");
+		displayExercises();
+		Exercise selectedExercise = UserPrompts.askExerciseSelection(this);
+		selectedExercise.editExerciseDetails();
+	}
+	
+	public void displayExercises() {
+		System.out.println("Displaying exercises...");
+		Formatter table = new Formatter();
+		table.format("%15s %15s %15s\n", "ExerciseId", "Exercise Time", "Exercise Name");
+		for (Exercise exercise : getExercises()) {
+			table.format("%15s %15s %15s", exercise.getExerciseId(), exercise.getExerciseTime(), exercise.getClass().getSimpleName());
+		}
+		System.out.println(table);
 	}
 
 	public int getWorkoutId() {
