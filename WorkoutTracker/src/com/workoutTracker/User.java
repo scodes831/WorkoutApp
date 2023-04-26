@@ -2,6 +2,7 @@ package com.workoutTracker;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Formatter;
@@ -50,6 +51,13 @@ public class User {
 		Workout workout = new Workout(workoutDate, workoutTime);
 		user.getWorkouts().add(workout);
 		return workout;
+	}
+	
+	public void addWorkoutToDatabase(Workout workout, Connection connection, WorkoutTable workoutTable) {
+		ArrayList<Object> workoutValues = new ArrayList<Object>();
+		workoutValues.add(workout.getDate());
+		workoutValues.add(workout.getTime());
+		workoutTable.insertRow(connection, workoutValues);
 	}
 	
 	public void displayAllWorkouts() {
@@ -148,6 +156,4 @@ public class User {
 	public static void setID(int iD) {
 		ID = iD;
 	}
-	
-
 }
