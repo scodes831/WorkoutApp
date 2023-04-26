@@ -1,15 +1,17 @@
 package com.workoutTracker;
 
+import java.sql.Connection;
 import java.util.Scanner;
 
 public class WorkoutMenu extends Menu {
 
-	public void displayMenu(UserManager userManager, MainMenu mainMenu) {
+	public void displayMenu(UserManager userManager, MainMenu mainMenu, Connection connection, UserTable userTable,
+			WorkoutTable workoutTable, ExerciseTable exerciseTable, SetTable setTable) {
 		boolean inputError = false;
 		do {
 			try {
 				int selection = makeSelection();
-				processSelection(userManager, mainMenu, selection);
+				processSelection(userManager, mainMenu, selection, connection, userTable, workoutTable, exerciseTable, setTable);
 			} catch (Exception e) {
 				inputError = true;
 				System.out.println("Please enter a valid selection.");
@@ -18,12 +20,14 @@ public class WorkoutMenu extends Menu {
 
 	}
 
-	public void processSelection(UserManager userManager, MainMenu mainMenu, int selection) {
+	public void processSelection(UserManager userManager, MainMenu mainMenu, int selection, Connection connection, UserTable userTable,
+			WorkoutTable workoutTable, ExerciseTable exerciseTable, SetTable setTable) {
 		User selectedUser = userManager.selectAUser(userManager);
 		switch (selection) {
 		case 1:
 			Workout workout = selectedUser.addWorkout(selectedUser);
 			workout.addWorkoutDetails(workout);
+			selectedUser.addWorkoutToDatabase(workout, connection, workoutTable);
 			break;
 		case 2:
 			selectedUser.displayAllWorkouts();
@@ -34,9 +38,9 @@ public class WorkoutMenu extends Menu {
 			selectedWorkout.editWorkout();
 			break;
 		case 4:
-			mainMenu.displayMenu(userManager, mainMenu);
+			mainMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, setTable);
 		}
-		displayMenu(userManager, mainMenu);
+		displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, setTable);
 	}
 
 	public int makeSelection() {
