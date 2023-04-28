@@ -1,5 +1,6 @@
 package com.workoutTracker;
 
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Formatter;
@@ -11,6 +12,9 @@ public class Workout {
 	int workoutId;
 	LocalDate date;
 	int time;
+	int heartRate;
+	int calories;
+	
 	ArrayList<Exercise> exercises = new ArrayList<Exercise>();
 
 	public Workout(LocalDate date, int time, ArrayList<Exercise> exercises) {
@@ -20,10 +24,12 @@ public class Workout {
 		this.exercises = exercises;
 	}
 
-	public Workout(LocalDate date, int time) {
+	public Workout(LocalDate date, int time, int heartRate, int calories) {
 		this.workoutId = generateWorkoutId();
 		this.date = date;
 		this.time = time;
+		this.heartRate = heartRate;
+		this.calories = calories;
 	}
 
 	public int generateWorkoutId() {
@@ -33,7 +39,7 @@ public class Workout {
 		return id;
 	}
 	
-	public void addWorkoutDetails(Workout workout) {
+	public void addWorkoutDetails(Workout workout, Connection connection, ExerciseTable exerciseTable) {
 		System.out.println("Let's add exercises to your workout!\n");
 		boolean keepAddingExercises = true;
 		do {
@@ -146,6 +152,22 @@ public class Workout {
 
 	public static void setID(int iD) {
 		ID = iD;
+	}
+
+	public int getHeartRate() {
+		return heartRate;
+	}
+
+	public void setHeartRate(int heartRate) {
+		this.heartRate = heartRate;
+	}
+
+	public int getCalories() {
+		return calories;
+	}
+
+	public void setCalories(int calories) {
+		this.calories = calories;
 	}
 
 }
