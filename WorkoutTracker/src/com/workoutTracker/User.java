@@ -8,18 +8,18 @@ import java.util.ArrayList;
 import java.util.Formatter;
 
 public class User {
-	
+
 	private static int ID = 1000;
-	
+
 	int userId;
 	String firstName;
 	String lastName;
 	int age;
 	double weightLbs;
 	double weightKg;
-	
+
 	ArrayList<Workout> workouts = new ArrayList<Workout>();
-	
+
 	public User(String firstName, String lastName, int age, double weightLbs) {
 		this.userId = generateUserId();
 		this.firstName = firstName;
@@ -38,13 +38,13 @@ public class User {
 		this.weightKg = convertPoundsToKilograms((double) weightLbs);
 	}
 
-	public int generateUserId() { 
+	public int generateUserId() {
 		int id = User.getID();
 		id++;
-		User.setID((id));  
+		User.setID((id));
 		return id;
 	}
-	
+
 	public Workout addWorkout(User user) {
 		LocalDate workoutDate = UserPrompts.askWorkoutDate();
 		int workoutTime = UserPrompts.askTime("workout");
@@ -54,27 +54,30 @@ public class User {
 		user.getWorkouts().add(workout);
 		return workout;
 	}
-	
+
 	public void addWorkoutToDatabase(Workout workout, Connection connection, WorkoutTable workoutTable) {
 		ArrayList<Object> workoutValues = new ArrayList<Object>();
 		workoutValues.add(workout.getDate());
 		workoutValues.add(workout.getTime());
+		workoutValues.add(workout.getHeartRate());
+		workoutValues.add(workout.getCalories());
 		workoutTable.insertRow(connection, workoutValues);
 	}
-	
+
 	public void displayAllWorkouts() {
 		if (getWorkouts().size() == 0) {
 			System.out.println("No workouts to display for this user\n");
 		} else {
 			Formatter table = new Formatter();
-			table.format("%15s %15s %15s %15s\n", "WorkoutId", "Date", "Time", "# of Exercises");
+			table.format("%15s %15s %15s %15s %15s\n", "WorkoutId", "Date", "Time", "Heart Rate", "Calories");
 			for (Workout workout : getWorkouts()) {
-				table.format("%15s %15s %15s %15s\n", workout.getWorkoutId(), workout.getDate(), workout.getTime(), workout.getExercises().size());
+				table.format("%15s %15s %15s %15s %15s\n", workout.getWorkoutId(), workout.getDate(), workout.getTime(),
+						workout.getHeartRate(), workout.getCalories());
 			}
 			System.out.println(table);
 		}
 	}
-	
+
 	public Workout selectWorkout() {
 		int selectedWorkoutId = UserPrompts.askWorkoutSelection(this);
 		for (Workout workout : getWorkouts()) {
@@ -84,12 +87,12 @@ public class User {
 		}
 		return null;
 	}
-	
+
 	public double convertPoundsToKilograms(double pounds) {
 		BigDecimal kg = new BigDecimal(pounds * 0.453592).setScale(2, RoundingMode.HALF_UP);
 		return kg.doubleValue();
 	}
-	
+
 	public double convertKilogramsToPounds(double kilograms) {
 		BigDecimal lbs = new BigDecimal(kilograms * 2.20462).setScale(2, RoundingMode.HALF_UP);
 		return lbs.doubleValue();
