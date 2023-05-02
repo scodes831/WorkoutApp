@@ -88,6 +88,17 @@ public class UserManager {
 					user.setWeightLbs(user.convertKilogramsToPounds(user.getWeightKg()));
 					System.out.println("User weight has been updated to " + user.getWeightKg() + " kilograms");
 					break;
+				case 6: 
+					stillEditing = false;
+					userTable.deleteRow(connection, user.getUserId());
+					int userIndex = 0;
+					for (int i = 0; i < getUsers().size(); i++) {
+						if (getUsers().get(i).getUserId() == user.getUserId()) {
+							userIndex = i;
+							break;
+						}
+					}
+					getUsers().remove(userIndex);
 				}
 				newValues.add(user.getFirstName());
 				newValues.add(user.getLastName());
