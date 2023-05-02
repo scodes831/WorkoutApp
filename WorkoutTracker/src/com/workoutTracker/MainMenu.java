@@ -6,12 +6,12 @@ import java.util.Scanner;
 public class MainMenu extends Menu {
 
 	public void displayMenu(UserManager userManager, MainMenu mainMenu, Connection connection,
-			UserTable userTable, WorkoutTable workoutTable, ExerciseTable exerciseTable, SetTable setTable) {
+			UserTable userTable, WorkoutTable workoutTable, ExerciseTable exerciseTable, StrengthTrainingTable stTable, SetTable setTable) {
 		boolean inputError = false;
 		do {
 			try {
 				int selection = makeSelection();
-				processSelection(userManager, mainMenu, selection, connection, userTable, workoutTable, exerciseTable, setTable);
+				processSelection(userManager, mainMenu, selection, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
 			} catch (Exception e) {
 				inputError = true;
 				System.out.println("Please enter a valid selection.");
@@ -27,17 +27,17 @@ public class MainMenu extends Menu {
 	}
 
 	public void processSelection(UserManager userManager, MainMenu mainMenu, int selection, Connection connection,
-			UserTable userTable, WorkoutTable workoutTable, ExerciseTable exerciseTable, SetTable setTable) {
+			UserTable userTable, WorkoutTable workoutTable, ExerciseTable exerciseTable, StrengthTrainingTable stTable, SetTable setTable) {
 		switch (selection) {
 		case 1:
 			UserMenu userMenu = new UserMenu();
-			userMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, setTable);
+			userMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
 			break;
 		case 2:
 			WorkoutMenu workoutMenu = new WorkoutMenu();
-			workoutMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, setTable);
+			workoutMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
 			break;
 		}
-		displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, setTable);
+		displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
 	}
 }
