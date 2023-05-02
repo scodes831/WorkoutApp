@@ -39,7 +39,7 @@ public class Workout {
 		return id;
 	}
 	
-	public void addWorkoutDetails(Workout workout, Connection connection, ExerciseTable exerciseTable) {
+	public void addWorkoutDetails(Workout workout, Connection connection, ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
 		System.out.println("Let's add exercises to your workout!\n");
 		boolean keepAddingExercises = true;
 		do {
@@ -47,7 +47,7 @@ public class Workout {
 			if (!exerciseType.equals("Exit")) {
 				Exercise exercise = addNewExercise(exerciseType);
 				workout.getExercises().add(exercise);
-				exercise.addExerciseDetails();
+				exercise.addExerciseDetails(connection, exerciseTable, stTable);
 			} else {
 				keepAddingExercises = false;
 			}
@@ -74,8 +74,9 @@ public class Workout {
 		return null;
 	}
 	
-	public void editWorkout() {
+	public void editWorkout(Connection connection, WorkoutTable workoutTable) {
 		boolean stillEditing = true;
+		ArrayList<Object> newValues = new ArrayList<Object>();
 		do {
 			int selection = UserPrompts.askWorkoutFieldToEdit();
 			if (selection == 0) {
@@ -95,6 +96,11 @@ public class Workout {
 					break;
 				}
 			}
+			newValues.add(this.getDate());
+			newValues.add(this.getTime());
+			newValues.add(this.getHeartRate());
+			newValues.add(this.getCalories());
+			workoutTable.updateRow(connection, this.getWorkoutId(), newValues);
 		} while (stillEditing);
 	}
 	
