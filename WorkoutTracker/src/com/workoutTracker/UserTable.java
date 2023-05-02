@@ -44,6 +44,17 @@ public class UserTable extends Table {
 			System.out.println(e);
 		}
 	}
+	
+	public void deleteRow(Connection connection, int id) {
+		Statement statement;
+		try {
+			String query = String.format("delete from users where userId = '%s'", id);
+			statement = connection.createStatement();
+			statement.executeUpdate(query);	
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 
 	public void readTable(Connection connection, UserManager userManager, WorkoutTable workoutTable,
 			ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
