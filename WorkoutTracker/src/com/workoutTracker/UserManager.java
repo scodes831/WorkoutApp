@@ -1,5 +1,6 @@
 package com.workoutTracker;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
@@ -23,6 +24,16 @@ public class UserManager {
 		getUsers().add(user);
 		return user;
 	}
+	
+	public void addUserToDatabase(User user, Connection connection, UserTable userTable) {
+		ArrayList<Object> userValues = new ArrayList<>();
+		userValues.add(user.getFirstName());
+		userValues.add(user.getLastName());
+		userValues.add(user.getAge());
+		userValues.add(user.getWeightLbs());
+		userValues.add(user.getWeightKg());
+		userTable.insertRow(connection, userValues);
+	}
 
 	public void displayUsers(ArrayList<User> users) {
 		Formatter userTable = new Formatter();
@@ -42,9 +53,10 @@ public class UserManager {
 		return selectedUser;
 	}
 	
-	public void editUser(User user) {
+	public void editUser(User user, Connection connection, UserTable userTable) {
 		Scanner in = new Scanner(System.in);
 		boolean stillEditing = true;
+		ArrayList<Object> newValues = new ArrayList<Object>();
 		do {
 			int selection = UserPrompts.askUserEditField(user);
 			if (selection > 0) {
@@ -77,6 +89,12 @@ public class UserManager {
 					System.out.println("User weight has been updated to " + user.getWeightKg() + " kilograms");
 					break;
 				}
+				newValues.add(user.getFirstName());
+				newValues.add(user.getLastName());
+				newValues.add(user.getAge());
+				newValues.add(user.getWeightLbs());
+				newValues.add(user.getWeightKg());
+				userTable.updateRow(connection, user.getUserId(), newValues);
 			} else {
 				stillEditing = false;
 			}
@@ -99,5 +117,7 @@ public class UserManager {
 	public void setUsers(ArrayList<User> users) {
 		this.users = users;
 	}
+
+	
 
 }
