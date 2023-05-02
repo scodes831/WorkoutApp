@@ -33,7 +33,25 @@ public class WorkoutTable extends Table {
 		}
 	}
 
-	public void readTable(Connection connection, User user, ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
+	public void updateRow(Connection connection, int id, ArrayList<Object> newValues) {
+		Statement statement;
+		try {
+			String query = String.format(
+					"update workouts set date = '%s', time = '%s', heartRate = '%s', calories = '%s' where workoutId = '%s'",
+					newValues.get(0), newValues.get(1), newValues.get(2), newValues.get(3), id);
+			statement = connection.createStatement();
+			statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	public void deleteRow(Connection connection, int id) {
+
+	}
+
+	public void readTable(Connection connection, User user, ExerciseTable exerciseTable,
+			StrengthTrainingTable stTable) {
 		Statement statement;
 		ResultSet result = null;
 		System.out.println("the user's id is " + user.getUserId());
@@ -62,7 +80,7 @@ public class WorkoutTable extends Table {
 						}
 					}
 				}
-				
+
 				if ((!alreadyExists) || user.getWorkouts().size() == 0) {
 					Workout workout = new Workout(date, time, heartRate, calories);
 					workout.setWorkoutId(workoutId);
