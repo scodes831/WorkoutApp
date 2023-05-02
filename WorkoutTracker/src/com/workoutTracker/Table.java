@@ -10,5 +10,7 @@ public abstract class Table {
 	public abstract void insertRow(Connection connection, ArrayList<Object> values);
 	
 	public abstract void updateRow(Connection connection, int id, ArrayList<Object> newValues);
+	
+	public abstract void deleteRow(Connection connection, int id);
 		
 }
