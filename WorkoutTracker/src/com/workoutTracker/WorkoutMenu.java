@@ -35,7 +35,7 @@ public class WorkoutMenu extends Menu {
 		case 3:
 			selectedUser.displayAllWorkouts();
 			Workout selectedWorkout = selectedUser.selectWorkout();
-			selectedWorkout.editWorkout();
+			selectedWorkout.editWorkout(connection, workoutTable);
 			break;
 		case 4:
 			mainMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
