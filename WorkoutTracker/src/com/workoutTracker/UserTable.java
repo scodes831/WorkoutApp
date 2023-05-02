@@ -31,12 +31,26 @@ public class UserTable extends Table {
 			System.out.println(e);
 		}
 	}
-	
-	public void readTable(Connection connection, UserManager userManager, WorkoutTable workoutTable, ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
+
+	public void updateRow(Connection connection, int id, ArrayList<Object> newValues) {
+		Statement statement;
+		try {
+			String query = String.format(
+					"update users set firstName = '%s', lastName = '%s', age = '%s', weightLbs = '%s', weightKgs = '%s' where userId = '%s'",
+					newValues.get(0), newValues.get(1), newValues.get(2), newValues.get(3), newValues.get(4), id);
+			statement = connection.createStatement();
+			statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	public void readTable(Connection connection, UserManager userManager, WorkoutTable workoutTable,
+			ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
 		Statement statement;
 		ResultSet result;
 		try {
-			String query = "select * from users";
+			String query = "select * from users order by userId";
 			statement = connection.createStatement();
 			result = statement.executeQuery(query);
 			while (result.next()) {
