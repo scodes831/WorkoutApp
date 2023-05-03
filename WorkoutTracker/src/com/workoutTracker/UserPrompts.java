@@ -308,14 +308,14 @@ public class UserPrompts {
 	}
 	
 	public static int askWorkoutFieldToEdit() {
-		System.out.println("Which field do you want to edit? (0 to exit)\n1 - Workout Date\n2 - Workout Time\n3 - Exercises");
+		System.out.println("Which field do you want to edit? (0 to exit)\n1 - Workout Date\n2 - Workout Time\n3 - Exercises\n4 - DELETE WORKOUT");
 		Scanner in = new Scanner(System.in);
 		boolean inputError = false;
 		do {
 			int input = in.nextInt();
 			if (input == 0) {
 				return 0;
-			} else if (input < 1 || input > 3) {
+			} else if (input < 1 || input > 4) {
 				inputError = true;
 				System.out.println("Please enter a valid selection.");
 			} else {
