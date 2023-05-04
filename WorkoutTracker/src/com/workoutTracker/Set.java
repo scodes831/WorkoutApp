@@ -2,6 +2,7 @@ package com.workoutTracker;
 
 public class Set {
 	
+	int setId;
 	double weightLbs;
 	double weightKg;
 	int reps;
@@ -28,5 +29,13 @@ public class Set {
 	}
 	public void setReps(int reps) {
 		this.reps = reps;
+	}
+
+	public int getSetId() {
+		return setId;
+	}
+
+	public void setSetId(int setId) {
+		this.setId = setId;
 	}
 }
