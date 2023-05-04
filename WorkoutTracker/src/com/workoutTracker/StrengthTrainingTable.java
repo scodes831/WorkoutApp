@@ -31,4 +31,19 @@ public class StrengthTrainingTable extends Table {
 		}
 	}
 
+	public void updateRow(Connection connection, int id, ArrayList<Object> newValues) {
+		
+	}
+
+	public void deleteRow(Connection connection, int id) {
+		Statement statement;
+		try {
+			String query = String.format("delete from strengthtraining where exerciseId = '%s'", id);
+			statement = connection.createStatement();
+			statement.executeUpdate(query);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 }
