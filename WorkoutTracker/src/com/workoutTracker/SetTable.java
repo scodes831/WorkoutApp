@@ -1,6 +1,7 @@
 package com.workoutTracker;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -32,6 +33,26 @@ public class SetTable extends Table {
 			String query = String.format("delete from sets where exerciseId = '%s'", id);
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public void readTable(Connection connection, StrengthTraining st) {
+		Statement statement;
+		ResultSet result = null;
+		try {
+			String query = "select * from sets where exerciseId = " + st.getExerciseId();
+			statement = connection.createStatement();
+			result = statement.executeQuery(query);
+			while (result.next()) {
+				int setId = Integer.valueOf(result.getString("setId"));
+				double weightLbs = Double.valueOf(result.getString("weightLbs"));
+				double weightKgs = Double.valueOf(result.getString("weightKg"));
+				int reps = Integer.valueOf(result.getString("reps"));
+				Set set = new Set(setId, weightLbs, weightKgs, reps);
+				st.getSets().add(set);
+			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}
