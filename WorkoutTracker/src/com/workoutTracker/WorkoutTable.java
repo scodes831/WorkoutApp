@@ -24,8 +24,8 @@ public class WorkoutTable extends Table {
 		Statement statement;
 		try {
 			String query = String.format(
-					"insert into workouts (date, time, heartRate, calories) values ('%s', '%s', '%s', '%s');",
-					values.get(0), values.get(1), values.get(2), values.get(3));
+					"insert into workouts (userId, date, time, heartRate, calories) values ('%s', '%s', '%s', '%s', '%s');",
+					values.get(0), values.get(1), values.get(2), values.get(3), values.get(4));
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
 		} catch (Exception e) {
@@ -47,14 +47,37 @@ public class WorkoutTable extends Table {
 	}
 
 	public void deleteRow(Connection connection, int id) {
+		System.out.println("inside workouttable delete row");
+		Statement statement;
+		try {
+			String query = String.format("delete from workouts where workoutid = '%s'", id);
+			statement = connection.createStatement();
+			statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 
+	public void deleteWorkoutDependencies(Connection connection, Workout workout, ExerciseTable exerciseTable,
+			StrengthTrainingTable stTable, SetTable setTable) {
+		for (int e = 0; e < workout.getExercises().size(); e++) {
+			if (workout.getExercises().get(e).getClass().getSimpleName().equals("StrengthTraining")) {
+				StrengthTraining st = (StrengthTraining) workout.getExercises().get(e);
+				for (int s = 0; s < st.getSets().size(); s++) {
+					setTable.deleteRow(connection, st.getSets().get(s).getSetId());
+					st.getSets().remove(s);
+				}
+				stTable.deleteRow(connection, workout.getExercises().get(e).getExerciseId());
+			}
+			exerciseTable.deleteRow(connection, workout.getExercises().get(e).getExerciseId());
+			workout.getExercises().remove(e);
+		}
 	}
 
 	public void readTable(Connection connection, User user, ExerciseTable exerciseTable,
-			StrengthTrainingTable stTable) {
+			StrengthTrainingTable stTable, SetTable setTable) {
 		Statement statement;
 		ResultSet result = null;
-		System.out.println("the user's id is " + user.getUserId());
 		try {
 			String query = "select * from workouts where userId = " + user.getUserId();
 			statement = connection.createStatement();
@@ -70,12 +93,9 @@ public class WorkoutTable extends Table {
 				int time = Integer.valueOf(result.getString("time"));
 				int heartRate = Integer.valueOf(result.getString("heartrate"));
 				int calories = Integer.valueOf(result.getString("calories"));
-				System.out.println("the workout's id on table is " + workoutId);
 				if (user.getWorkouts().size() != 0) {
 					for (Workout workout : user.getWorkouts()) {
-						System.out.println("the workout's id in class is " + workout.getWorkoutId());
 						if (workout.getWorkoutId() == workoutId) {
-							System.out.println("workout already exists");
 							alreadyExists = true;
 						}
 					}
@@ -85,6 +105,7 @@ public class WorkoutTable extends Table {
 					Workout workout = new Workout(date, time, heartRate, calories);
 					workout.setWorkoutId(workoutId);
 					user.getWorkouts().add(workout);
+					exerciseTable.readTable(connection, workout, stTable, setTable);
 				}
 			}
 		} catch (Exception e) {
