@@ -57,7 +57,7 @@ public class UserTable extends Table {
 	}
 
 	public void readTable(Connection connection, UserManager userManager, WorkoutTable workoutTable,
-			ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
+			ExerciseTable exerciseTable, StrengthTrainingTable stTable, SetTable setTable) {
 		Statement statement;
 		ResultSet result;
 		try {
@@ -82,7 +82,7 @@ public class UserTable extends Table {
 					user.setUserId(userId);
 					user.setWeightKg(weightKgs);
 					userManager.getUsers().add(user);
-					workoutTable.readTable(connection, user, exerciseTable, stTable);
+					workoutTable.readTable(connection, user, exerciseTable, stTable, setTable);
 				}
 			}
 		} catch (Exception e) {
