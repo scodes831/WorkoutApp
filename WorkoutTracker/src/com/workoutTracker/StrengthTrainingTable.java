@@ -1,6 +1,7 @@
 package com.workoutTracker;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -42,6 +43,25 @@ public class StrengthTrainingTable extends Table {
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
 			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	public void readTable(Connection connection, Workout workout, int exerciseId, int exerciseTime, SetTable setTable) {
+		Statement statement;
+		ResultSet result = null;
+		try {
+			String query = "select * from strengthtraining where exerciseId = " + exerciseId;
+			statement = connection.createStatement();
+			result = statement.executeQuery(query);
+			while (result.next()) {
+				String exerciseName = result.getString("exercisename");
+				String muscleGroup = result.getString("musclegroup");
+				StrengthTraining st = new StrengthTraining(exerciseId, exerciseTime, exerciseName, muscleGroup);
+				workout.getExercises().add(st);
+				setTable.readTable(connection, st);
+			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}
