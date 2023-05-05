@@ -7,8 +7,15 @@ public class Set {
 	double weightKg;
 	int reps;
 	
-	public Set(double weightLbs, int reps) {
+	Set(double weightLbs, int reps) {
 		this.weightLbs = weightLbs;
+		this.reps = reps;
+	}
+	
+	Set(int setId, double weightLbs, double weightKg, int reps) {
+		this.setId = setId;
+		this.weightLbs = weightLbs;
+		this.weightKg = weightKg;
 		this.reps = reps;
 	}
 	
