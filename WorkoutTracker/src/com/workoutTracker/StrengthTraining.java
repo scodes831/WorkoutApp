@@ -1,7 +1,7 @@
 package com.workoutTracker;
 
+import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class StrengthTraining extends Exercise {
 	
@@ -15,16 +15,43 @@ public class StrengthTraining extends Exercise {
 		this.muscleGroup = muscleGroup;
 	}
 	
+	StrengthTraining(int id, int time, String exerciseName, String muscleGroup) {
+		this.exerciseId = id;
+		this.exerciseTime = time;
+		this.exerciseName = exerciseName;
+		this.muscleGroup = muscleGroup;
+	}
+	
 	StrengthTraining() {}
 	
-	public void addStrengthTrainingDetails() {
+	public void addStrengthTrainingDetails(Connection connection, StrengthTrainingTable stTable) {
 		String exerciseName = UserPrompts.askStrengthTrainingExerciseName();
 		String muscleGroup = UserPrompts.askMuscleGroupName();
 		this.setExerciseName(exerciseName);
 		this.setMuscleGroup(muscleGroup);
+		addToStrengthTrainingTable(connection, stTable);
 		addSetDetails();
 	}
 	
+	private void addToStrengthTrainingTable(Connection connection, StrengthTrainingTable stTable) {
+		ArrayList<Object> values = new ArrayList<Object>();
+		values.add(getExerciseName());
+		values.add(getMuscleGroup());
+		stTable.insertRow(connection, values);
+	}
+	
+	public void deleteFromStrengthTrainingTable(Connection connection, Workout workout, StrengthTraining st, StrengthTrainingTable stTable) {
+		stTable.deleteRow(connection, st.getExerciseId());
+		int exerciseIndex = -1;
+		for (int i = 0; i < workout.getExercises().size(); i++) {
+			if (workout.getExercises().get(i).getExerciseId() == st.getExerciseId()) {
+				exerciseIndex = i;
+				break;
+			}
+		}
+		workout.getExercises().remove(exerciseIndex);
+	}
+
 	public void editStrengthTrainingDetails() {
 		boolean stillEditing = true;
 		do {
@@ -36,22 +63,14 @@ public class StrengthTraining extends Exercise {
 					this.setExerciseTime(newExerciseTime);
 					break;
 				case 2: 
-					int newHeartRate = UserPrompts.askHeartRate();
-					this.setHeartRate(newHeartRate);
-					break;
-				case 3: 
-					int calories = UserPrompts.askCalories();
-					this.setCalories(calories);
-					break;
-				case 4: 
 					String exerciseName = UserPrompts.askStrengthTrainingExerciseName();
 					this.setExerciseName(exerciseName);
 					break;
-				case 5:
+				case 3:
 					String newMuscleGroup = UserPrompts.askMuscleGroupName();
 					this.setMuscleGroup(newMuscleGroup);
 					break;
-				case 6:
+				case 4:
 					System.out.println("editing sets");
 					break;
 				}
