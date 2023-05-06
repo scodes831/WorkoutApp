@@ -23,9 +23,8 @@ public class ExerciseTable extends Table {
 	public void insertRow(Connection connection, ArrayList<Object> values) {
 		Statement statement;
 		try {
-			String query = String.format(
-					"insert into exercises (type, time) values ('%s', '%s');",
-					values.get(0), values.get(1));
+			String query = String.format("insert into exercises (type, time) values ('%s', '%s');", values.get(0),
+					values.get(1));
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
 		} catch (Exception e) {
@@ -34,7 +33,15 @@ public class ExerciseTable extends Table {
 	}
 
 	public void updateRow(Connection connection, int id, ArrayList<Object> newValues) {
-		
+		Statement statement;
+		try {
+			String query = String.format("update exercises set type = '%s', time = '%s' where exerciseId = '%s'",
+					newValues.get(0), newValues.get(1), id);
+			statement = connection.createStatement();
+			statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	public void deleteRow(Connection connection, int id) {
@@ -48,7 +55,7 @@ public class ExerciseTable extends Table {
 			System.out.println(e);
 		}
 	}
-	
+
 	public void readTable(Connection connection, Workout workout, StrengthTrainingTable stTable, SetTable setTable) {
 		Statement statement;
 		ResultSet result = null;
