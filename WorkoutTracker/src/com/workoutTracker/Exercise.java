@@ -2,7 +2,9 @@ package com.workoutTracker;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.Connection;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public abstract class Exercise {
 	
@@ -10,8 +12,6 @@ public abstract class Exercise {
 	
 	int exerciseId;
 	int exerciseTime;
-	int heartRate;
-	int calories;
 	
 	Exercise() {
 		this.exerciseId = generateExerciseId();
@@ -24,11 +24,12 @@ public abstract class Exercise {
 		return id;
 	}
 	
-	public void addExerciseDetails() {
+	public void addExerciseDetails(Connection connection, ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
 		int exerciseTime = UserPrompts.askTime("exercise");
 		this.setExerciseTime(exerciseTime);
+		addExerciseToDatabase(connection, exerciseTable);
 		if (this instanceof StrengthTraining) {
-			((StrengthTraining)this).addStrengthTrainingDetails();
+			((StrengthTraining)this).addStrengthTrainingDetails(connection, stTable);
 		} else if (this instanceof Bike) {
 			((Bike)this).addBikeDetails();
 		} else if (this instanceof HIIT) {
@@ -38,10 +39,17 @@ public abstract class Exercise {
 		}
 	}
 	
-	public void editExerciseDetails() {
+	public void addExerciseToDatabase(Connection connection, ExerciseTable exerciseTable) {
+		ArrayList<Object> values = new ArrayList<Object>();
+		values.add(getClass().getSimpleName());
+		values.add(getExerciseTime());
+		exerciseTable.insertRow(connection, values);
+	}
+	
+	public void editExerciseDetails(Connection connection, ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
 		if (this instanceof StrengthTraining) {
 			System.out.println("this is an instance of st");
-			((StrengthTraining)this).editStrengthTrainingDetails();
+			((StrengthTraining)this).editStrengthTrainingDetails(connection, exerciseTable, stTable);
 		} else if (this instanceof Bike) {
 			System.out.println("this is an instance of bike");
 			((Bike)this).editBikeDetails();
@@ -78,19 +86,6 @@ public abstract class Exercise {
 	public double convertPoundsToKilograms(double pounds) {
 		BigDecimal kg = new BigDecimal(pounds * 0.453592).setScale(2, RoundingMode.HALF_UP);
 		return kg.doubleValue();
-	}
-	
-	public int getHeartRate() {
-		return heartRate;
-	}
-	public void setHeartRate(int heartRate) {
-		this.heartRate = heartRate;
-	}
-	public int getCalories() {
-		return calories;
-	}
-	public void setCalories(int calories) {
-		this.calories = calories;
 	}
 	
 	public int getExerciseId() {
