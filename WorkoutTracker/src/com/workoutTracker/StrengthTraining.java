@@ -52,8 +52,10 @@ public class StrengthTraining extends Exercise {
 		workout.getExercises().remove(exerciseIndex);
 	}
 
-	public void editStrengthTrainingDetails() {
+	public void editStrengthTrainingDetails(Connection connection, ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
 		boolean stillEditing = true;
+		ArrayList<Object> exerciseValues = new ArrayList<Object>();
+		ArrayList<Object> stValues = new ArrayList<Object>();
 		do {
 			int selection = UserPrompts.askStrengthTrainingEditFields();
 			if (selection > 0) {
@@ -74,6 +76,11 @@ public class StrengthTraining extends Exercise {
 					System.out.println("editing sets");
 					break;
 				}
+				exerciseValues.add(this.getExerciseTime());
+				stValues.add(this.getExerciseName());
+				stValues.add(this.getExerciseTime());
+				exerciseTable.updateRow(connection, this.getExerciseId(), exerciseValues);
+				stTable.updateRow(connection, this.getExerciseId(), stValues);
 			} else {
 				stillEditing = false;
 			}
