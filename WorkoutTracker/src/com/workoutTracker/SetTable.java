@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class SetTable extends Table {
-	
+
 	public void createTable(Connection connection) {
 		Statement statement;
 		try {
@@ -20,11 +20,28 @@ public class SetTable extends Table {
 	}
 
 	public void insertRow(Connection connection, ArrayList<Object> values) {
-		
+		Statement statement;
+		try {
+			String query = String.format("insert into sets (weightLbs, weightKg, reps) values ('%s', '%s', '%s'",
+					values.get(0), values.get(1), values.get(2));
+			statement = connection.createStatement();
+			statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	public void updateRow(Connection connection, int id, ArrayList<Object> newValues) {
-		
+		Statement statement;
+		try {
+			String query = String.format(
+					"update sets set weightLbs = '%s', weightKg = '%s', reps = '%s' where setId = '%s'",
+					newValues.get(0), newValues.get(1), newValues.get(2), id);
+			statement = connection.createStatement();
+			statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	public void deleteRow(Connection connection, int id) {
@@ -37,7 +54,7 @@ public class SetTable extends Table {
 			System.out.println(e);
 		}
 	}
-	
+
 	public void readTable(Connection connection, StrengthTraining st) {
 		Statement statement;
 		ResultSet result = null;
