@@ -14,7 +14,7 @@ public class Workout {
 	int time;
 	int heartRate;
 	int calories;
-	
+
 	ArrayList<Exercise> exercises = new ArrayList<Exercise>();
 
 	public Workout(LocalDate date, int time, ArrayList<Exercise> exercises) {
@@ -38,8 +38,9 @@ public class Workout {
 		Workout.setID(id);
 		return id;
 	}
-	
-	public void addWorkoutDetails(Workout workout, Connection connection, ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
+
+	public void addWorkoutDetails(Workout workout, Connection connection, ExerciseTable exerciseTable,
+			StrengthTrainingTable stTable) {
 		System.out.println("Let's add exercises to your workout!\n");
 		boolean keepAddingExercises = true;
 		do {
@@ -51,9 +52,9 @@ public class Workout {
 			} else {
 				keepAddingExercises = false;
 			}
-		} while (keepAddingExercises);		
+		} while (keepAddingExercises);
 	}
-	
+
 	public Exercise addNewExercise(String exerciseType) {
 		switch (exerciseType) {
 		case "Run":
@@ -73,8 +74,9 @@ public class Workout {
 		}
 		return null;
 	}
-	
-	public void editWorkout(Connection connection, WorkoutTable workoutTable) {
+
+	public void editWorkout(Connection connection, User user, WorkoutTable workoutTable, ExerciseTable exerciseTable,
+			StrengthTrainingTable stTable, SetTable setTable) {
 		boolean stillEditing = true;
 		ArrayList<Object> newValues = new ArrayList<Object>();
 		do {
@@ -92,8 +94,20 @@ public class Workout {
 					this.setTime(newTime);
 					break;
 				case 3:
-					this.editExercises();
+					this.editExercises(connection, exerciseTable, stTable);
 					break;
+				case 4:
+					stillEditing = false;
+					int userIndex = -1;
+					workoutTable.deleteWorkoutDependencies(connection, this, exerciseTable, stTable, setTable);
+					workoutTable.deleteRow(connection, this.getWorkoutId());
+					for (int i = 0; i < user.getWorkouts().size(); i++) {
+						if (user.getWorkouts().get(i).getWorkoutId() == this.getWorkoutId()) {
+							userIndex = i;
+							break;
+						}
+					}
+					user.getWorkouts().remove(userIndex);
 				}
 			}
 			newValues.add(this.getDate());
@@ -103,19 +117,20 @@ public class Workout {
 			workoutTable.updateRow(connection, this.getWorkoutId(), newValues);
 		} while (stillEditing);
 	}
-	
-	public void editExercises() {
+
+	public void editExercises(Connection connection, ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
 		displayExercises();
 		Exercise selectedExercise = UserPrompts.askExerciseSelection(this);
-		selectedExercise.editExerciseDetails();
+		selectedExercise.editExerciseDetails(connection, exerciseTable, stTable);
 	}
-	
+
 	public void displayExercises() {
 		System.out.println("Displaying exercises...");
 		Formatter table = new Formatter();
 		table.format("%15s %15s %15s\n", "ExerciseId", "Exercise Time", "Exercise Name");
 		for (Exercise exercise : getExercises()) {
-			table.format("%15s %15s %15s", exercise.getExerciseId(), exercise.getExerciseTime(), exercise.getClass().getSimpleName());
+			table.format("%15s %15s %15s", exercise.getExerciseId(), exercise.getExerciseTime(),
+					exercise.getClass().getSimpleName());
 		}
 		System.out.println(table);
 	}
