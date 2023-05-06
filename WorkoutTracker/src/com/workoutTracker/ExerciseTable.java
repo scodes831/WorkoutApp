@@ -32,11 +32,11 @@ public class ExerciseTable extends Table {
 		}
 	}
 
-	public void updateRow(Connection connection, int id, ArrayList<Object> newValues) {
+	public void updateRow(Connection connection, int id, int newTime) {
 		Statement statement;
 		try {
-			String query = String.format("update exercises set type = '%s', time = '%s' where exerciseId = '%s'",
-					newValues.get(0), newValues.get(1), id);
+			String query = String.format("update exercises set time = '%s' where exerciseId = '%s'",
+					newTime, id);
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
 		} catch (Exception e) {
