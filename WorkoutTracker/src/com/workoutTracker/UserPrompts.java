@@ -292,7 +292,7 @@ public class UserPrompts {
 	}
 	
 	public static int askWorkoutSelection(User user) {
-		System.out.println("Enter the workoutId you want to edit:");
+		System.out.println("Enter the workoutId you want to view/edit:");
 		Scanner in = new Scanner(System.in);
 		boolean inputError = false;
 		int input = in.nextInt();
