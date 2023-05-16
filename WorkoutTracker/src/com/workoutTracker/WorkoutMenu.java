@@ -31,13 +31,16 @@ public class WorkoutMenu extends Menu {
 			break;
 		case 2:
 			selectedUser.displayAllWorkouts();
+			Workout selectedWorkout = selectedUser.selectWorkout();
+			if (selectWorkoutOptions() == 1) {
+				selectedWorkout.displayExercises();
+			} else if (selectWorkoutOptions() == 2) {
+				selectedWorkout.editWorkout(connection, selectedUser, workoutTable, exerciseTable, stTable, setTable);
+			} else {
+				break;
+			}
 			break;
 		case 3:
-			selectedUser.displayAllWorkouts();
-			Workout selectedWorkout = selectedUser.selectWorkout();
-			selectedWorkout.editWorkout(connection, workoutTable);
-			break;
-		case 4:
 			mainMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
 		}
 		displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
@@ -45,7 +48,14 @@ public class WorkoutMenu extends Menu {
 
 	public int makeSelection() {
 		System.out.println(
-				"Workout Menu Options:\n1 - Add Workout\n2 - Display Workouts\n3 - Edit Workouts\n4 - Back to Main Menu");
+				"Workout Menu Options:\n1 - Add Workout\n2 - Display Workouts\n3 - Back to Main Menu");
+		Scanner in = new Scanner(System.in);
+		int selection = in.nextInt();
+		return selection;
+	}
+	
+	public int selectWorkoutOptions() {
+		System.out.println("\n1 - Display Exercises\n2 - Edit Workout\n3 - Back to Main Menu");
 		Scanner in = new Scanner(System.in);
 		int selection = in.nextInt();
 		return selection;
