@@ -23,8 +23,8 @@ public class ExerciseTable extends Table {
 	public void insertRow(Connection connection, ArrayList<Object> values) {
 		Statement statement;
 		try {
-			String query = String.format("insert into exercises (type, time) values ('%s', '%s');", values.get(0),
-					values.get(1));
+			String query = String.format("insert into exercises (workoutId, type, time) values ('%s', '%s', '%s');", values.get(0),
+					values.get(1), values.get(2));
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
 		} catch (Exception e) {
