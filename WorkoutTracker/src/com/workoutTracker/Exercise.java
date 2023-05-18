@@ -24,10 +24,11 @@ public abstract class Exercise {
 		return id;
 	}
 	
-	public void addExerciseDetails(Connection connection, ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
+	public void addExerciseDetails(Connection connection, Workout workout, ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
+		System.out.println("inside addExerciseDetails");
 		int exerciseTime = UserPrompts.askTime("exercise");
 		this.setExerciseTime(exerciseTime);
-		addExerciseToDatabase(connection, exerciseTable);
+		addExerciseToDatabase(connection, workout, exerciseTable);
 		if (this instanceof StrengthTraining) {
 			((StrengthTraining)this).addStrengthTrainingDetails(connection, stTable);
 		} else if (this instanceof Bike) {
@@ -39,14 +40,16 @@ public abstract class Exercise {
 		}
 	}
 	
-	public void addExerciseToDatabase(Connection connection, ExerciseTable exerciseTable) {
+	public void addExerciseToDatabase(Connection connection, Workout workout, ExerciseTable exerciseTable) {
 		ArrayList<Object> values = new ArrayList<Object>();
+		values.add(workout.getWorkoutId());
 		values.add(getClass().getSimpleName());
 		values.add(getExerciseTime());
 		exerciseTable.insertRow(connection, values);
 	}
 	
 	public void editExerciseDetails(Connection connection, ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
+		System.out.println("start: edit exercise details");
 		if (this instanceof StrengthTraining) {
 			System.out.println("this is an instance of st");
 			((StrengthTraining)this).editStrengthTrainingDetails(connection, exerciseTable, stTable);
