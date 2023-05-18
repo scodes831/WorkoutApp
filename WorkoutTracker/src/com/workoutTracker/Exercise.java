@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public abstract class Exercise {
 	
-	private static int ID = 378832;
+	private static int ID = 1;
 	
 	int exerciseId;
 	int exerciseTime;
@@ -42,6 +42,7 @@ public abstract class Exercise {
 	
 	public void addExerciseToDatabase(Connection connection, Workout workout, ExerciseTable exerciseTable) {
 		ArrayList<Object> values = new ArrayList<Object>();
+		values.add(getExerciseId());
 		values.add(workout.getWorkoutId());
 		values.add(getClass().getSimpleName());
 		values.add(getExerciseTime());
