@@ -11,7 +11,7 @@ public class ExerciseTable extends Table {
 	public void createTable(Connection connection) {
 		Statement statement;
 		try {
-			String query = "create table if not exists exercises (exerciseId SERIAL PRIMARY KEY, workoutId SERIAL, type VARCHAR(20), time INTEGER,"
+			String query = "create table if not exists exercises (exerciseId INTEGER PRIMARY KEY, workoutId SERIAL, type VARCHAR(20), time INTEGER,"
 					+ " FOREIGN KEY (workoutId) REFERENCES workouts(workoutId))";
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
@@ -23,8 +23,8 @@ public class ExerciseTable extends Table {
 	public void insertRow(Connection connection, ArrayList<Object> values) {
 		Statement statement;
 		try {
-			String query = String.format("insert into exercises (workoutId, type, time) values ('%s', '%s', '%s');", values.get(0),
-					values.get(1), values.get(2));
+			String query = String.format("insert into exercises (exerciseId, workoutId, type, time) values ('%s', '%s', '%s', '%s');", values.get(0),
+					values.get(1), values.get(2), values.get(3));
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
 		} catch (Exception e) {
