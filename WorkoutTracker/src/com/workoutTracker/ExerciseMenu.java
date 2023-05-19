@@ -5,13 +5,13 @@ import java.util.Scanner;
 
 public class ExerciseMenu {
 
-	public void displayMenu(Workout workout, MainMenu mainMenu, Connection connection, UserTable userTable,
+	public void displayMenu(Workout workout, UserManager userManager, MainMenu mainMenu, WorkoutMenu workoutMenu, Connection connection, UserTable userTable,
 			WorkoutTable workoutTable, ExerciseTable exerciseTable, StrengthTrainingTable stTable, SetTable setTable) {
 		boolean inputError = false;
 		do {
 			try {
 				int selection = makeSelection();
-				processSelection(workout, mainMenu, selection, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
+				processSelection(workout, userManager, mainMenu, workoutMenu, selection, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
 			} catch (Exception e) {
 				inputError = true;
 				System.out.println("Please enter a valid selection.");
@@ -19,7 +19,7 @@ public class ExerciseMenu {
 		} while (inputError);
 	}
 
-	public void processSelection(Workout workout, MainMenu mainMenu, int selection, Connection connection,
+	public void processSelection(Workout workout, UserManager userManager, MainMenu mainMenu, WorkoutMenu workoutMenu, int selection, Connection connection,
 			UserTable userTable, WorkoutTable workoutTable, ExerciseTable exerciseTable, StrengthTrainingTable stTable,
 			SetTable setTable) {
 		switch (selection) {
@@ -34,14 +34,14 @@ public class ExerciseMenu {
 			selectedExercise.editExerciseDetails(connection, exerciseTable, stTable);
 			break;
 		case 3:
-			//back to main/workout menu
+			workoutMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
 			break;
 		}
-		displayMenu(workout, mainMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
+		displayMenu(workout, userManager, mainMenu, workoutMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
 	}
 	
 	public int makeSelection() {
-		System.out.println("Exercise Menu Options: \n1 - Add Exercise\n2 - Edit Exercise\n3 - Back to Main Menu");
+		System.out.println("Exercise Menu Options: \n1 - Add Exercise\n2 - Edit Exercise\n3 - Back to Workout Menu");
 		Scanner in = new Scanner(System.in);
 		int selection = in.nextInt();
 		return selection;
