@@ -344,12 +344,12 @@ public class UserPrompts {
 	
 	public static int askStrengthTrainingEditFields() {
 		System.out.println("Please enter the field to edit (0 to exit)");
-		System.out.println("1 - Exercise Time\n2 - Exercise Name\n3 - Muscle Group\n4 - Sets");
+		System.out.println("1 - Exercise Time\n2 - Exercise Name\n3 - Muscle Group\n4 - Sets\n5 - DELETE EXERCISE");
 		Scanner in = new Scanner(System.in);
 		boolean inputError = false;
 		do {
 			int input = in.nextInt();
-			if (input > 0 && input < 5) {
+			if (input > 0 && input < 6) {
 				return input;
 			} else if (input == 0) {
 				return 0;
