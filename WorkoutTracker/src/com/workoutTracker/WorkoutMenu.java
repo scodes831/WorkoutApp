@@ -34,6 +34,8 @@ public class WorkoutMenu extends Menu {
 			Workout selectedWorkout = selectedUser.selectWorkout();
 			if (selectWorkoutOptions() == 1) {
 				selectedWorkout.displayExercises();
+				ExerciseMenu exerciseMenu = new ExerciseMenu();
+				exerciseMenu.displayMenu(selectedWorkout, userManager, mainMenu, this, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
 			} else if (selectWorkoutOptions() == 2) {
 				selectedWorkout.editWorkout(connection, selectedUser, workoutTable, exerciseTable, stTable, setTable);
 			} else {
