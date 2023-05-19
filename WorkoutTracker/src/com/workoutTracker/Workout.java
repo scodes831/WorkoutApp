@@ -74,6 +74,11 @@ public class Workout {
 		}
 		return null;
 	}
+	
+	public Exercise selectExercise() {
+		Exercise selectedExercise = UserPrompts.askExerciseSelection(this);
+		return selectedExercise;
+	}
 
 	public void editWorkout(Connection connection, User user, WorkoutTable workoutTable, ExerciseTable exerciseTable,
 			StrengthTrainingTable stTable, SetTable setTable) {
@@ -129,7 +134,7 @@ public class Workout {
 		Formatter table = new Formatter();
 		table.format("%15s %15s %15s\n", "ExerciseId", "Exercise Time", "Exercise Name");
 		for (Exercise exercise : getExercises()) {
-			table.format("%15s %15s %15s", exercise.getExerciseId(), exercise.getExerciseTime(),
+			table.format("%15s %15s %15s\n", exercise.getExerciseId(), exercise.getExerciseTime(),
 					exercise.getClass().getSimpleName());
 		}
 		System.out.println(table);
