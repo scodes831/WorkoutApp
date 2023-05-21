@@ -50,8 +50,9 @@ public class UserPrompts {
 		return 0;
 	}
 
-	public static int askSetsReps(Scanner in, String sr) {
+	public static int askSetsReps(String sr) {
 		System.out.println("How many " + sr + "?");
+		Scanner in = new Scanner(System.in);
 		boolean inputError = false;
 		do {
 			int sets = in.nextInt();
