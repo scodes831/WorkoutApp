@@ -27,7 +27,7 @@ public class WorkoutMenu extends Menu {
 		case 1:
 			Workout workout = selectedUser.addWorkout(selectedUser);
 			selectedUser.addWorkoutToDatabase(workout, connection, workoutTable);
-			workout.addWorkoutDetails(workout, connection, exerciseTable, stTable);
+			workout.addWorkoutDetails(workout, connection, exerciseTable, stTable, setTable);
 			break;
 		case 2:
 			selectedUser.displayAllWorkouts();
