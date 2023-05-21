@@ -163,6 +163,15 @@ public class StrengthTraining extends Exercise {
 			}		
 		} while (stillEditing);
 	}
+	
+	public Set findSetBySetId(int id) {
+		for (int i = 0; i < getSets().size(); i++) {
+			if (getSets().get(i).getSetId() == id) {
+				return getSets().get(i);
+			}
+		}
+		return null;
+	}
 
 	public String getExerciseName() {
 		return exerciseName;
