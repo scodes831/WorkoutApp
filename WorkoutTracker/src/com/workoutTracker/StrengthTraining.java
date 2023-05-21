@@ -26,13 +26,13 @@ public class StrengthTraining extends Exercise {
 	StrengthTraining() {
 	}
 
-	public void addStrengthTrainingDetails(Connection connection, StrengthTrainingTable stTable) {
+	public void addStrengthTrainingDetails(Connection connection, StrengthTrainingTable stTable, SetTable setTable) {
 		String exerciseName = UserPrompts.askStrengthTrainingExerciseName();
 		String muscleGroup = UserPrompts.askMuscleGroupName();
 		this.setExerciseName(exerciseName);
 		this.setMuscleGroup(muscleGroup);
 		addToStrengthTrainingTable(connection, stTable);
-		addSetDetails();
+		addSetDetails(connection, setTable);
 	}
 
 	public void displayStrengthTrainingExericses() {
@@ -126,14 +126,42 @@ public class StrengthTraining extends Exercise {
 		} while (stillEditing);
 	}
 
-	public void addSetDetails() {
+	public void addSetDetails(Connection connection, SetTable setTable) {
 		double setWeightLbs = UserPrompts.askSetWeight();
 		int sets = UserPrompts.askNumSets();
 		int reps = UserPrompts.askSetReps();
 		for (int i = 1; i < sets + 1; i++) {
 			Set set = new Set(setWeightLbs, reps);
 			getSets().add(set);
+			set.addToSetTable(connection, setTable);
 		}
+	}
+	
+	public void editSetDetails(Connection connection, Set set, SetTable setTable) {
+		boolean stillEditing = true;
+		ArrayList<Object> setValues = new ArrayList<Object>();
+		do {
+			int selection = UserPrompts.askSetEditFields();
+			if (selection > 0) {
+				switch (selection) {
+				case 1:
+					double newSetWeight = UserPrompts.askWeight(false);
+					set.setWeightLbs(newSetWeight);
+					set.setWeightKg(this.convertPoundsToKilograms(newSetWeight));
+					break;
+				case 2:
+					int newReps = UserPrompts.askSetsReps("reps");
+					set.setReps(newReps);
+					break;
+				}
+				setValues.add(set.getWeightLbs());
+				setValues.add(set.getWeightKg());
+				setValues.add(set.getReps());
+				setTable.updateRow(connection, selection, setValues);	
+			} else {
+				stillEditing = false;
+			}		
+		} while (stillEditing);
 	}
 
 	public String getExerciseName() {
