@@ -418,6 +418,23 @@ public class UserPrompts {
 		return -1;
 	}
 	
+	public static int askSetEditFields() {
+		System.out.println("Please enter the field to edit (0 to exit)");
+		System.out.println("1 - Weight\n2 - Reps\n3 - DELETE SET");
+		Scanner in = new Scanner(System.in);
+		boolean inputError = false;
+		do {
+			int input = in.nextInt();
+			if (input > 0 && input < 4) {
+				return input;
+			} else {
+				inputError = true;
+				System.out.println("Please enter a valid selection.");
+			}
+		} while (inputError);
+		return -1;
+	}	
+	
 	private static boolean validateWorkoutSelectionInput(int input, User user) {
 		for (Workout workout : user.getWorkouts()) {
 			if (workout.getWorkoutId() == input) {
