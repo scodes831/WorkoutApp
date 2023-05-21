@@ -425,7 +425,7 @@ public class UserPrompts {
 		boolean inputError = false;
 		do {
 			int input = in.nextInt();
-			if (input > 0 && input < 4) {
+			if (input > -1 && input < 4) {
 				return input;
 			} else {
 				inputError = true;
