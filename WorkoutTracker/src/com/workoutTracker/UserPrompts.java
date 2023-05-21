@@ -33,8 +33,9 @@ public class UserPrompts {
 		return 0;
 	}
 
-	public static double askWeight(Scanner in, boolean isUserWeight) {
+	public static double askWeight(boolean isUserWeight) {
 		System.out.println("Enter weight in pounds:");
+		Scanner in = new Scanner(System.in);
 		boolean inputError = false;
 		do {
 			double weight = in.nextDouble();

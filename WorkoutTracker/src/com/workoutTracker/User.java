@@ -57,6 +57,7 @@ public class User {
 
 	public void addWorkoutToDatabase(Workout workout, Connection connection, WorkoutTable workoutTable) {
 		ArrayList<Object> workoutValues = new ArrayList<Object>();
+		workoutValues.add(this.getUserId());
 		workoutValues.add(workout.getDate());
 		workoutValues.add(workout.getTime());
 		workoutValues.add(workout.getHeartRate());
