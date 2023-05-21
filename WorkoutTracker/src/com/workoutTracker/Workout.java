@@ -40,7 +40,7 @@ public class Workout {
 	}
 
 	public void addWorkoutDetails(Workout workout, Connection connection, ExerciseTable exerciseTable,
-			StrengthTrainingTable stTable) {
+			StrengthTrainingTable stTable, SetTable setTable) {
 		System.out.println("Let's add exercises to your workout!\n");
 		boolean keepAddingExercises = true;
 		do {
@@ -48,7 +48,7 @@ public class Workout {
 			if (!exerciseType.equals("Exit")) {
 				Exercise exercise = addNewExercise(exerciseType);
 				workout.getExercises().add(exercise);
-				exercise.addExerciseDetails(connection, exerciseTable, stTable);
+				exercise.addExerciseDetails(connection, workout, exerciseTable, stTable, setTable);
 			} else {
 				keepAddingExercises = false;
 			}
@@ -99,7 +99,7 @@ public class Workout {
 					this.setTime(newTime);
 					break;
 				case 3:
-					this.editExercises(connection, exerciseTable, stTable);
+					editExercises(connection, exerciseTable, stTable);
 					break;
 				case 4:
 					stillEditing = false;
@@ -126,7 +126,7 @@ public class Workout {
 	public void editExercises(Connection connection, ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
 		displayExercises();
 		Exercise selectedExercise = UserPrompts.askExerciseSelection(this);
-		selectedExercise.editExerciseDetails(connection, exerciseTable, stTable);
+		selectedExercise.editExerciseDetails(connection, this, exerciseTable, stTable);
 	}
 
 	public void displayExercises() {
