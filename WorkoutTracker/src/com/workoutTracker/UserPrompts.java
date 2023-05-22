@@ -420,6 +420,24 @@ public class UserPrompts {
 		return -1;
 	}
 	
+	public static Set askSetSelection(StrengthTraining strengthTraining) {
+		System.out.println("Enter the setId of the set you want to edit:");
+		Scanner in = new Scanner(System.in);
+		boolean inputError = false;
+		do {
+			int input = in.nextInt();
+			Set selectedSet = validateSetSelectionInput(input, strengthTraining);
+			if (selectedSet != null) {
+				return selectedSet;
+			} else {
+				inputError = true;
+				System.out.println("Please enter a valid setId");
+			}
+		} while (inputError);
+		return null;
+		
+	}
+
 	public static int askSetEditFields() {
 		System.out.println("Please enter the field to edit (0 to exit)");
 		System.out.println("1 - Weight\n2 - Reps\n3 - DELETE SET");
@@ -498,4 +516,15 @@ public class UserPrompts {
 		boolean isValidInput = (input == 1 || input == 2) ? true : false;
 		return isValidInput;
 	}
+	
+	private static Set validateSetSelectionInput(int input, StrengthTraining strengthTraining) {
+		for (Set set : strengthTraining.getSets()) {
+			if (set.getSetId() == input) {
+				return set;
+			}
+		}
+		return null;
+	}
+
+	
 }
