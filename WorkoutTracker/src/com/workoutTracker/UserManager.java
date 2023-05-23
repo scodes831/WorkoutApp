@@ -15,7 +15,7 @@ public class UserManager {
 		values.add(UserPrompts.askFirstName(in));
 		values.add(UserPrompts.askLastName(in));
 		values.add(UserPrompts.askAge(in));
-		values.add(UserPrompts.askWeight(in, true));
+		values.add(UserPrompts.askWeight(true));
 		return values;
 	}
 
@@ -27,6 +27,7 @@ public class UserManager {
 	
 	public void addUserToDatabase(User user, Connection connection, UserTable userTable) {
 		ArrayList<Object> userValues = new ArrayList<>();
+		userValues.add(user.getUserId());
 		userValues.add(user.getFirstName());
 		userValues.add(user.getLastName());
 		userValues.add(user.getAge());
@@ -77,13 +78,13 @@ public class UserManager {
 					System.out.println("User age has been updated to " + user.getAge() + "years old");
 					break;
 				case 4: 
-					double weightLbs = UserPrompts.askWeight(in, true);
+					double weightLbs = UserPrompts.askWeight(true);
 					user.setWeightLbs(weightLbs);
 					user.setWeightKg(user.convertPoundsToKilograms(user.getWeightLbs()));
 					System.out.println("User weight has been updated to " + user.getWeightLbs() + " pounds");
 					break;
 				case 5:
-					double weightKg = UserPrompts.askWeight(in, true);
+					double weightKg = UserPrompts.askWeight(true);
 					user.setWeightKg(weightKg);
 					user.setWeightLbs(user.convertKilogramsToPounds(user.getWeightKg()));
 					System.out.println("User weight has been updated to " + user.getWeightKg() + " kilograms");
@@ -91,7 +92,7 @@ public class UserManager {
 				case 6: 
 					stillEditing = false;
 					userTable.deleteRow(connection, user.getUserId());
-					int userIndex = 0;
+					int userIndex = -1;
 					for (int i = 0; i < getUsers().size(); i++) {
 						if (getUsers().get(i).getUserId() == user.getUserId()) {
 							userIndex = i;
