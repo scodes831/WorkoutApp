@@ -7,7 +7,7 @@ import java.util.Formatter;
 
 public class Workout {
 
-	private static int ID = 49820;
+	private static int ID = 1;
 
 	int workoutId;
 	LocalDate date;
