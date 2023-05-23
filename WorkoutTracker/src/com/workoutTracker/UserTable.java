@@ -10,7 +10,7 @@ public class UserTable extends Table {
 	public void createTable(Connection connection) {
 		Statement statement;
 		try {
-			String query = "create table if not exists users (userId SERIAL PRIMARY KEY, firstName VARCHAR(30), lastName VARCHAR (30), age INTEGER, "
+			String query = "create table if not exists users (userId INTEGER PRIMARY KEY, firstName VARCHAR(30), lastName VARCHAR (30), age INTEGER, "
 					+ "weightLbs NUMERIC(6,1), weightKgs NUMERIC(6,1))";
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
@@ -23,8 +23,8 @@ public class UserTable extends Table {
 		Statement statement;
 		try {
 			String query = String.format(
-					"insert into users (firstName, lastName, age, weightLbs, weightKgs) values ('%s', '%s', '%s', '%s', '%s');",
-					values.get(0), values.get(1), values.get(2), values.get(3), values.get(4));
+					"insert into users (userId, firstName, lastName, age, weightLbs, weightKgs) values ('%s', '%s', '%s', '%s', '%s', '%s');",
+					values.get(0), values.get(1), values.get(2), values.get(3), values.get(4), values.get(5));
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
 		} catch (Exception e) {
