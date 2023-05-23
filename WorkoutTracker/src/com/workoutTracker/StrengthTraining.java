@@ -6,6 +6,7 @@ import java.util.Formatter;
 
 public class StrengthTraining extends Exercise {
 
+	private static int ID = 1;
 	String exerciseName;
 	String muscleGroup;
 
@@ -164,15 +165,6 @@ public class StrengthTraining extends Exercise {
 		} while (stillEditing);
 	}
 	
-	public Set findSetBySetId(int id) {
-		for (int i = 0; i < getSets().size(); i++) {
-			if (getSets().get(i).getSetId() == id) {
-				return getSets().get(i);
-			}
-		}
-		return null;
-	}
-
 	public String getExerciseName() {
 		return exerciseName;
 	}
@@ -195,6 +187,14 @@ public class StrengthTraining extends Exercise {
 
 	public void setSets(ArrayList<Set> sets) {
 		this.sets = sets;
+	}
+
+	public static int getID() {
+		return ID;
+	}
+
+	public static void setID(int iD) {
+		ID = iD;
 	}
 
 }
