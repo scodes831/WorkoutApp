@@ -6,7 +6,6 @@ import java.util.Formatter;
 
 public class StrengthTraining extends Exercise {
 
-	private static int ID = 1;
 	String exerciseName;
 	String muscleGroup;
 
@@ -17,8 +16,8 @@ public class StrengthTraining extends Exercise {
 		this.muscleGroup = muscleGroup;
 	}
 
-	StrengthTraining(int id, int time, String exerciseName, String muscleGroup) {
-		this.exerciseId = id;
+	StrengthTraining(int exId, int time, String exerciseName, String muscleGroup) {
+		this.exerciseId = exId;
 		this.exerciseTime = time;
 		this.exerciseName = exerciseName;
 		this.muscleGroup = muscleGroup;
@@ -50,7 +49,7 @@ public class StrengthTraining extends Exercise {
 		setTable.format("%15s %15s %15s %15s %15s %15s\n", "SetId", "Set #", "Exercise Name", "Reps", "Weight (Lbs)",
 				"Weight (Kgs)");
 		for (Set set : getSets()) {
-			setTable.format("%15s %15s %15s %15s %15s %15s\\n", set.getSetId(), count + " of " + getSets().size(),
+			setTable.format("%15s %15s %15s %15s %15s %15s\n", set.getSetId(), count + " of " + getSets().size(),
 					getExerciseName(), set.getReps(), set.getWeightLbs(), set.getWeightKg());
 			count++;
 		}
@@ -134,7 +133,7 @@ public class StrengthTraining extends Exercise {
 		for (int i = 1; i < sets + 1; i++) {
 			Set set = new Set(setWeightLbs, reps);
 			getSets().add(set);
-			set.addToSetTable(connection, setTable);
+			set.addToSetTable(connection, this, setTable);
 		}
 	}
 	
@@ -188,13 +187,4 @@ public class StrengthTraining extends Exercise {
 	public void setSets(ArrayList<Set> sets) {
 		this.sets = sets;
 	}
-
-	public static int getID() {
-		return ID;
-	}
-
-	public static void setID(int iD) {
-		ID = iD;
-	}
-
 }
