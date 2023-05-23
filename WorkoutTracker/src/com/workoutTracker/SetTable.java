@@ -10,7 +10,7 @@ public class SetTable extends Table {
 	public void createTable(Connection connection) {
 		Statement statement;
 		try {
-			String query = "create table if not exists sets (setId SERIAL PRIMARY KEY, exerciseId SERIAL, weightLbs NUMERIC(6,1), weightKg NUMERIC(6,1), "
+			String query = "create table if not exists sets (setId INTEGER PRIMARY KEY, exerciseId INTEGER, weightLbs NUMERIC(6,1), weightKg NUMERIC(6,1), "
 					+ "reps INTEGER, FOREIGN KEY (exerciseId) REFERENCES exercises(exerciseId))";
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
@@ -22,8 +22,8 @@ public class SetTable extends Table {
 	public void insertRow(Connection connection, ArrayList<Object> values) {
 		Statement statement;
 		try {
-			String query = String.format("insert into sets (weightLbs, weightKg, reps) values ('%s', '%s', '%s'",
-					values.get(0), values.get(1), values.get(2));
+			String query = String.format("insert into sets (setId, exerciseId, weightLbs, weightKg, reps) values ('%s', '%s', '%s', '%s', '%s');",
+					values.get(0), values.get(1), values.get(2), values.get(3), values.get(4));
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
 		} catch (Exception e) {
