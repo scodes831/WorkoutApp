@@ -143,25 +143,33 @@ public class StrengthTraining extends Exercise {
 		ArrayList<Object> setValues = new ArrayList<Object>();
 		do {
 			int selection = UserPrompts.askSetEditFields();
-			if (selection > 0) {
-				switch (selection) {
-				case 1:
-					double newSetWeight = UserPrompts.askWeight(false);
-					set.setWeightLbs(newSetWeight);
-					set.setWeightKg(this.convertPoundsToKilograms(newSetWeight));
-					break;
-				case 2:
-					int newReps = UserPrompts.askSetsReps("reps");
-					set.setReps(newReps);
-					break;
-				}
-				setValues.add(set.getWeightLbs());
-				setValues.add(set.getWeightKg());
-				setValues.add(set.getReps());
-				setTable.updateRow(connection, selection, setValues);	
-			} else {
+			switch (selection) {
+			case 0: 
 				stillEditing = false;
-			}		
+				break;
+			case 1:
+				double newSetWeight = UserPrompts.askWeight(false);
+				set.setWeightLbs(newSetWeight);
+				set.setWeightKg(this.convertPoundsToKilograms(newSetWeight));
+				break;
+			case 2:
+				int newReps = UserPrompts.askSetsReps("reps");
+				set.setReps(newReps);
+				break;
+			case 3: 
+				stillEditing = false;
+				setTable.deleteRow(connection, set.getSetId());
+				for (int i = 0; i < getSets().size(); i++) {
+					if (getSets().get(i).getSetId() == set.getSetId()){
+						getSets().remove(i);
+						break;
+					}
+				}
+			}
+			setValues.add(set.getWeightLbs());
+			setValues.add(set.getWeightKg());
+			setValues.add(set.getReps());
+			setTable.updateRow(connection, selection, setValues);
 		} while (stillEditing);
 	}
 	
