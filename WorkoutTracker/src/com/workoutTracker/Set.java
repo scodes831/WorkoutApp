@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Set {
 	
-	private static int ID = 1;
+	private static int ID = 0;
 	
 	int setId;
 	double weightLbs;
