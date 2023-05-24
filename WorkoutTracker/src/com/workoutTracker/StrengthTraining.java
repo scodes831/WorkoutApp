@@ -132,6 +132,7 @@ public class StrengthTraining extends Exercise {
 		int reps = UserPrompts.askSetReps();
 		for (int i = 1; i < sets + 1; i++) {
 			Set set = new Set(setWeightLbs, reps);
+			set.setWeightKg(convertPoundsToKilograms(setWeightLbs));
 			getSets().add(set);
 			set.addToSetTable(connection, this, setTable);
 		}
