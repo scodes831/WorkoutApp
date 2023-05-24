@@ -47,7 +47,7 @@ public class SetTable extends Table {
 	public void deleteRow(Connection connection, int id) {
 		Statement statement;
 		try {
-			String query = String.format("delete from sets where exerciseId = '%s'", id);
+			String query = String.format("delete from sets where setId = '%s'", id);
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
 		} catch (Exception e) {
