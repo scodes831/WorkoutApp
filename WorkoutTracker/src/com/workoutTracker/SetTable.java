@@ -63,12 +63,20 @@ public class SetTable extends Table {
 			statement = connection.createStatement();
 			result = statement.executeQuery(query);
 			while (result.next()) {
+				boolean alreadyExists = false;
 				int setId = Integer.valueOf(result.getString("setId"));
 				double weightLbs = Double.valueOf(result.getString("weightLbs"));
 				double weightKgs = Double.valueOf(result.getString("weightKg"));
 				int reps = Integer.valueOf(result.getString("reps"));
-				Set set = new Set(setId, weightLbs, weightKgs, reps);
-				st.getSets().add(set);
+				for (Set set : st.getSets()) {
+					if (set.getSetId() == setId) {
+						alreadyExists = true;
+					}
+				}
+				if (!alreadyExists) {
+					Set set = new Set(setId, weightLbs, weightKgs, reps);
+					st.getSets().add(set);
+				}
 			}
 		} catch (Exception e) {
 			System.out.println(e);
