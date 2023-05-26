@@ -158,7 +158,7 @@ public class UserPrompts {
 				case 3:
 					return "Bike";
 				case 4:
-					return "Strength Training";
+					return "StrengthTraining";
 				case 0:
 					return "Exit";
 				}
