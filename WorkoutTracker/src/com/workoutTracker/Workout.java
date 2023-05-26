@@ -66,7 +66,7 @@ public class Workout {
 		case "Bike":
 			Bike bike = new Bike();
 			return bike;
-		case "Strength Training":
+		case "StrengthTraining":
 			StrengthTraining strengthTraining = new StrengthTraining();
 			return strengthTraining;
 		case "Exit":
