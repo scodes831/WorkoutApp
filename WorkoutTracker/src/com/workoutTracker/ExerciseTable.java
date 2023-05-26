@@ -65,6 +65,8 @@ public class ExerciseTable extends Table {
 			result = statement.executeQuery(query);
 			while (result.next()) {
 				boolean alreadyExists = false;
+				String exerciseType = result.getString("type");
+				System.out.println("exercise type is " + exerciseType);
 				int exerciseId = Integer.valueOf(result.getString("exerciseId"));
 				int time = Integer.valueOf(result.getString("time"));
 				for (Exercise exercise : workout.getExercises()) {
@@ -73,7 +75,20 @@ public class ExerciseTable extends Table {
 					}
 				}
 				if ((!alreadyExists) || workout.getExercises().size() == 0) {
-					stTable.readTable(connection, workout, exerciseId, time, setTable);
+					Exercise newExercise = workout.addNewExercise(exerciseType);
+					newExercise.setExerciseId(exerciseId);
+					newExercise.setExerciseTime(time);
+					switch (exerciseType) {
+					case "StrengthTraining":
+						stTable.readTable(connection, workout, exerciseId, time, setTable);
+						break;
+					case "Bike":
+						break;
+					case "HIIT":
+						break;
+					case "Run":
+						break;
+					}
 				}
 			}
 		} catch (Exception e) {
