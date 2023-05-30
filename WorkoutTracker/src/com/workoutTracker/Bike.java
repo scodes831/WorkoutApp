@@ -10,6 +10,15 @@ public class Bike extends Exercise {
 	double distanceKm;
 	int resistance;
 	boolean isStationaryBike;
+	
+	public Bike(int exerciseId, double mph, double distanceMi, double distanceKm, int resistance, boolean isStationaryBike) {
+		this.exerciseId = exerciseId;
+		this.mph = mph;
+		this.distanceMi = distanceMi;
+		this.distanceKm = distanceKm;
+		this.resistance = resistance;
+		this.isStationaryBike = isStationaryBike;
+	}
 
 	public void addBikeDetails() {
 		boolean isStationaryBike = UserPrompts.askIfStationaryBike();
@@ -36,25 +45,17 @@ public class Bike extends Exercise {
 					this.setPace(this.calculatePace(this.getMph()));
 					break;
 				case 2:
-					int newHeartRate = UserPrompts.askHeartRate();
-					this.setHeartRate(newHeartRate);
-					break;
-				case 3:
-					int calories = UserPrompts.askCalories();
-					this.setCalories(calories);
-					break;
-				case 4:
 					boolean isStationaryBike = UserPrompts.askIfStationaryBike();
 					this.setStationaryBike(isStationaryBike);
 					break;
-				case 5:
+				case 3:
 					double newDistanceMi = UserPrompts.askDistanceMiles();
 					this.setDistanceMi(newDistanceMi);
 					this.setDistanceKm(this.convertMilesToKilometers(newDistanceMi));
 					this.setMph(this.calculateMPH(this.getDistanceMi(), this.getExerciseTime()));
 					this.setPace(this.calculatePace(this.getMph()));
 					break;
-				case 6:
+				case 4:
 					int newResistance = UserPrompts.askResistance();
 					this.setResistance(newResistance);
 					break;
