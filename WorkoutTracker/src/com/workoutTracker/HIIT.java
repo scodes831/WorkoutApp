@@ -26,22 +26,14 @@ public class HIIT extends Exercise {
 					this.setExerciseTime(newExerciseTime);
 					break;
 				case 2:
-					int newHeartRate = UserPrompts.askHeartRate();
-					this.setHeartRate(newHeartRate);
-					break;
-				case 3:
-					int calories = UserPrompts.askCalories();
-					this.setCalories(calories);
-					break;
-				case 4:
 					int newActiveIntervalSec = UserPrompts.askIntervalSeconds("active");
 					this.setActiveIntervalSec(newActiveIntervalSec);
 					break;
-				case 5:
+				case 3:
 					int newRestIntervalSec = UserPrompts.askIntervalSeconds("rest");
 					this.setRestIntervalSec(newRestIntervalSec);
 					break;
-				case 6:
+				case 4:
 					int newNumOfIntervals = UserPrompts.askNumIntervals();
 					this.setNumOfIntervals(newNumOfIntervals);
 					break;
