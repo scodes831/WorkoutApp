@@ -28,14 +28,6 @@ public class Run extends Exercise {
 					this.setExerciseTime(newExerciseTime);
 					break;
 				case 2:
-					int newHeartRate = UserPrompts.askHeartRate();
-					this.setHeartRate(newHeartRate);
-					break;
-				case 3:
-					int calories = UserPrompts.askCalories();
-					this.setCalories(calories);
-					break;
-				case 4:
 					double newDistanceMi = UserPrompts.askDistanceMiles();
 					this.setDistanceMi(newDistanceMi);
 					this.setDistanceKm(this.convertMilesToKilometers(newDistanceMi));
