@@ -74,7 +74,7 @@ public class WorkoutTable extends Table {
 		}
 	}
 
-	public void readTable(Connection connection, User user, ExerciseTable exerciseTable,
+	public void readTable(Connection connection, User user, ExerciseTable exerciseTable, BikeTable bikeTable, RunTable runTable, HIITTable hiitTable, 
 			StrengthTrainingTable stTable, SetTable setTable) {
 		Statement statement;
 		ResultSet result = null;
@@ -105,7 +105,7 @@ public class WorkoutTable extends Table {
 					Workout workout = new Workout(date, time, heartRate, calories);
 					workout.setWorkoutId(workoutId);
 					user.getWorkouts().add(workout);
-					exerciseTable.readTable(connection, workout, stTable, setTable);
+					exerciseTable.readTable(connection, workout, bikeTable, runTable, hiitTable, stTable, setTable);
 				}
 			}
 		} catch (Exception e) {
