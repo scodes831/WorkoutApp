@@ -9,6 +9,13 @@ public class Run extends Exercise {
 	double distanceMi;
 	double distanceKm;
 	
+	public Run(int exerciseId, double mph, double distanceMi, double distanceKm){
+		this.exerciseId = exerciseId;
+		this.mph = mph;
+		this.distanceMi = distanceMi;
+		this.distanceKm = distanceKm;
+	}
+	
 	public void addRunDetails() {
 		double distanceMi = UserPrompts.askDistanceMiles();
 		this.setDistanceMi(distanceMi);
