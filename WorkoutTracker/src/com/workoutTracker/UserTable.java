@@ -44,20 +44,21 @@ public class UserTable extends Table {
 			System.out.println(e);
 		}
 	}
-	
+
 	public void deleteRow(Connection connection, int id) {
 		Statement statement;
 		try {
 			String query = String.format("delete from users where userId = '%s'", id);
 			statement = connection.createStatement();
-			statement.executeUpdate(query);	
+			statement.executeUpdate(query);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 
 	public void readTable(Connection connection, UserManager userManager, WorkoutTable workoutTable,
-			ExerciseTable exerciseTable, StrengthTrainingTable stTable, SetTable setTable) {
+			ExerciseTable exerciseTable, BikeTable bikeTable, RunTable runTable, HIITTable hiitTable,
+			StrengthTrainingTable stTable, SetTable setTable) {
 		Statement statement;
 		ResultSet result;
 		try {
@@ -82,7 +83,7 @@ public class UserTable extends Table {
 					user.setUserId(userId);
 					user.setWeightKg(weightKgs);
 					userManager.getUsers().add(user);
-					workoutTable.readTable(connection, user, exerciseTable, stTable, setTable);
+					workoutTable.readTable(connection, user, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
 				}
 			}
 		} catch (Exception e) {
