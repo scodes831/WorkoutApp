@@ -6,6 +6,12 @@ public class HIIT extends Exercise {
 	int restIntervalSec;
 	int numOfIntervals;
 	
+	public HIIT(int activeIntervalSec, int restIntervalSec, int numIntervals) {
+		this.activeIntervalSec = activeIntervalSec;
+		this.restIntervalSec = restIntervalSec;
+		this.numOfIntervals = numIntervals;
+	}
+	
 	public void addHIITDetails() {
 		int activeIntervalSec = UserPrompts.askIntervalSeconds("active");
 		this.setActiveIntervalSec(activeIntervalSec);
