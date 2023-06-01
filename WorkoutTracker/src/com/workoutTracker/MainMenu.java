@@ -6,12 +6,13 @@ import java.util.Scanner;
 public class MainMenu extends Menu {
 
 	public void displayMenu(UserManager userManager, MainMenu mainMenu, Connection connection,
-			UserTable userTable, WorkoutTable workoutTable, ExerciseTable exerciseTable, StrengthTrainingTable stTable, SetTable setTable) {
+			UserTable userTable, WorkoutTable workoutTable, ExerciseTable exerciseTable, BikeTable bikeTable,
+			RunTable runTable, HIITTable hiitTable, StrengthTrainingTable stTable, SetTable setTable) {
 		boolean inputError = false;
 		do {
 			try {
 				int selection = makeSelection();
-				processSelection(userManager, mainMenu, selection, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
+				processSelection(userManager, mainMenu, selection, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
 			} catch (Exception e) {
 				inputError = true;
 				System.out.println("Please enter a valid selection.");
@@ -27,7 +28,8 @@ public class MainMenu extends Menu {
 	}
 
 	public void processSelection(UserManager userManager, MainMenu mainMenu, int selection, Connection connection,
-			UserTable userTable, WorkoutTable workoutTable, ExerciseTable exerciseTable, StrengthTrainingTable stTable, SetTable setTable) {
+			UserTable userTable, WorkoutTable workoutTable, ExerciseTable exerciseTable, BikeTable bikeTable,
+			RunTable runTable, HIITTable hiitTable, StrengthTrainingTable stTable, SetTable setTable) {
 		switch (selection) {
 		case 1:
 			UserMenu userMenu = new UserMenu();
@@ -35,9 +37,9 @@ public class MainMenu extends Menu {
 			break;
 		case 2:
 			WorkoutMenu workoutMenu = new WorkoutMenu();
-			workoutMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
+			workoutMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
 			break;
 		}
-		displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
+		displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
 	}
 }
