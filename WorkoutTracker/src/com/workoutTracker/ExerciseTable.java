@@ -11,7 +11,7 @@ public class ExerciseTable extends Table {
 	public void createTable(Connection connection) {
 		Statement statement;
 		try {
-			String query = "create table if not exists exercises (exerciseId INTEGER PRIMARY KEY, workoutId SERIAL, type VARCHAR(20), time INTEGER,"
+			String query = "create table if not exists exercises (exerciseId INTEGER PRIMARY KEY, workoutId INTEGER, type VARCHAR(20), time INTEGER,"
 					+ " FOREIGN KEY (workoutId) REFERENCES workouts(workoutId))";
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
@@ -56,7 +56,7 @@ public class ExerciseTable extends Table {
 		}
 	}
 
-	public void readTable(Connection connection, Workout workout, StrengthTrainingTable stTable, SetTable setTable) {
+	public void readTable(Connection connection, Workout workout, BikeTable bikeTable, RunTable runTable, HIITTable hiitTable, StrengthTrainingTable stTable, SetTable setTable) {
 		Statement statement;
 		ResultSet result = null;
 		try {
@@ -83,10 +83,13 @@ public class ExerciseTable extends Table {
 						stTable.readTable(connection, workout, exerciseId, time, setTable);
 						break;
 					case "Bike":
+						bikeTable.readTable(connection, workout, exerciseId, time);
 						break;
 					case "HIIT":
+						hiitTable.readTable(connection, workout, exerciseId, time);
 						break;
 					case "Run":
+						runTable.readTable(connection, workout, exerciseId, time);
 						break;
 					}
 				}
