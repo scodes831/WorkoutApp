@@ -1,6 +1,7 @@
 package com.workoutTracker;
 
 import java.time.LocalTime;
+import java.util.Formatter;
 
 public class Bike extends Exercise {
 
@@ -10,8 +11,9 @@ public class Bike extends Exercise {
 	double distanceKm;
 	int resistance;
 	boolean isStationaryBike;
-	
-	public Bike(int exerciseId, double mph, double distanceMi, double distanceKm, int resistance, boolean isStationaryBike) {
+
+	public Bike(int exerciseId, double mph, double distanceMi, double distanceKm, int resistance,
+			boolean isStationaryBike) {
 		this.exerciseId = exerciseId;
 		this.mph = mph;
 		this.distanceMi = distanceMi;
@@ -66,6 +68,16 @@ public class Bike extends Exercise {
 		} while (stillEditing);
 	}
 
+	public void displayBikeExercises() {
+		Formatter table = new Formatter();
+		table.format("%15s %15s %15s %15s %15s %15s %15s %15s %15s\n", "ExerciseId", "Time", "MPH", "Pace",
+				"Distance (miles)", "Distance (km)", "Resistance", "Stationary Bike?");
+		table.format("%15s %15s %15s %15s %15s %15s %15s %15s %15s\n", this.getExerciseId(), this.getExerciseTime(),
+				this.getMph(), this.getPace(), this.getDistanceMi(), this.getDistanceKm(), this.getResistance(),
+				this.getIsStationaryBike());
+		System.out.println(table);
+	}
+
 	public double getMph() {
 		return mph;
 	}
@@ -106,7 +118,7 @@ public class Bike extends Exercise {
 		this.resistance = resistance;
 	}
 
-	public boolean isStationaryBike() {
+	public boolean getIsStationaryBike() {
 		return isStationaryBike;
 	}
 
