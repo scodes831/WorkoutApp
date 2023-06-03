@@ -1,6 +1,8 @@
 package com.workoutTracker;
 
+import java.sql.Connection;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Formatter;
 
 public class Bike extends Exercise {
@@ -21,6 +23,8 @@ public class Bike extends Exercise {
 		this.resistance = resistance;
 		this.isStationaryBike = isStationaryBike;
 	}
+	
+	public Bike() {}
 
 	public void addBikeDetails() {
 		boolean isStationaryBike = UserPrompts.askIfStationaryBike();
@@ -34,8 +38,11 @@ public class Bike extends Exercise {
 		this.setPace(this.calculatePace(this.getMph()));
 	}
 
-	public void editBikeDetails() {
+	public void editBikeDetails(Connection connection, Workout workout, ExerciseTable exerciseTable,
+			BikeTable bikeTable) {
 		boolean stillEditing = true;
+		ArrayList<Object> exerciseValues = new ArrayList<Object>();
+		ArrayList<Object> bikeValues = new ArrayList<Object>();
 		do {
 			int selection = UserPrompts.askBikeEditFields();
 			if (selection > 0) {
@@ -62,6 +69,15 @@ public class Bike extends Exercise {
 					this.setResistance(newResistance);
 					break;
 				}
+				exerciseValues.add(this.getExerciseTime());
+				bikeValues.add(this.getMph());
+				bikeValues.add(this.getPace());
+				bikeValues.add(this.getDistanceMi());
+				bikeValues.add(this.getDistanceKm());
+				bikeValues.add(this.getResistance());
+				bikeValues.add(this.getIsStationaryBike());
+				exerciseTable.updateRow(connection, this.getExerciseId(), exerciseValues);
+				bikeTable.updateRow(connection, this.getExerciseId(), bikeValues);
 			} else {
 				stillEditing = false;
 			}
@@ -70,9 +86,9 @@ public class Bike extends Exercise {
 
 	public void displayBikeExercises() {
 		Formatter table = new Formatter();
-		table.format("%15s %15s %15s %15s %15s %15s %15s %15s %15s\n", "ExerciseId", "Time", "MPH", "Pace",
+		table.format("%15s %15s %15s %15s %15s %15s %15s %15s\n", "ExerciseId", "Time", "MPH", "Pace",
 				"Distance (miles)", "Distance (km)", "Resistance", "Stationary Bike?");
-		table.format("%15s %15s %15s %15s %15s %15s %15s %15s %15s\n", this.getExerciseId(), this.getExerciseTime(),
+		table.format("%15s %15s %15s %15s %15s %15s %15s %15s\n", this.getExerciseId(), this.getExerciseTime(),
 				this.getMph(), this.getPace(), this.getDistanceMi(), this.getDistanceKm(), this.getResistance(),
 				this.getIsStationaryBike());
 		System.out.println(table);
