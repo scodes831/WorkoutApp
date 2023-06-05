@@ -66,7 +66,6 @@ public class ExerciseTable extends Table {
 			while (result.next()) {
 				boolean alreadyExists = false;
 				String exerciseType = result.getString("type");
-				System.out.println("exercise type is " + exerciseType);
 				int exerciseId = Integer.valueOf(result.getString("exerciseId"));
 				int time = Integer.valueOf(result.getString("time"));
 				for (Exercise exercise : workout.getExercises()) {
@@ -78,18 +77,19 @@ public class ExerciseTable extends Table {
 					Exercise newExercise = workout.addNewExercise(exerciseType);
 					newExercise.setExerciseId(exerciseId);
 					newExercise.setExerciseTime(time);
+					workout.getExercises().add(newExercise);
 					switch (exerciseType) {
 					case "StrengthTraining":
-						stTable.readTable(connection, workout, exerciseId, time, setTable);
+						stTable.readTable(connection, workout, newExercise, setTable);
 						break;
 					case "Bike":
-						bikeTable.readTable(connection, workout, exerciseId, time);
+						bikeTable.readTable(connection, workout, newExercise);
 						break;
 					case "HIIT":
-						hiitTable.readTable(connection, workout, exerciseId, time);
+						hiitTable.readTable(connection, workout, newExercise);
 						break;
 					case "Run":
-						runTable.readTable(connection, workout, exerciseId, time);
+						runTable.readTable(connection, workout, newExercise);
 						break;
 					}
 				}
