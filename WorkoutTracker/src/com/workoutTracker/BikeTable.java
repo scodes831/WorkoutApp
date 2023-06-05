@@ -10,7 +10,7 @@ public class BikeTable extends Table {
 	public void createTable(Connection connection) {
 		Statement statement;
 		try {
-			String query = "create table if not exists bike (exerciseId INTEGER PRIMARY KEY, mph NUMERIC(6,1), pace INTEGER, distance_mi NUMERIC(6,2),"
+			String query = "create table if not exists bike (exerciseId INTEGER PRIMARY KEY, mph NUMERIC(6,1), pace TIME, distance_mi NUMERIC(6,2),"
 					+ " distance_km NUMERIC(6,2), resistance INTEGER, is_stationary_bike BOOLEAN, FOREIGN KEY (exerciseId) REFERENCES exercises(exerciseId))";
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
@@ -59,33 +59,32 @@ public class BikeTable extends Table {
 		}
 	}
 
-	public void readTable(Connection connection, Workout workout, int exerciseId, int exerciseTime) {
+	public void readTable(Connection connection, Workout workout, Exercise exercise) {
+		System.out.println("inside bikeTable.readTable");
 		Statement statement;
 		ResultSet result = null;
 		try {
-			String query = "select * from bike where exerciseId = " + exerciseId;
+			String query = "select * from bike where exerciseId = " + exercise.getExerciseId();
 			statement = connection.createStatement();
 			result = statement.executeQuery(query);
 			while (result.next()) {
-				boolean alreadyExists = false;
 				double mph = Double.valueOf(result.getString("mph"));
 				double distanceMi = Double.valueOf(result.getString("distance_mi"));
 				double distanceKm = Double.valueOf(result.getString("distance_km"));
 				int resistance = Integer.valueOf(result.getString("resistance"));
-				boolean isStationaryBike = Boolean.valueOf(result.getString("is_stationary_bike"));
-				for (Exercise exercise : workout.getExercises()) {
-					if (exercise instanceof Bike) {
-						if (exercise.getExerciseId() == exerciseId) {
-							alreadyExists = true;
-						} else {
-							Bike bike = new Bike(exerciseId, mph, distanceMi, distanceKm, resistance, isStationaryBike);
-							bike.setPace(bike.calculatePace(mph));
-							workout.getExercises().add(bike);
-						}
-					} else {
-						continue;
-					}
+				String stringSB = result.getString("is_stationary_bike");
+				boolean isStationaryBike;
+				if (stringSB.equals("t") ) {
+					isStationaryBike = true;
+				} else {
+					isStationaryBike = false;
 				}
+				((Bike) exercise).setMph(mph);
+				((Bike) exercise).setPace(exercise.calculatePace(mph));
+				((Bike) exercise).setDistanceMi(distanceMi);
+				((Bike) exercise).setDistanceKm(distanceKm);
+				((Bike) exercise).setResistance(resistance);
+				((Bike) exercise).setStationaryBike(isStationaryBike);					
 			}
 		} catch (Exception e) {
 			System.out.println(e);
