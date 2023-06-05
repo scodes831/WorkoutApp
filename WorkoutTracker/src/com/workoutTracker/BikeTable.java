@@ -73,12 +73,7 @@ public class BikeTable extends Table {
 				double distanceKm = Double.valueOf(result.getString("distance_km"));
 				int resistance = Integer.valueOf(result.getString("resistance"));
 				String stringSB = result.getString("is_stationary_bike");
-				boolean isStationaryBike;
-				if (stringSB.equals("t") ) {
-					isStationaryBike = true;
-				} else {
-					isStationaryBike = false;
-				}
+				boolean isStationaryBike = getBooleanValue(stringSB);
 				((Bike) exercise).setMph(mph);
 				((Bike) exercise).setPace(exercise.calculatePace(mph));
 				((Bike) exercise).setDistanceMi(distanceMi);
@@ -88,6 +83,14 @@ public class BikeTable extends Table {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
+		}
+	}
+	
+	private boolean getBooleanValue(String sb) {
+		if (sb.equals("t")) {
+			return true;
+		}  else {
+			return false;
 		}
 	}
 
