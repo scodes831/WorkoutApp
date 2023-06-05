@@ -58,31 +58,21 @@ public class RunTable extends Table {
 		}
 	}
 	
-	public void readTable(Connection connection, Workout workout, int exerciseId, int exerciseTime) {
+	public void readTable(Connection connection, Workout workout, Exercise exercise) {
 		Statement statement;
 		ResultSet result = null;
 		try {
-			String query = "select * from run where exerciseId = " + exerciseId;
+			String query = "select * from run where exerciseId = " + exercise.getExerciseId();
 			statement = connection.createStatement();
 			result = statement.executeQuery(query);
 			while (result.next()) {
-				boolean alreadyExists = false;
 				double mph = Double.valueOf(result.getString("mph"));
 				double distanceMi = Double.valueOf(result.getString("distance_mi"));
 				double distanceKm = Double.valueOf(result.getString("distance_km"));
-				for (Exercise exercise : workout.getExercises()) {
-					if (exercise instanceof Run) {
-						if (exercise.getExerciseId() == exerciseId) {
-							alreadyExists = true;
-						} else {
-							Run run = new Run(exerciseId, mph, distanceMi, distanceKm);
-							run.setPace(run.calculatePace(mph));
-							workout.getExercises().add(run);
-						}
-					} else {
-						continue;
-					}
-				}
+				((Run) exercise).setMph(mph);
+				((Run) exercise).setPace(exercise.calculatePace(mph));
+				((Run) exercise).setDistanceMi(distanceMi);
+				((Run) exercise).setDistanceKm(distanceKm);
 			}
 		} catch (Exception e) {
 			System.out.println(e);
