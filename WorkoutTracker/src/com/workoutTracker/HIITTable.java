@@ -58,30 +58,20 @@ public class HIITTable extends Table {
 		}
 	}
 	
-	public void readTable(Connection connection, Workout workout, int exerciseId, int exerciseTime) {
+	public void readTable(Connection connection, Workout workout, Exercise exercise) {
 		Statement statement;
 		ResultSet result = null;
 		try {
-			String query = "select * from hiit where exerciseId = " + exerciseId;
+			String query = "select * from hiit where exerciseId = " + exercise.getExerciseId();
 			statement = connection.createStatement();
 			result = statement.executeQuery(query);
 			while (result.next()) {
-				boolean alreadyExists = false;
 				int activeIntervalSec = Integer.valueOf(result.getString("active_interval_seconds"));
 				int restIntervalSec = Integer.valueOf(result.getString("rest_interval_seconds"));
 				int numIntervals = Integer.valueOf(result.getString("intervals"));
-				for (Exercise exercise : workout.getExercises()) {
-					if (exercise instanceof HIIT) {
-						if (exercise.getExerciseId() == exerciseId) {
-							alreadyExists = true;
-						} else {
-							HIIT hiit = new HIIT(activeIntervalSec, restIntervalSec, numIntervals);
-							workout.getExercises().add(hiit);
-						}
-					} else {
-						continue;
-					}
-				}
+				((HIIT) exercise).setActiveIntervalSec(activeIntervalSec);
+				((HIIT) exercise).setRestIntervalSec(restIntervalSec);
+				((HIIT) exercise).setNumOfIntervals(numIntervals);
 			}
 		} catch (Exception e) {
 			System.out.println(e);
