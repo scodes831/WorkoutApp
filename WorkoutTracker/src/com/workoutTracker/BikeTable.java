@@ -37,7 +37,7 @@ public class BikeTable extends Table {
 		try {
 			String query = String.format(
 					"update bike set mph = '%s', pace = '%s', distance_mi = '%s', distance_km = '%s', resistance = '%s', is_stationary_bike = '%s' where exerciseid = '%s'",
-					newValues.get(0), newValues.get(1), newValues.get(2), newValues.get(3), newValues.get(4), newValues.get(5), newValues.get(6), id);
+					newValues.get(0), newValues.get(1), newValues.get(2), newValues.get(3), newValues.get(4), newValues.get(5), id);
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
 
@@ -60,7 +60,6 @@ public class BikeTable extends Table {
 	}
 
 	public void readTable(Connection connection, Workout workout, Exercise exercise) {
-		System.out.println("inside bikeTable.readTable");
 		Statement statement;
 		ResultSet result = null;
 		try {
