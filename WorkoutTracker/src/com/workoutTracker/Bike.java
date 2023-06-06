@@ -23,10 +23,11 @@ public class Bike extends Exercise {
 		this.resistance = resistance;
 		this.isStationaryBike = isStationaryBike;
 	}
-	
-	public Bike() {}
 
-	public void addBikeDetails() {
+	public Bike() {
+	}
+
+	public void addBikeDetails(Connection connection, BikeTable bikeTable) {
 		boolean isStationaryBike = UserPrompts.askIfStationaryBike();
 		this.setStationaryBike(isStationaryBike);
 		double distanceMi = UserPrompts.askDistanceMiles();
@@ -36,6 +37,19 @@ public class Bike extends Exercise {
 		this.setResistance(resistance);
 		this.setMph(this.calculateMPH(distanceMi, this.getExerciseTime()));
 		this.setPace(this.calculatePace(this.getMph()));
+		addToBikeTable(connection, bikeTable);
+	}
+
+	public void addToBikeTable(Connection connection, BikeTable bikeTable) {
+		ArrayList<Object> values = new ArrayList<Object>();
+		values.add(this.getExerciseId());
+		values.add(this.getMph());
+		values.add(this.getPace());
+		values.add(this.getDistanceMi());
+		values.add(this.getDistanceKm());
+		values.add(this.getResistance());
+		values.add(this.getIsStationaryBike());
+		bikeTable.insertRow(connection, values);
 	}
 
 	public void editBikeDetails(Connection connection, Workout workout, ExerciseTable exerciseTable,
