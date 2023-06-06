@@ -365,12 +365,12 @@ public class UserPrompts {
 	
 	public static int askBikeEditFields() {
 		System.out.println("Please enter the field to edit (0 to exit)");
-		System.out.println("1 - Exercise Time\n2 - Heart Rate\n3 - Calories\n4 - Stationary Bike\n5 - Distance\n6 - Resistance");
+		System.out.println("1 - Exercise Time\n2 - Stationary Bike\n3 - Distance\n4 - Resistance");
 		Scanner in = new Scanner(System.in);
 		boolean inputError = false;
 		do {
 			int input = in.nextInt();
-			if (input > 0 && input < 7) {
+			if (input > 0 && input < 5) {
 				return input;
 			} else if (input == 0) {
 				return 0;
