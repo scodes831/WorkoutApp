@@ -61,12 +61,11 @@ public class Run extends Exercise {
 					break;
 				}
 				exerciseValues.add(this.getExerciseTime());
-				runValues.add(this.getExerciseId());
 				runValues.add(this.getMph());
 				runValues.add(this.getPace());
 				runValues.add(this.getDistanceMi());
 				runValues.add(this.getDistanceKm());
-				exerciseTable.updateRow(connection, this.getExerciseId(), runValues);
+				exerciseTable.updateRow(connection, this.getExerciseId(), exerciseValues);
 				runTable.updateRow(connection, this.getExerciseId(), runValues);
 			} else {
 				stillEditing = false;
@@ -76,9 +75,9 @@ public class Run extends Exercise {
 	
 	public void displayRunExercises() {
 		Formatter table = new Formatter();
-		table.format("%15s %15s %15s %15s %15s %15s %15s\n", "ExerciseId", "Time", "MPH", "Pace",
+		table.format("%15s %15s %15s %15s %15s %15s\n", "ExerciseId", "Time", "MPH", "Pace",
 				"Distance (miles)", "Distance (km)");
-		table.format("%15s %15s %15s %15s %15s %15s %15s\n", this.getExerciseId(), this.getExerciseTime(),
+		table.format("%15s %15s %15s %15s %15s %15s\n", this.getExerciseId(), this.getExerciseTime(),
 				this.getMph(), this.getPace(), this.getDistanceMi(), this.getDistanceKm());
 		System.out.println(table);
 	}	
