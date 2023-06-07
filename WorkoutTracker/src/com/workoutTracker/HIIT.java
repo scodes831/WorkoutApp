@@ -78,9 +78,9 @@ public class HIIT extends Exercise {
 
 	public void displayHIITExercises() {
 		Formatter table = new Formatter();
-		table.format("%15s %15s %15s %15s %15s\n", "ExerciseId", "Time", "Active Interval (seconds)",
+		table.format("%15s %15s %25s %25s %15s\n", "ExerciseId", "Time", "Active Interval (seconds)",
 				"Rest Interval (seconds)", "# of Intervals");
-		table.format("%15s %15s %15s %15s %15s\n", this.getExerciseId(), this.getExerciseTime(),
+		table.format("%15s %15s %25s %25s %15s\n", this.getExerciseId(), this.getExerciseTime(),
 				this.getActiveIntervalSec(), this.getRestIntervalSec(), this.getNumOfIntervals());
 		System.out.println(table);
 	}
