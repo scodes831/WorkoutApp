@@ -365,12 +365,12 @@ public class UserPrompts {
 	
 	public static int askBikeEditFields() {
 		System.out.println("Please enter the field to edit (0 to exit)");
-		System.out.println("1 - Exercise Time\n2 - Stationary Bike\n3 - Distance\n4 - Resistance");
+		System.out.println("1 - Exercise Time\n2 - Stationary Bike\n3 - Distance\n4 - Resistance\n5 - DELETE EXERCISE");
 		Scanner in = new Scanner(System.in);
 		boolean inputError = false;
 		do {
 			int input = in.nextInt();
-			if (input > 0 && input < 5) {
+			if (input > 0 && input < 6) {
 				return input;
 			} else if (input == 0) {
 				return 0;
@@ -384,12 +384,12 @@ public class UserPrompts {
 	
 	public static int askHIITEditFields() {
 		System.out.println("Please enter the field to edit (0 to exit)");
-		System.out.println("1 - Exercise Time\n2 - Active Interval\n3 - Rest Interval\n4 - # of Intervals");
+		System.out.println("1 - Exercise Time\n2 - Active Interval\n3 - Rest Interval\n4 - # of Intervals\n5 - DELETE EXERCISE");
 		Scanner in = new Scanner(System.in);
 		boolean inputError = false;
 		do {
 			int input = in.nextInt();
-			if (input > 0 && input < 5) {
+			if (input > 0 && input < 6) {
 				return input;
 			} else if (input == 0) {
 				return 0;
@@ -403,12 +403,12 @@ public class UserPrompts {
 	
 	public static int askRunEditFields() {
 		System.out.println("Please enter the field to edit (0 to exit)");
-		System.out.println("1 - Exercise Time\n2 - Distance");
+		System.out.println("1 - Exercise Time\n2 - Distance\n3 - DELETE EXERCISE");
 		Scanner in = new Scanner(System.in);
 		boolean inputError = false;
 		do {
 			int input = in.nextInt();
-			if (input > 0 && input < 3) {
+			if (input > 0 && input < 4) {
 				return input;
 			} else if (input == 0) {
 				return 0;
