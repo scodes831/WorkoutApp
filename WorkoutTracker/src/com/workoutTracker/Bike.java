@@ -82,6 +82,10 @@ public class Bike extends Exercise {
 					int newResistance = UserPrompts.askResistance();
 					this.setResistance(newResistance);
 					break;
+				case 5: 
+					stillEditing = false;
+					deleteBikeExercise(exerciseTable, bikeTable, workout, connection);
+					break;
 				}
 				exerciseValues.add(this.getExerciseTime());
 				bikeValues.add(this.getMph());
@@ -96,6 +100,12 @@ public class Bike extends Exercise {
 				stillEditing = false;
 			}
 		} while (stillEditing);
+	}
+	
+	private void deleteBikeExercise(ExerciseTable exerciseTable, BikeTable bikeTable, Workout workout, Connection connection) {
+		bikeTable.deleteRow(connection, this.getExerciseId());
+		exerciseTable.deleteRow(connection,  this.getExerciseId());
+		workout.getExercises().remove(findExerciseIndex(workout, this));
 	}
 
 	public void displayBikeExercises() {
