@@ -27,7 +27,7 @@ public class WorkoutMenu extends Menu {
 		case 1:
 			Workout workout = selectedUser.addWorkout(selectedUser);
 			selectedUser.addWorkoutToDatabase(workout, connection, workoutTable);
-			workout.addWorkoutDetails(workout, connection, exerciseTable, stTable, setTable);
+			workout.addWorkoutDetails(workout, connection, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
 			break;
 		case 2:
 			selectedUser.displayAllWorkouts();
@@ -37,7 +37,7 @@ public class WorkoutMenu extends Menu {
 				ExerciseMenu exerciseMenu = new ExerciseMenu();
 				exerciseMenu.displayMenu(selectedWorkout, userManager, mainMenu, this, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
 			} else if (selectWorkoutOptions() == 2) {
-				selectedWorkout.editWorkout(connection, selectedUser, workoutTable, exerciseTable, stTable, setTable);
+				selectedWorkout.editWorkout(connection, selectedUser, workoutTable, exerciseTable, bikeTable, hiitTable, runTable, stTable, setTable);
 			} else {
 				break;
 			}

@@ -40,7 +40,8 @@ public class Workout {
 	}
 
 	public void addWorkoutDetails(Workout workout, Connection connection, ExerciseTable exerciseTable,
-			StrengthTrainingTable stTable, SetTable setTable) {
+			BikeTable bikeTable, RunTable runTable, HIITTable hiitTable, StrengthTrainingTable stTable,
+			SetTable setTable) {
 		System.out.println("Let's add exercises to your workout!\n");
 		boolean keepAddingExercises = true;
 		do {
@@ -48,7 +49,8 @@ public class Workout {
 			if (!exerciseType.equals("Exit")) {
 				Exercise exercise = addNewExercise(exerciseType);
 				workout.getExercises().add(exercise);
-				exercise.addExerciseDetails(connection, workout, exerciseTable, stTable, setTable);
+				exercise.addExerciseDetails(connection, workout, exerciseTable, bikeTable, runTable, hiitTable, stTable,
+						setTable);
 			} else {
 				keepAddingExercises = false;
 			}
@@ -74,14 +76,15 @@ public class Workout {
 		}
 		return null;
 	}
-	
+
 	public Exercise selectExercise() {
 		Exercise selectedExercise = UserPrompts.askExerciseSelection(this);
 		return selectedExercise;
 	}
 
 	public void editWorkout(Connection connection, User user, WorkoutTable workoutTable, ExerciseTable exerciseTable,
-			StrengthTrainingTable stTable, SetTable setTable) {
+			BikeTable bikeTable, HIITTable hiitTable, RunTable runTable, StrengthTrainingTable stTable,
+			SetTable setTable) {
 		boolean stillEditing = true;
 		ArrayList<Object> newValues = new ArrayList<Object>();
 		do {
@@ -99,7 +102,7 @@ public class Workout {
 					this.setTime(newTime);
 					break;
 				case 3:
-					editExercises(connection, exerciseTable, stTable);
+					editExercises(connection, exerciseTable, bikeTable, hiitTable, runTable, stTable, setTable);
 					break;
 				case 4:
 					stillEditing = false;
@@ -123,10 +126,12 @@ public class Workout {
 		} while (stillEditing);
 	}
 
-	public void editExercises(Connection connection, ExerciseTable exerciseTable, StrengthTrainingTable stTable) {
+	public void editExercises(Connection connection, ExerciseTable exerciseTable, BikeTable bikeTable,
+			 HIITTable hiitTable, RunTable runTable, StrengthTrainingTable stTable, SetTable setTable) {
 		displayExercises();
 		Exercise selectedExercise = UserPrompts.askExerciseSelection(this);
-		selectedExercise.editExerciseDetails(connection, this, exerciseTable, stTable);
+		selectedExercise.editExerciseDetails(connection, this, exerciseTable, bikeTable, hiitTable, runTable, stTable,
+				setTable);
 	}
 
 	public void displayExercises() {

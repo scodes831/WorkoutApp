@@ -51,11 +51,11 @@ public abstract class Exercise {
 	}
 
 	public void editExerciseDetails(Connection connection, Workout workout, ExerciseTable exerciseTable,
-			BikeTable bikeTable, HIITTable hiitTable, RunTable runTable, StrengthTrainingTable stTable) {
+			BikeTable bikeTable, HIITTable hiitTable, RunTable runTable, StrengthTrainingTable stTable, SetTable setTable) {
 		System.out.println("start: edit exercise details");
 		if (this instanceof StrengthTraining) {
 			System.out.println("this is an instance of st");
-			((StrengthTraining) this).editStrengthTrainingDetails(connection, workout, exerciseTable, stTable);
+			((StrengthTraining) this).editStrengthTrainingDetails(connection, workout, exerciseTable, stTable, setTable);
 		} else if (this instanceof Bike) {
 			System.out.println("this is an instance of bike");
 			((Bike) this).editBikeDetails(connection, workout, exerciseTable, bikeTable);
@@ -66,6 +66,17 @@ public abstract class Exercise {
 			System.out.println("this is an instance of run");
 			((Run) this).editRunDetails(connection, workout, exerciseTable, runTable);
 		}
+	}
+	
+	public int findExerciseIndex(Workout workout, Exercise exercise) {
+		int index = -1;
+		for (int i = 0; i < workout.getExercises().size(); i++) {
+			if (workout.getExercises().get(i).getExerciseId() == this.getExerciseId()) {
+				index = i;
+				break;
+			}
+		}
+		return index;
 	}
 
 	public double calculateMPH(double miles, int time) {

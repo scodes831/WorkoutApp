@@ -78,7 +78,7 @@ public class StrengthTraining extends Exercise {
 	}
 
 	public void editStrengthTrainingDetails(Connection connection, Workout workout, ExerciseTable exerciseTable,
-			StrengthTrainingTable stTable) {
+			StrengthTrainingTable stTable, SetTable setTable) {
 		boolean stillEditing = true;
 		ArrayList<Object> exerciseValues = new ArrayList<Object>();
 		ArrayList<Object> stValues = new ArrayList<Object>();
@@ -103,7 +103,9 @@ public class StrengthTraining extends Exercise {
 					break;
 				case 5:
 					stillEditing = false;
+					setTable.deleteSetsByExerciseId(connection, this.getExerciseId());
 					stTable.deleteRow(connection, this.getExerciseId());
+					exerciseTable.deleteRow(connection, this.getExerciseId());
 					int stIndex = -1;
 					for (int i = 0; i < workout.getExercises().size(); i++) {
 						if (workout.getExercises().get(i).getExerciseId() == this.getExerciseId()) {

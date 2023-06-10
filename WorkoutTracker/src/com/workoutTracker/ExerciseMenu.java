@@ -34,11 +34,11 @@ public class ExerciseMenu {
 		case 2:
 			String exerciseType = UserPrompts.askExerciseType();
 			Exercise newExercise = workout.addNewExercise(exerciseType);
-			newExercise.addExerciseDetails(connection, workout, exerciseTable, stTable, setTable);
+			newExercise.addExerciseDetails(connection, workout, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
 			System.out.println("new exercise has been added");
 			break;
 		case 3:
-			workoutMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, stTable,
+			workoutMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable,
 					setTable);
 			break;
 		}
@@ -61,19 +61,19 @@ public class ExerciseMenu {
 		if (exercise instanceof StrengthTraining) {
 			StrengthTrainingMenu stMenu = new StrengthTrainingMenu();
 			stMenu.displayMenu(workout, userManager, mainMenu, workoutMenu, exMenu, connection, userTable, workoutTable,
-					exerciseTable, stTable, setTable, exercise);
+					exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable, exercise);
 		} else if (exercise instanceof Bike) {
 			BikeMenu bikeMenu = new BikeMenu();
 			bikeMenu.displayMenu(workout, userManager, mainMenu, workoutMenu, exMenu, connection, userTable,
-					workoutTable, exerciseTable, bikeTable, exercise);
+					workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable, exercise);
 		} else if (exercise instanceof Run) {
 			RunMenu runMenu = new RunMenu();
 			runMenu.displayMenu(workout, userManager, mainMenu, workoutMenu, exMenu, connection, userTable,
-					workoutTable, exerciseTable, runTable, exercise);
+					workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable, exercise);
 		} else if (exercise instanceof HIIT) {
 			HIITMenu hiitMenu = new HIITMenu();
 			hiitMenu.displayMenu(workout, userManager, mainMenu, workoutMenu, exMenu, connection, userTable,
-					workoutTable, exerciseTable, hiitTable, exercise);
+					workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable, exercise);
 
 		}
 	}
