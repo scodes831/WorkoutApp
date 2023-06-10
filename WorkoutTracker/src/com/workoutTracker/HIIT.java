@@ -63,6 +63,10 @@ public class HIIT extends Exercise {
 					int newNumOfIntervals = UserPrompts.askNumIntervals();
 					this.setNumOfIntervals(newNumOfIntervals);
 					break;
+				case 5:
+					stillEditing = false;
+					deleteHIITExercise(exerciseTable, hiitTable, workout, connection);
+					break;
 				}
 				exerciseValues.add(this.getExerciseTime());
 				hiitValues.add(this.getActiveIntervalSec());
@@ -74,6 +78,12 @@ public class HIIT extends Exercise {
 				stillEditing = false;
 			}
 		} while (stillEditing);
+	}
+	
+	private void deleteHIITExercise(ExerciseTable exerciseTable, HIITTable hiitTable, Workout workout, Connection connection) {
+		hiitTable.deleteRow(connection, this.getExerciseId());
+		exerciseTable.deleteRow(connection,  this.getExerciseId());
+		workout.getExercises().remove(findExerciseIndex(workout, this));
 	}
 
 	public void displayHIITExercises() {
