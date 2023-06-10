@@ -59,6 +59,10 @@ public class Run extends Exercise {
 					this.setMph(this.calculateMPH(newDistanceMi, this.getExerciseTime()));
 					this.setPace(this.calculatePace(this.getMph()));
 					break;
+				case 3:
+					stillEditing = false;
+					deleteRunExercise(exerciseTable, runTable, workout, connection);
+					break;
 				}
 				exerciseValues.add(this.getExerciseTime());
 				runValues.add(this.getMph());
@@ -71,6 +75,12 @@ public class Run extends Exercise {
 				stillEditing = false;
 			}
 		} while (stillEditing);
+	}
+	
+	private void deleteRunExercise(ExerciseTable exerciseTable, RunTable runTable, Workout workout, Connection connection) {
+		runTable.deleteRow(connection, this.getExerciseId());
+		exerciseTable.deleteRow(connection,  this.getExerciseId());
+		workout.getExercises().remove(findExerciseIndex(workout, this));
 	}
 	
 	public void displayRunExercises() {
