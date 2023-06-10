@@ -54,12 +54,23 @@ public class SetTable extends Table {
 			System.out.println(e);
 		}
 	}
+	
+	public void deleteSetsByExerciseId(Connection connection, int exerciseId) {
+		Statement statement;
+		try {
+			String query = String.format("delete from sets where exerciseId = '%s'", exerciseId);
+			statement = connection.createStatement();
+			statement.executeUpdate(query);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 
 	public void readTable(Connection connection, StrengthTraining st) {
 		Statement statement;
 		ResultSet result = null;
 		try {
-			String query = "select * from sets where exerciseId = " + st.getExerciseId();
+			String query = "select * from sets where exerciseId = " + st.getExerciseId() + " order by setId";
 			statement = connection.createStatement();
 			result = statement.executeQuery(query);
 			while (result.next()) {
@@ -82,5 +93,4 @@ public class SetTable extends Table {
 			System.out.println(e);
 		}
 	}
-
 }
