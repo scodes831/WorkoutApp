@@ -32,11 +32,12 @@ public class WorkoutMenu extends Menu {
 		case 2:
 			selectedUser.displayAllWorkouts();
 			Workout selectedWorkout = selectedUser.selectWorkout();
-			if (selectWorkoutOptions() == 1) {
+			int selectedWorkoutOption = selectWorkoutOptions();
+			if (selectedWorkoutOption == 1) {
 				selectedWorkout.displayExercises();
 				ExerciseMenu exerciseMenu = new ExerciseMenu();
 				exerciseMenu.displayMenu(selectedWorkout, userManager, mainMenu, this, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
-			} else if (selectWorkoutOptions() == 2) {
+			} else if (selectedWorkoutOption == 2) {
 				selectedWorkout.editWorkout(connection, selectedUser, workoutTable, exerciseTable, bikeTable, hiitTable, runTable, stTable, setTable);
 			} else {
 				break;
