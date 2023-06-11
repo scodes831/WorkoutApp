@@ -102,9 +102,6 @@ public class Workout {
 					this.setTime(newTime);
 					break;
 				case 3:
-					editExercises(connection, exerciseTable, bikeTable, hiitTable, runTable, stTable, setTable);
-					break;
-				case 4:
 					stillEditing = false;
 					int userIndex = -1;
 					workoutTable.deleteWorkoutDependencies(connection, this, exerciseTable, stTable, setTable);
