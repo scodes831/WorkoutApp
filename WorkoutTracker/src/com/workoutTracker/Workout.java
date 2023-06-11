@@ -104,7 +104,7 @@ public class Workout {
 				case 3:
 					stillEditing = false;
 					int userIndex = -1;
-					workoutTable.deleteWorkoutDependencies(connection, this, exerciseTable, stTable, setTable);
+					workoutTable.deleteWorkoutDependencies(connection, this, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
 					workoutTable.deleteRow(connection, this.getWorkoutId());
 					for (int i = 0; i < user.getWorkouts().size(); i++) {
 						if (user.getWorkouts().get(i).getWorkoutId() == this.getWorkoutId()) {
