@@ -10,7 +10,7 @@ public class RunTable extends Table {
 	public void createTable(Connection connection) {
 		Statement statement;
 		try {
-			String query = "create table if not exists run (exerciseId INTEGER PRIMARY KEY, mph NUMERIC(6,1), pace INTEGER, distance_mi NUMERIC(6,2), distance_km NUMERIC(6,2), "
+			String query = "create table if not exists run (exerciseId INTEGER PRIMARY KEY, mph NUMERIC(6,1), pace TIME, distance_mi NUMERIC(6,2), distance_km NUMERIC(6,2), "
 					+ "FOREIGN KEY (exerciseId) REFERENCES exercises(exerciseId))";
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
@@ -78,5 +78,4 @@ public class RunTable extends Table {
 			System.out.println(e);
 		}
 	}
-
 }
