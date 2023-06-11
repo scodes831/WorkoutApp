@@ -59,23 +59,32 @@ public class WorkoutTable extends Table {
 	}
 
 	public void deleteWorkoutDependencies(Connection connection, Workout workout, ExerciseTable exerciseTable,
-			StrengthTrainingTable stTable, SetTable setTable) {
+			BikeTable bikeTable, RunTable runTable, HIITTable hiitTable, StrengthTrainingTable stTable,
+			SetTable setTable) {
 		for (int e = 0; e < workout.getExercises().size(); e++) {
-			if (workout.getExercises().get(e).getClass().getSimpleName().equals("StrengthTraining")) {
+			String exType = workout.getExercises().get(e).getClass().getSimpleName();
+			int exId = workout.getExercises().get(e).getExerciseId();
+			if (exType.equals("StrengthTraining")) {
 				StrengthTraining st = (StrengthTraining) workout.getExercises().get(e);
 				for (int s = 0; s < st.getSets().size(); s++) {
 					setTable.deleteRow(connection, st.getSets().get(s).getSetId());
 					st.getSets().remove(s);
 				}
-				stTable.deleteRow(connection, workout.getExercises().get(e).getExerciseId());
+				stTable.deleteRow(connection, exId);
+			} else if (exType.equals("Bike")) {
+				bikeTable.deleteRow(connection, exId);
+			} else if (exType.equals("Run")) {
+				runTable.deleteRow(connection, exId);
+			} else {
+				hiitTable.deleteRow(connection, exId);
 			}
-			exerciseTable.deleteRow(connection, workout.getExercises().get(e).getExerciseId());
+			exerciseTable.deleteRow(connection, exId);
 			workout.getExercises().remove(e);
 		}
 	}
 
-	public void readTable(Connection connection, User user, ExerciseTable exerciseTable, BikeTable bikeTable, RunTable runTable, HIITTable hiitTable, 
-			StrengthTrainingTable stTable, SetTable setTable) {
+	public void readTable(Connection connection, User user, ExerciseTable exerciseTable, BikeTable bikeTable,
+			RunTable runTable, HIITTable hiitTable, StrengthTrainingTable stTable, SetTable setTable) {
 		Statement statement;
 		ResultSet result = null;
 		try {
