@@ -33,7 +33,7 @@ public class MainMenu extends Menu {
 		switch (selection) {
 		case 1:
 			UserMenu userMenu = new UserMenu();
-			userMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable);
+			userMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
 			break;
 		case 2:
 			WorkoutMenu workoutMenu = new WorkoutMenu();
