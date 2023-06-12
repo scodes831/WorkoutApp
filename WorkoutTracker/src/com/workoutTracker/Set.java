@@ -18,8 +18,8 @@ public class Set {
 		this.reps = reps;
 	}
 	
-	Set(int setId, double weightLbs, double weightKg, int reps) {
-		this.setId = setId;
+	Set(double weightLbs, double weightKg, int reps) {
+		this.setId = generateSetId();
 		this.weightLbs = weightLbs;
 		this.weightKg = weightKg;
 		this.reps = reps;
