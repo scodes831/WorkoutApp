@@ -75,7 +75,7 @@ public class SetTable extends Table {
 			result = statement.executeQuery(query);
 			while (result.next()) {
 				boolean alreadyExists = false;
-				int setId = Integer.valueOf(result.getString("setId"));
+				int setId = Integer.valueOf(result.getString("setId"));		
 				double weightLbs = Double.valueOf(result.getString("weightLbs"));
 				double weightKgs = Double.valueOf(result.getString("weightKg"));
 				int reps = Integer.valueOf(result.getString("reps"));
@@ -85,7 +85,8 @@ public class SetTable extends Table {
 					}
 				}
 				if (!alreadyExists) {
-					Set set = new Set(setId, weightLbs, weightKgs, reps);
+					Set set = new Set(weightLbs, weightKgs, reps);
+					set.setSetId(setId);
 					st.getSets().add(set);
 				}
 			}
