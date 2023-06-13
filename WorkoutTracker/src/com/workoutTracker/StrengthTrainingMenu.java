@@ -35,7 +35,7 @@ public class StrengthTrainingMenu extends SubMenu {
 			break;
 		case 2:
 			st.displayStrengthTrainingExericses();
-			st.editStrengthTrainingDetails(connection, workout, exerciseTable, stTable);
+			st.editStrengthTrainingDetails(connection, workout, exerciseTable, stTable, setTable);
 			break;
 		case 3:
 			exMenu.displayMenu(workout, userManager, mainMenu, workoutMenu, connection, userTable, workoutTable,
