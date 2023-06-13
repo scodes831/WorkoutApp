@@ -60,7 +60,7 @@ public class ExerciseTable extends Table {
 		Statement statement;
 		ResultSet result = null;
 		try {
-			String query = "select * from exercises where workoutId = " + workout.getWorkoutId();
+			String query = "select * from exercises where workoutId = " + workout.getWorkoutId() + " order by exerciseId";
 			statement = connection.createStatement();
 			result = statement.executeQuery(query);
 			while (result.next()) {
