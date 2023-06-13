@@ -23,7 +23,7 @@ public abstract class Exercise {
 		Exercise.setID(id);
 		return id;
 	}
-
+	
 	public void addExerciseDetails(Connection connection, Workout workout, ExerciseTable exerciseTable,
 			BikeTable bikeTable, RunTable runTable, HIITTable hiitTable, StrengthTrainingTable stTable,
 			SetTable setTable) {
@@ -54,16 +54,12 @@ public abstract class Exercise {
 			BikeTable bikeTable, HIITTable hiitTable, RunTable runTable, StrengthTrainingTable stTable, SetTable setTable) {
 		System.out.println("start: edit exercise details");
 		if (this instanceof StrengthTraining) {
-			System.out.println("this is an instance of st");
 			((StrengthTraining) this).editStrengthTrainingDetails(connection, workout, exerciseTable, stTable, setTable);
 		} else if (this instanceof Bike) {
-			System.out.println("this is an instance of bike");
 			((Bike) this).editBikeDetails(connection, workout, exerciseTable, bikeTable);
 		} else if (this instanceof HIIT) {
-			System.out.println("this is an instance of hiit");
 			((HIIT) this).editHIITDetails(connection, workout, exerciseTable, hiitTable);
 		} else if (this instanceof Run) {
-			System.out.println("this is an instance of run");
 			((Run) this).editRunDetails(connection, workout, exerciseTable, runTable);
 		}
 	}
