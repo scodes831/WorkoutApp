@@ -6,13 +6,13 @@ import java.util.Scanner;
 public class SetMenu {
 	
 	public void displayMenu(Workout workout, UserManager userManager, MainMenu mainMenu, WorkoutMenu workoutMenu, ExerciseMenu exMenu, StrengthTrainingMenu stMenu, Connection connection,
-			UserTable userTable, WorkoutTable workoutTable, ExerciseTable exerciseTable, StrengthTrainingTable stTable,
+			UserTable userTable, WorkoutTable workoutTable, ExerciseTable exerciseTable, BikeTable bikeTable, RunTable runTable, HIITTable hiitTable, StrengthTrainingTable stTable,
 			SetTable setTable, StrengthTraining st) {
 		boolean inputError = false;
 		do {
 			try {
 				int selection = makeSelection();
-				processSelection(workout, userManager, mainMenu, workoutMenu, stMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable, exMenu, st, selection);
+				processSelection(workout, userManager, mainMenu, workoutMenu, stMenu, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable, exMenu, st, selection);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
@@ -21,7 +21,7 @@ public class SetMenu {
 	}
 	
 	public void processSelection(Workout workout, UserManager userManager, MainMenu mainMenu, WorkoutMenu workoutMenu, StrengthTrainingMenu stMenu, Connection connection, UserTable userTable,
-			WorkoutTable workoutTable, ExerciseTable exerciseTable, StrengthTrainingTable stTable, SetTable setTable, ExerciseMenu exMenu, StrengthTraining st, int selection) {
+			WorkoutTable workoutTable, ExerciseTable exerciseTable, BikeTable bikeTable, RunTable runTable, HIITTable hiitTable, StrengthTrainingTable stTable, SetTable setTable, ExerciseMenu exMenu, StrengthTraining st, int selection) {
 		switch (selection) {
 		case 1:
 			st.displaySets();
@@ -35,10 +35,10 @@ public class SetMenu {
 			st.editSetDetails(connection, selectedSet, setTable);
 			break;
 		case 4:
-			stMenu.displayMenu(workout, userManager, mainMenu, workoutMenu, exMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable, st);
+			stMenu.displayMenu(workout, userManager, mainMenu, workoutMenu, exMenu, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable, st);
 			break;
 		}
-		displayMenu(workout, userManager, mainMenu, workoutMenu, exMenu, stMenu, connection, userTable, workoutTable, exerciseTable, stTable, setTable, st);
+		displayMenu(workout, userManager, mainMenu, workoutMenu, exMenu, stMenu, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable, st);
 	}
 	
 	public int makeSelection() {
