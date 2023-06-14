@@ -24,7 +24,7 @@ public class UserManager {
 		getUsers().add(user);
 		return user;
 	}
-	
+
 	public void addUserToDatabase(User user, Connection connection, UserTable userTable) {
 		ArrayList<Object> userValues = new ArrayList<>();
 		userValues.add(user.getUserId());
@@ -46,15 +46,17 @@ public class UserManager {
 		}
 		System.out.println(userTable);
 	}
-	
+
 	public User selectAUser(UserManager userManager) {
 		userManager.displayUsers(userManager.getUsers());
 		int selectedId = UserPrompts.askUserId(userManager);
 		User selectedUser = userManager.getUserById(userManager, selectedId);
 		return selectedUser;
 	}
-	
-	public void editUser(User user, Connection connection, UserTable userTable) {
+
+	public void editUser(User user, Connection connection, UserTable userTable, WorkoutTable workoutTable,
+			ExerciseTable exerciseTable, BikeTable bikeTable, RunTable runTable, HIITTable hiitTable,
+			StrengthTrainingTable stTable, SetTable setTable) {
 		Scanner in = new Scanner(System.in);
 		boolean stillEditing = true;
 		ArrayList<Object> newValues = new ArrayList<Object>();
@@ -62,22 +64,22 @@ public class UserManager {
 			int selection = UserPrompts.askUserEditField(user);
 			if (selection > 0) {
 				switch (selection) {
-				case 1: 
+				case 1:
 					String firstName = UserPrompts.askFirstName(in);
 					user.setFirstName(firstName);
 					System.out.println("User first name has been updated to " + user.getFirstName());
 					break;
-				case 2: 
+				case 2:
 					String lastName = UserPrompts.askLastName(in);
 					user.setLastName(lastName);
 					System.out.println("User last name has been updated to " + user.getLastName());
 					break;
-				case 3: 
+				case 3:
 					int age = UserPrompts.askAge(in);
 					user.setAge(age);
 					System.out.println("User age has been updated to " + user.getAge() + "years old");
 					break;
-				case 4: 
+				case 4:
 					double weightLbs = UserPrompts.askWeight(true);
 					user.setWeightLbs(weightLbs);
 					user.setWeightKg(user.convertPoundsToKilograms(user.getWeightLbs()));
@@ -89,8 +91,10 @@ public class UserManager {
 					user.setWeightLbs(user.convertKilogramsToPounds(user.getWeightKg()));
 					System.out.println("User weight has been updated to " + user.getWeightKg() + " kilograms");
 					break;
-				case 6: 
+				case 6:
 					stillEditing = false;
+					userTable.deleteUserDependencies(connection, user, workoutTable, exerciseTable, bikeTable,
+							runTable, hiitTable, stTable, setTable);
 					userTable.deleteRow(connection, user.getUserId());
 					int userIndex = -1;
 					for (int i = 0; i < getUsers().size(); i++) {
@@ -112,7 +116,7 @@ public class UserManager {
 			}
 		} while (stillEditing);
 	}
-	
+
 	public User getUserById(UserManager um, int id) {
 		for (int i = 0; i < um.getUsers().size(); i++) {
 			if (um.getUsers().get(i).getUserId() == id) {
@@ -129,7 +133,5 @@ public class UserManager {
 	public void setUsers(ArrayList<User> users) {
 		this.users = users;
 	}
-
-	
 
 }
