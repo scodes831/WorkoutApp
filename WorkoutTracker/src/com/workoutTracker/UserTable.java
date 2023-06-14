@@ -56,6 +56,17 @@ public class UserTable extends Table {
 		}
 	}
 
+	public void deleteUserDependencies(Connection connection, User user, WorkoutTable workoutTable,
+			ExerciseTable exerciseTable, BikeTable bikeTable, RunTable runTable, HIITTable hiitTable,
+			StrengthTrainingTable stTable, SetTable setTable) {
+		for (int w = 0; w < user.getWorkouts().size(); w++) {
+			Workout workout = user.getWorkouts().get(w);
+			workoutTable.deleteWorkoutDependencies(connection, workout, exerciseTable, bikeTable, runTable, hiitTable,
+					stTable, setTable);
+			workoutTable.deleteRow(connection, workout.getWorkoutId());
+		}
+	}
+
 	public void readTable(Connection connection, UserManager userManager, WorkoutTable workoutTable,
 			ExerciseTable exerciseTable, BikeTable bikeTable, RunTable runTable, HIITTable hiitTable,
 			StrengthTrainingTable stTable, SetTable setTable) {
@@ -83,7 +94,8 @@ public class UserTable extends Table {
 					user.setUserId(userId);
 					user.setWeightKg(weightKgs);
 					userManager.getUsers().add(user);
-					workoutTable.readTable(connection, user, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
+					workoutTable.readTable(connection, user, exerciseTable, bikeTable, runTable, hiitTable, stTable,
+							setTable);
 				}
 			}
 		} catch (Exception e) {
