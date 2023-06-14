@@ -30,19 +30,25 @@ public class WorkoutMenu extends Menu {
 			workout.addWorkoutDetails(workout, connection, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
 			break;
 		case 2:
-			selectedUser.displayAllWorkouts();
-			Workout selectedWorkout = selectedUser.selectWorkout();
-			int selectedWorkoutOption = selectWorkoutOptions();
-			if (selectedWorkoutOption == 1) {
-				selectedWorkout.displayExercises();
-				ExerciseMenu exerciseMenu = new ExerciseMenu();
-				exerciseMenu.displayMenu(selectedWorkout, userManager, mainMenu, this, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
-			} else if (selectedWorkoutOption == 2) {
-				selectedWorkout.editWorkout(connection, selectedUser, workoutTable, exerciseTable, bikeTable, hiitTable, runTable, stTable, setTable);
+			if (selectedUser.getWorkouts().size() == 0) {
+				System.out.println("User " + selectedUser.getFirstName() + " " + selectedUser.getLastName() + " has 0 workouts to display.\n");
+				break;
 			} else {
+				selectedUser.displayAllWorkouts();
+				Workout selectedWorkout = selectedUser.selectWorkout();
+				int selectedWorkoutOption = selectWorkoutOptions();
+				if (selectedWorkoutOption == 1) {
+					selectedWorkout.displayExercises();
+					ExerciseMenu exerciseMenu = new ExerciseMenu();
+					exerciseMenu.displayMenu(selectedWorkout, userManager, mainMenu, this, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
+				} else if (selectedWorkoutOption == 2) {
+					selectedWorkout.editWorkout(connection, selectedUser, workoutTable, exerciseTable, bikeTable, hiitTable, runTable, stTable, setTable);
+				} else {
+					break;
+				}
 				break;
 			}
-			break;
+			
 		case 3:
 			mainMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
 		}
