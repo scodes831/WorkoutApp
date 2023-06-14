@@ -66,7 +66,8 @@ public class WorkoutTable extends Table {
 			int exId = workout.getExercises().get(e).getExerciseId();
 			if (exType.equals("StrengthTraining")) {
 				StrengthTraining st = (StrengthTraining) workout.getExercises().get(e);
-				for (int s = 0; s < st.getSets().size(); s++) {
+				int numSets = st.getSets().size();
+				for (int s = 0; s < numSets; s++) {
 					setTable.deleteRow(connection, st.getSets().get(s).getSetId());
 					st.getSets().remove(s);
 				}
