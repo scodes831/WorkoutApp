@@ -37,7 +37,7 @@ public class UserMenu extends Menu {
 			break;
 		case 3:
 			User selectedUser = userManager.selectAUser(userManager);
-			userManager.editUser(selectedUser, connection, userTable);
+			userManager.editUser(selectedUser, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
 			break;
 		case 4:
 			mainMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
