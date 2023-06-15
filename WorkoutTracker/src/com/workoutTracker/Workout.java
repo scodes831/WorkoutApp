@@ -2,6 +2,7 @@ package com.workoutTracker;
 
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Formatter;
 
@@ -11,20 +12,20 @@ public class Workout {
 
 	int workoutId;
 	LocalDate date;
-	int time;
+	LocalTime time;
 	int heartRate;
 	int calories;
 
 	ArrayList<Exercise> exercises = new ArrayList<Exercise>();
 
-	public Workout(LocalDate date, int time, ArrayList<Exercise> exercises) {
+	public Workout(LocalDate date, LocalTime time, ArrayList<Exercise> exercises) {
 		this.workoutId = generateWorkoutId();
 		this.date = date;
 		this.time = time;
 		this.exercises = exercises;
 	}
 
-	public Workout(LocalDate date, int time, int heartRate, int calories) {
+	public Workout(LocalDate date, LocalTime time, int heartRate, int calories) {
 		this.workoutId = generateWorkoutId();
 		this.date = date;
 		this.time = time;
@@ -98,7 +99,7 @@ public class Workout {
 					this.setDate(newDate);
 					break;
 				case 2:
-					int newTime = UserPrompts.askTime("workout");
+					LocalTime newTime = UserPrompts.askTime("workout");
 					this.setTime(newTime);
 					break;
 				case 3:
@@ -158,11 +159,11 @@ public class Workout {
 		this.date = date;
 	}
 
-	public int getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
 
-	public void setTime(int time) {
+	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 
