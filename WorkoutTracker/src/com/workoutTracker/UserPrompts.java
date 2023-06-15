@@ -1,6 +1,7 @@
 package com.workoutTracker;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class UserPrompts {
@@ -121,10 +122,10 @@ public class UserPrompts {
 		return LocalDate.now();
 	}
 
-	public static int askTime(String text) {
-		System.out.println("How long was the " + text + " (in minutes)?");
+	public static LocalTime askTime(String text) {
+		System.out.println("How long was the " + text + " (HH:MM:SS format)?");
 		Scanner in = new Scanner(System.in);
-		int time = in.nextInt();
+		LocalTime time = LocalTime.parse(in.next());
 		return time;
 	}
 	
