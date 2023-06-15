@@ -1,6 +1,7 @@
 package com.workoutTracker;
 
 import java.sql.Connection;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Formatter;
 
@@ -48,7 +49,7 @@ public class HIIT extends Exercise {
 			if (selection > 0) {
 				switch (selection) {
 				case 1:
-					int newExerciseTime = UserPrompts.askTime("exercise");
+					LocalTime newExerciseTime = UserPrompts.askTime("exercise");
 					this.setExerciseTime(newExerciseTime);
 					break;
 				case 2:

@@ -1,6 +1,7 @@
 package com.workoutTracker;
 
 import java.sql.Connection;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Formatter;
 
@@ -16,7 +17,7 @@ public class StrengthTraining extends Exercise {
 		this.muscleGroup = muscleGroup;
 	}
 
-	StrengthTraining(int exId, int time, String exerciseName, String muscleGroup) {
+	StrengthTraining(int exId, LocalTime time, String exerciseName, String muscleGroup) {
 		this.exerciseId = exId;
 		this.exerciseTime = time;
 		this.exerciseName = exerciseName;
@@ -87,7 +88,7 @@ public class StrengthTraining extends Exercise {
 			if (selection > 0) {
 				switch (selection) {
 				case 1:
-					int newExerciseTime = UserPrompts.askTime("exercise");
+					LocalTime newExerciseTime = UserPrompts.askTime("exercise");
 					this.setExerciseTime(newExerciseTime);
 					break;
 				case 2:

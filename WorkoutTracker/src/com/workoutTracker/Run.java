@@ -49,7 +49,7 @@ public class Run extends Exercise {
 			if (selection > 0) {
 				switch (selection) {
 				case 1:
-					int newExerciseTime = UserPrompts.askTime("exercise");
+					LocalTime newExerciseTime = UserPrompts.askTime("exercise");
 					this.setExerciseTime(newExerciseTime);
 					break;
 				case 2:

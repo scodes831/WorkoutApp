@@ -62,7 +62,7 @@ public class Bike extends Exercise {
 			if (selection > 0) {
 				switch (selection) {
 				case 1:
-					int newExerciseTime = UserPrompts.askTime("exercise");
+					LocalTime newExerciseTime = UserPrompts.askTime("exercise");
 					this.setExerciseTime(newExerciseTime);
 					this.setMph(this.calculateMPH(this.getDistanceMi(), newExerciseTime));
 					this.setPace(this.calculatePace(this.getMph()));
