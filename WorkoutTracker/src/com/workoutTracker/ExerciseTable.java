@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class ExerciseTable extends Table {
@@ -11,7 +12,7 @@ public class ExerciseTable extends Table {
 	public void createTable(Connection connection) {
 		Statement statement;
 		try {
-			String query = "create table if not exists exercises (exerciseId INTEGER PRIMARY KEY, workoutId INTEGER, type VARCHAR(20), time INTEGER,"
+			String query = "create table if not exists exercises (exerciseId INTEGER PRIMARY KEY, workoutId INTEGER, type VARCHAR(20), time TIME,"
 					+ " FOREIGN KEY (workoutId) REFERENCES workouts(workoutId))";
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
@@ -67,7 +68,7 @@ public class ExerciseTable extends Table {
 				boolean alreadyExists = false;
 				String exerciseType = result.getString("type");
 				int exerciseId = Integer.valueOf(result.getString("exerciseId"));
-				int time = Integer.valueOf(result.getString("time"));
+				LocalTime time = LocalTime.parse(result.getString("time"));
 				for (Exercise exercise : workout.getExercises()) {
 					if (exercise.getExerciseId() == exerciseId) {
 						alreadyExists = true;
