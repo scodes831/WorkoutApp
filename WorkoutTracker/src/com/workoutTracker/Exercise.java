@@ -11,7 +11,7 @@ public abstract class Exercise {
 	private static int ID = 1;
 
 	int exerciseId;
-	int exerciseTime;
+	LocalTime exerciseTime;
 
 	Exercise() {
 		this.exerciseId = generateExerciseId();
@@ -27,7 +27,7 @@ public abstract class Exercise {
 	public void addExerciseDetails(Connection connection, Workout workout, ExerciseTable exerciseTable,
 			BikeTable bikeTable, RunTable runTable, HIITTable hiitTable, StrengthTrainingTable stTable,
 			SetTable setTable) {
-		int exerciseTime = UserPrompts.askTime("exercise");
+		LocalTime exerciseTime = UserPrompts.askTime("exercise");
 		this.setExerciseTime(exerciseTime);
 		addExerciseToDatabase(connection, workout, exerciseTable);
 		if (this instanceof StrengthTraining) {
@@ -52,7 +52,6 @@ public abstract class Exercise {
 
 	public void editExerciseDetails(Connection connection, Workout workout, ExerciseTable exerciseTable,
 			BikeTable bikeTable, HIITTable hiitTable, RunTable runTable, StrengthTrainingTable stTable, SetTable setTable) {
-		System.out.println("start: edit exercise details");
 		if (this instanceof StrengthTraining) {
 			((StrengthTraining) this).editStrengthTrainingDetails(connection, workout, exerciseTable, stTable, setTable);
 		} else if (this instanceof Bike) {
@@ -75,8 +74,9 @@ public abstract class Exercise {
 		return index;
 	}
 
-	public double calculateMPH(double miles, int time) {
-		BigDecimal mph = new BigDecimal((miles * 60) / time).setScale(1, RoundingMode.HALF_UP);
+	public double calculateMPH(double miles, LocalTime time) {
+		int newTime = (time.getHour() *60) + time.getMinute() + (time.getSecond()/60);
+		BigDecimal mph = new BigDecimal((miles * 60) / newTime).setScale(1, RoundingMode.HALF_UP);
 		return mph.doubleValue();
 	}
 
@@ -117,11 +117,11 @@ public abstract class Exercise {
 		ID = iD;
 	}
 
-	public int getExerciseTime() {
+	public LocalTime getExerciseTime() {
 		return exerciseTime;
 	}
 
-	public void setExerciseTime(int exerciseTime) {
+	public void setExerciseTime(LocalTime exerciseTime) {
 		this.exerciseTime = exerciseTime;
 	}
 
