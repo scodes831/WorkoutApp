@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Formatter;
 
@@ -47,7 +48,7 @@ public class User {
 
 	public Workout addWorkout(User user) {
 		LocalDate workoutDate = UserPrompts.askWorkoutDate();
-		int workoutTime = UserPrompts.askTime("workout");
+		LocalTime workoutTime = UserPrompts.askTime("workout");
 		int heartRate = UserPrompts.askHeartRate();
 		int calories = UserPrompts.askCalories();
 		Workout workout = new Workout(workoutDate, workoutTime, heartRate, calories);
