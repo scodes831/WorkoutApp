@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class WorkoutTable extends Table {
@@ -11,7 +12,7 @@ public class WorkoutTable extends Table {
 	public void createTable(Connection connection) {
 		Statement statement;
 		try {
-			String query = "create table if not exists workouts (workoutId INTEGER PRIMARY KEY, userId INTEGER, date DATE, time INTEGER, heartRate INTEGER, "
+			String query = "create table if not exists workouts (workoutId INTEGER PRIMARY KEY, userId INTEGER, date DATE, time TIME, heartRate INTEGER, "
 					+ "calories INTEGER, FOREIGN KEY (userId) REFERENCES users(userId))";
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
@@ -100,7 +101,7 @@ public class WorkoutTable extends Table {
 				int month = Integer.valueOf(dateStr[1]);
 				int day = Integer.valueOf(dateStr[2]);
 				LocalDate date = LocalDate.of(year, month, day);
-				int time = Integer.valueOf(result.getString("time"));
+				LocalTime time = LocalTime.parse(result.getString("time"));
 				int heartRate = Integer.valueOf(result.getString("heartrate"));
 				int calories = Integer.valueOf(result.getString("calories"));
 				if (user.getWorkouts().size() != 0) {
