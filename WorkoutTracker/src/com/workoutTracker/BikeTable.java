@@ -57,7 +57,6 @@ public class BikeTable extends Table {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		System.out.println("bike row for exId " + id + " has been deleted");
 	}
 
 	public void readTable(Connection connection, Workout workout, Exercise exercise) {

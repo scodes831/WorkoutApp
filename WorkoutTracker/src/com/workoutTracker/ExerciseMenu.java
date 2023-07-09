@@ -35,7 +35,6 @@ public class ExerciseMenu {
 			String exerciseType = UserPrompts.askExerciseType();
 			Exercise newExercise = workout.addNewExercise(exerciseType);
 			newExercise.addExerciseDetails(connection, workout, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
-			System.out.println("new exercise has been added");
 			break;
 		case 3:
 			workoutMenu.displayMenu(userManager, mainMenu, connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable,
