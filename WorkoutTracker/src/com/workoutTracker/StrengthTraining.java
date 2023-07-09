@@ -119,7 +119,7 @@ public class StrengthTraining extends Exercise {
 				}
 				exerciseValues.add(this.getExerciseTime());
 				stValues.add(this.getExerciseName());
-				stValues.add(this.getExerciseTime());
+				stValues.add(this.getMuscleGroup());
 				exerciseTable.updateRow(connection, this.getExerciseId(), exerciseValues);
 				stTable.updateRow(connection, this.getExerciseId(), stValues);
 			} else {
