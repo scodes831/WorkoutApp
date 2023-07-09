@@ -15,14 +15,7 @@ public class Main {
 		HIITTable hiitTable = new HIITTable();
 		StrengthTrainingTable stTable = new StrengthTrainingTable();
 		SetTable setTable = new SetTable();
-		userTable.createTable(connection);
-		workoutTable.createTable(connection);
-		exerciseTable.createTable(connection);
-		bikeTable.createTable(connection);
-		runTable.createTable(connection);
-		hiitTable.createTable(connection);
-		stTable.createTable(connection);
-		setTable.createTable(connection);
+		dm.createTables(connection, userTable, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
 		UserManager um = new UserManager();
 		MainMenu mainMenu = new MainMenu();
 		userTable.readTable(connection, um, workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable);
