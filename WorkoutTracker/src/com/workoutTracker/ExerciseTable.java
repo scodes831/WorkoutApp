@@ -51,7 +51,6 @@ public class ExerciseTable extends Table {
 			String query = String.format("delete from exercises where exerciseId = '%s'", id);
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
-			System.out.println("row deleted from exercise table");
 		} catch (Exception e) {
 			System.out.println(e);
 		}

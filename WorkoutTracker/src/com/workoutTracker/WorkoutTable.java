@@ -48,7 +48,6 @@ public class WorkoutTable extends Table {
 	}
 
 	public void deleteRow(Connection connection, int id) {
-		System.out.println("inside workouttable delete row");
 		Statement statement;
 		try {
 			String query = String.format("delete from workouts where workoutid = '%s'", id);
