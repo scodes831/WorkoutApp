@@ -28,9 +28,14 @@ public class ExerciseMenu {
 			StrengthTrainingTable stTable, SetTable setTable) {
 		switch (selection) {
 		case 1:
-			Exercise selectedExercise = workout.selectExercise();
-			displaySubExerciseMenu(workout, userManager, mainMenu, workoutMenu, this, connection, userTable,
-					workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable, selectedExercise);
+			if (workout.getExercises().size() == 0) {
+				System.out.println("There are no exercises associated with this workout.");
+				break;
+			} else {
+				Exercise selectedExercise = workout.selectExercise();
+				displaySubExerciseMenu(workout, userManager, mainMenu, workoutMenu, this, connection, userTable,
+						workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable, selectedExercise);
+			}
 		case 2:
 			String exerciseType = UserPrompts.askExerciseType();
 			Exercise newExercise = workout.addNewExercise(exerciseType);
