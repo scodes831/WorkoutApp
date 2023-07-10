@@ -32,6 +32,7 @@ public class ExerciseMenu {
 				System.out.println("There are no exercises associated with this workout.");
 				break;
 			} else {
+				workout.displayExercises();
 				Exercise selectedExercise = workout.selectExercise();
 				displaySubExerciseMenu(workout, userManager, mainMenu, workoutMenu, this, connection, userTable,
 						workoutTable, exerciseTable, bikeTable, runTable, hiitTable, stTable, setTable, selectedExercise);
